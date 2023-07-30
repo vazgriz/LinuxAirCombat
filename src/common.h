@@ -31,7 +31,7 @@
 #undef USE_GLUT
 #define HAVE_SDL_MIXER
 
-#include <unistd.h>
+//#include <unistd.h>
 #include <cerrno>
 #include <string>
 #include <limits.h>

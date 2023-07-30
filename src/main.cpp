@@ -486,31 +486,31 @@ unsigned int TimerGamePassCount = 0;
 unsigned int SystemMessageRepeatCounter = 0;
 
 // global Unsigned 16-bit integer variables:
-Uint16 OutGoingPacketSignature;
+uint16_t OutGoingPacketSignature;
 
 // global Unsigned 32-bit integer variables:
-Uint32 DeltaTime;
-Uint32 LastTime = 0;
-Uint32 LandingTimer = 0;
-Uint32 Me163LandingTimer = 90000;
-Uint32 MissionNetworkBattle01Timer = 0;
-Uint32 MissionNetworkBattle02Timer = 0;
-Uint32 MissionNetworkBattle03Timer = 0;
-Uint32 MissionNetworkBattle04Timer = 0;
-Uint32 MissionNetworkBattle05Timer = 0;
-Uint32 MissionNetworkBattle06Timer = 0;
-Uint32 MissionNetworkBattle07Timer = 0;
-Uint32 MissionNetworkBattle08Timer = 0;
-Uint32 MissionNetworkBattle09Timer = 0;
-Uint32 MissionNetworkBattle10Timer = 0;
-Uint32 MissionNetworkBattleRadarTimer = 0;
-Uint32 MumbleCommand1p2Timer = 1000000000;
-Uint32 MumbleCommandTimer = 40000;
-Uint32 MumbleTimeRemainingBeforeChannelReset = 10000000;
-Uint32 NetworkApiPriorTimer[32];
-Uint32 SpeedBrakeTimer;
-Uint32 StallTimer;
-Uint32 ViewResetTimer;
+uint32_t DeltaTime;
+uint32_t LastTime = 0;
+uint32_t LandingTimer = 0;
+uint32_t Me163LandingTimer = 90000;
+uint32_t MissionNetworkBattle01Timer = 0;
+uint32_t MissionNetworkBattle02Timer = 0;
+uint32_t MissionNetworkBattle03Timer = 0;
+uint32_t MissionNetworkBattle04Timer = 0;
+uint32_t MissionNetworkBattle05Timer = 0;
+uint32_t MissionNetworkBattle06Timer = 0;
+uint32_t MissionNetworkBattle07Timer = 0;
+uint32_t MissionNetworkBattle08Timer = 0;
+uint32_t MissionNetworkBattle09Timer = 0;
+uint32_t MissionNetworkBattle10Timer = 0;
+uint32_t MissionNetworkBattleRadarTimer = 0;
+uint32_t MumbleCommand1p2Timer = 1000000000;
+uint32_t MumbleCommandTimer = 40000;
+uint32_t MumbleTimeRemainingBeforeChannelReset = 10000000;
+uint32_t NetworkApiPriorTimer[32];
+uint32_t SpeedBrakeTimer;
+uint32_t StallTimer;
+uint32_t ViewResetTimer;
 
 // global Long integer variables:
 long CountdownTimer = 0;
@@ -13229,7 +13229,7 @@ void InitReshape ()
     glPolygonMode (GL_FRONT_AND_BACK, polygonMode);
     }
 
-void init_timer (Uint32 dt)
+void init_timer (uint32_t dt)
     {
     void KeyInit (int key, int x, int y);
     void proceedFire ();
@@ -14655,15 +14655,15 @@ static void LacTimerFunc (int value)
     {
     // Abstract Event Branch
     void switch_menu ();
-    void TimerCreate (Uint32 dt);
-    void TimerCredits (Uint32 dt);
-    void TimerFinish (Uint32 dt);
+    void TimerCreate (uint32_t dt);
+    void TimerCredits (uint32_t dt);
+    void TimerFinish (uint32_t dt);
     void TimerGame (int dt);
-    void TimerJoin (Uint32 dt);
-    void TimerMenu (Uint32 dt);
-    void TimerMission (Uint32 dt);
-    void TimerStats (Uint32 dt);
-    Uint32 akttime, dt;
+    void TimerJoin (uint32_t dt);
+    void TimerMenu (uint32_t dt);
+    void TimerMission (uint32_t dt);
+    void TimerStats (uint32_t dt);
+    uint32_t akttime, dt;
 
     akttime = SDL_GetTicks ();
     if (LastTime == 0)
@@ -17615,7 +17615,7 @@ void setPlaneVolume ()
 int setScreen (int w, int h, int b, int f)
     {
 
-    Uint32 video_flags;
+    uint32_t video_flags;
     if (f)
         {
         video_flags = SDL_OPENGL | SDL_FULLSCREEN;
@@ -18997,7 +18997,7 @@ void textMouseButton (char *buf, int button)
         }
     }
 
-void TimerCredits (Uint32 dt)
+void TimerCredits (uint32_t dt)
     {
     CreditsTimer += dt;
 
@@ -19008,7 +19008,7 @@ void TimerCredits (Uint32 dt)
     sdldisplay = true;
     }
 
-void TimerFinish (Uint32 dt)
+void TimerFinish (uint32_t dt)
     {
     FinishTimer += dt;
 
@@ -19596,7 +19596,7 @@ void TimerGame (int dt)
 
     }
 
-void TimerMenu (Uint32 dt)
+void TimerMenu (uint32_t dt)
     {
     char buf [256];
     MenuTimer += dt;
@@ -19660,13 +19660,13 @@ void TimerMenu (Uint32 dt)
     sdldisplay = true;
     }
 
-void TimerMission (Uint32 dt)
+void TimerMission (uint32_t dt)
     {
     MissionMenuTimer += dt;
     sdldisplay = true;
     }
 
-void TimerStats (Uint32 dt)
+void TimerStats (uint32_t dt)
     {
     MenuTimer += dt;
     sdldisplay = true;

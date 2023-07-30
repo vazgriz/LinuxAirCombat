@@ -81,7 +81,7 @@ BinaryFile::BinaryFile (char *filename)
         error_outofmemory ();
         }
     memset (data, 0, size);
-    Uint32 z = 0;
+    uint32_t z = 0;
     while (z < size)
         {
         if (size - z >= 4096)
@@ -183,21 +183,21 @@ int BinaryFile::readString (char *ptr)
     return i;
     }
 
-int BinaryFile::readUInt16 (Uint16 *i)
+int BinaryFile::readUInt16 (uint16_t *i)
     {
 #ifdef WORDS_BIGENDIAN
     ret [0] = data [filepointer + 1];
     ret [1] = data [filepointer + 0];
     ret [2] = 0;
-    *i = *((Uint16 *) ret);
+    *i = *((uint16_t *) ret);
 #else
-    *i = *((Uint16 *) &data [filepointer]);
+    *i = *((uint16_t *) &data [filepointer]);
 #endif
     filepointer += 2;
     return 2;
     }
 
-int BinaryFile::readUInt32 (Uint32 *i)
+int BinaryFile::readUInt32 (uint32_t *i)
     {
 #ifdef WORDS_BIGENDIAN
     ret [0] = data [filepointer + 3];
@@ -205,9 +205,9 @@ int BinaryFile::readUInt32 (Uint32 *i)
     ret [2] = data [filepointer + 1];
     ret [3] = data [filepointer];
     ret [4] = 0;
-    *i = *((Uint32 *) ret);
+    *i = *((uint32_t *) ret);
 #else
-    *i = *((Uint32 *) &data [filepointer]);
+    *i = *((uint32_t *) &data [filepointer]);
 #endif
     filepointer += 4;
     return 4;
@@ -762,7 +762,7 @@ void CLoad3DS::ReadUScale (CMaterial *material, Chunk *previousChunk)
 
 void CLoad3DS::ReadUVCoordinates (CObject *object, Chunk *previousChunk)
     {
-    previousChunk->bytesRead += file->readUInt16 ((Uint16 *) &object->numTexVertex);
+    previousChunk->bytesRead += file->readUInt16 ((uint16_t *) &object->numTexVertex);
     CVector2 *p = new CVector2 [object->numTexVertex];
     if (p == NULL)
         {
@@ -784,8 +784,8 @@ void CLoad3DS::ReadUVRotation (CMaterial *material, Chunk *previousChunk)
 
 void CLoad3DS::ReadVertexIndices (CObject *object, Chunk *previousChunk)
     {
-    Uint16 index = 0;
-    previousChunk->bytesRead += file->readUInt16 ((Uint16 *) &object->numTriangles);
+    uint16_t index = 0;
+    previousChunk->bytesRead += file->readUInt16 ((uint16_t *) &object->numTriangles);
     object->triangle = new CTriangle [object->numTriangles];
     if (object->triangle == NULL)
         {
@@ -809,7 +809,7 @@ void CLoad3DS::ReadVertexIndices (CObject *object, Chunk *previousChunk)
 void CLoad3DS::ReadVertices (CObject *object, Chunk *previousChunk)
     {
     int i;
-    previousChunk->bytesRead += file->readUInt16 ((Uint16 *) &object->numVertices);
+    previousChunk->bytesRead += file->readUInt16 ((uint16_t *) &object->numVertices);
     object->vertex = new CVertex [object->numVertices];
     if (object->vertex == NULL)
         {

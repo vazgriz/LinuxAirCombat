@@ -35,8 +35,8 @@ class BinaryFile
 {
   public:
   FILE *in; // file struct
-  Uint32 size; // file size
-  Uint32 filepointer; // pointer to char in memory
+  uint32_t size; // file size
+  uint32_t filepointer; // pointer to char in memory
   unsigned char *data; // file data in memory
   unsigned char ret [11]; // big endian swapping buffer
 
@@ -45,8 +45,8 @@ class BinaryFile
   ~BinaryFile ();
   int readFloat (float *f);
   int readFloat (float *f, int n);
-  int readUInt32 (Uint32 *i);
-  int readUInt16 (Uint16 *i);
+  int readUInt32 (uint32_t *i);
+  int readUInt16 (uint16_t *i);
   int readString (char *ptr, int ptrmax, int n);
   int readString (char *ptr, int n);
   int readString (char *ptr);
@@ -89,15 +89,15 @@ class BinaryFile
 
 // Structure for the 3DS indicies
 struct Indices {
-  Uint16 a, b, c, bVisible;
+  uint16_t a, b, c, bVisible;
 };
 
 // Chunk info
 struct Chunk
 {
-  Uint16 ID;
-  Uint32 length;
-  Uint32 bytesRead;
+  uint16_t ID;
+  uint32_t length;
+  uint32_t bytesRead;
 };
 
 // CLoad3DS handles all of the loading code (see NEHE's OpenGL tutorials)
