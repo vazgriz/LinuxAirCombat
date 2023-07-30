@@ -1,0 +1,318 @@
+# depslib dependency file v1.0
+1644110992 source:/home/bbosen/Temp/Lac09p15/3ds.cpp
+	<ctype.h>
+	<math.h>
+	<stdio.h>
+	<string.h>
+	"3ds.h"
+	"common.h"
+	"dirs.h"
+	"gl.h"
+	"mathtab.h"
+
+1679342246 /home/bbosen/Temp/Lac09p15/3ds.h
+	"model.h"
+
+1679342180 /home/bbosen/Temp/Lac09p15/model.h
+	"common.h"
+	"vertexarray.h"
+
+1682974257 /home/bbosen/Temp/Lac09p15/common.h
+	"config.h"
+	<unistd.h>
+	<cerrno>
+	<string>
+	<limits.h>
+	<GL/glut.h>
+	"SDL/SDL.h"
+	"SDL/SDL_thread.h"
+	"SDL/SDL_mixer.h"
+
+1679342570 /home/bbosen/Temp/Lac09p15/config.h
+
+1679342188 /home/bbosen/Temp/Lac09p15/vertexarray.h
+	"common.h"
+
+1679342594 /home/bbosen/Temp/Lac09p15/dirs.h
+
+1679342198 /home/bbosen/Temp/Lac09p15/gl.h
+	"common.h"
+	"model.h"
+
+1680984508 /home/bbosen/Temp/Lac09p15/mathtab.h
+
+1683050072 source:/home/bbosen/Temp/Lac09p15/aiobject.cpp
+	"aiobject.h"
+	"glland.h"
+	"land.h"
+	"main.h"
+	"mathtab.h"
+	"mission.h"
+	"NetworkApi.h"
+
+1681586940 /home/bbosen/Temp/Lac09p15/aiobject.h
+	"common.h"
+	"model.h"
+	"effects.h"
+
+1679342594 /home/bbosen/Temp/Lac09p15/effects.h
+	"model.h"
+	"object.h"
+	"mathtab.h"
+
+1679342184 /home/bbosen/Temp/Lac09p15/object.h
+	"model.h"
+
+1679342204 /home/bbosen/Temp/Lac09p15/glland.h
+	<string.h>
+	"model.h"
+	"aiobject.h"
+	"effects.h"
+	"land.h"
+
+1679342220 /home/bbosen/Temp/Lac09p15/land.h
+
+1679342240 /home/bbosen/Temp/Lac09p15/main.h
+	<math.h>
+	<stdio.h>
+	<string.h>
+	<time.h>
+	"aiobject.h"
+	"model.h"
+	"3ds.h"
+	"effects.h"
+	"audio.h"
+	"pilots.h"
+
+1679342270 /home/bbosen/Temp/Lac09p15/audio.h
+	"common.h"
+
+1679342186 /home/bbosen/Temp/Lac09p15/pilots.h
+
+1679342098 /home/bbosen/Temp/Lac09p15/mission.h
+	"model.h"
+	"aiobject.h"
+
+1679342184 /home/bbosen/Temp/Lac09p15/NetworkApi.h
+	"main.h"
+	"glland.h"
+	<ctype.h>
+
+1679342270 source:/home/bbosen/Temp/Lac09p15/audio.cpp
+	"audio.h"
+	"dirs.h"
+
+1681130578 source:/home/bbosen/Temp/Lac09p15/cockpit.cpp
+	<stdio.h>
+	"cockpit.h"
+	"gl.h"
+	"glland.h"
+	"main.h"
+	"mathtab.h"
+	"mission.h"
+	"pilots.h"
+
+1679342480 /home/bbosen/Temp/Lac09p15/cockpit.h
+	"common.h"
+	"model.h"
+
+1679342480 source:/home/bbosen/Temp/Lac09p15/common.cpp
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"common.h"
+	"dirs.h"
+
+1667600726 source:/home/bbosen/Temp/Lac09p15/conf.cpp
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"aiobject.h"
+	"conf.h"
+	"common.h"
+	"dirs.h"
+
+1679342492 /home/bbosen/Temp/Lac09p15/conf.h
+
+1679342592 source:/home/bbosen/Temp/Lac09p15/dirs.cpp
+	<stdio.h>
+	<string.h>
+	<unistd.h>
+	<sys/types.h>
+	<sys/stat.h>
+	"dirs.h"
+	"common.h"
+
+1644111002 source:/home/bbosen/Temp/Lac09p15/effects.cpp
+	<math.h>
+	"effects.h"
+	"glland.h"
+	"gl.h"
+	"common.h"
+
+1644111008 source:/home/bbosen/Temp/Lac09p15/fileloader.cpp
+	<stdio.h>
+	<string.h>
+	"fileloader.h"
+
+1679342596 /home/bbosen/Temp/Lac09p15/fileloader.h
+
+1666847836 source:/home/bbosen/Temp/Lac09p15/FlightModel.cpp
+	<ctype.h>
+	<unistd.h>
+	"cockpit.h"
+	"common.h"
+	"conf.h"
+	"dirs.h"
+	"gl.h"
+	"glland.h"
+	"land.h"
+	"main.h"
+	"mathtab.h"
+	"menu.h"
+	"mission.h"
+
+1679342086 /home/bbosen/Temp/Lac09p15/menu.h
+	"model.h"
+
+1679342198 source:/home/bbosen/Temp/Lac09p15/gl.cpp
+	<stdio.h>
+	<string.h>
+	<math.h>
+	"gl.h"
+
+1681671964 source:/home/bbosen/Temp/Lac09p15/glland.cpp
+	"glland.h"
+	"main.h"
+	"mathtab.h"
+	"gl.h"
+	"common.h"
+
+1681663502 source:/home/bbosen/Temp/Lac09p15/land.cpp
+	<stdio.h>
+	<math.h>
+	<string.h>
+	"common.h"
+	"land.h"
+	"mathtab.h"
+
+1679342220 source:/home/bbosen/Temp/Lac09p15/loader_tga.cpp
+	<stdio.h>
+	<string.h>
+	<sys/stat.h>
+	"loader_tga.h"
+	"common.h"
+
+1679342220 /home/bbosen/Temp/Lac09p15/loader_tga.h
+
+1683116724 source:/home/bbosen/Temp/Lac09p15/main.cpp
+	"cockpit.h"
+	"common.h"
+	"conf.h"
+	"dirs.h"
+	"gl.h"
+	"glland.h"
+	"land.h"
+	"main.h"
+	"mathtab.h"
+	"menu.h"
+	"mission.h"
+	"NetworkApi.h"
+
+1679342084 source:/home/bbosen/Temp/Lac09p15/mathtab.cpp
+	<math.h>
+	"mathtab.h"
+	"common.h"
+
+1644197058 source:/home/bbosen/Temp/Lac09p15/menu.cpp
+	"menu.h"
+	"main.h"
+
+1681778318 source:/home/bbosen/Temp/Lac09p15/mission.cpp
+	<stdio.h>
+	<string.h>
+	"aiobject.h"
+	"common.h"
+	"conf.h"
+	"glland.h"
+	"mission.h"
+	"main.h"
+	"mathtab.h"
+	"NetworkApi.h"
+	"MissionNetworkBattle01.cpp"
+	"MissionNetworkBattle02.cpp"
+	"MissionNetworkBattle03.cpp"
+	"MissionNetworkBattle04.cpp"
+	"MissionNetworkBattle05.cpp"
+	"MissionNetworkBattle06.cpp"
+	"MissionNetworkBattle07.cpp"
+	"MissionNetworkBattle08.cpp"
+	"MissionNetworkBattle09.cpp"
+	"MissionNetworkBattle10.cpp"
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle01.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle02.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle03.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle04.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle05.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle06.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle07.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle08.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle09.cpp
+
+1681160256 /home/bbosen/Temp/Lac09p15/MissionNetworkBattle10.cpp
+
+1644111026 source:/home/bbosen/Temp/Lac09p15/model.cpp
+	<stdio.h>
+	<string.h>
+	<math.h>
+	"model.h"
+	"gl.h"
+	"mathtab.h"
+	"loader_tga.h"
+
+1681131900 source:/home/bbosen/Temp/Lac09p15/NetworkApi.cpp
+	"common.h"
+	"glland.h"
+	"NetworkApi.h"
+	"mission.h"
+	<stdio.h>
+	<errno.h>
+	<string.h>
+	<signal.h>
+	<unistd.h>
+	<netinet/in.h>
+	<netdb.h>
+	<arpa/inet.h>
+	<sys/socket.h>
+
+1679342184 source:/home/bbosen/Temp/Lac09p15/object.cpp
+	"object.h"
+	"gl.h"
+
+1679342184 source:/home/bbosen/Temp/Lac09p15/objload.cpp
+	<stdio.h>
+	<math.h>
+	"objload.h"
+
+1679342186 /home/bbosen/Temp/Lac09p15/objload.h
+	"model.h"
+
+1679342186 source:/home/bbosen/Temp/Lac09p15/pilots.cpp
+	<stdio.h>
+	<string.h>
+	"dirs.h"
+	"pilots.h"
+	"mission.h"
+
+1679342188 source:/home/bbosen/Temp/Lac09p15/vertexarray.cpp
+	"vertexarray.h"
+
