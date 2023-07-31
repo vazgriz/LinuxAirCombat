@@ -34,8 +34,7 @@
 OpenGL
 ****************************************************************************/
 
-GL::GL ()
-    {
+GL::GL() {
     antialiasing = false;
     zbuffer = false;
     alphablending = false;
@@ -44,185 +43,149 @@ GL::GL ()
     gllightnr = 0;
     texnum = -1;
     aktlist = 0;
-    fogcolor [0] = 0.5;
-    fogcolor [1] = 0.5;
-    fogcolor [2] = 0.5;
+    fogcolor[0] = 0.5;
+    fogcolor[1] = 0.5;
+    fogcolor[2] = 0.5;
     foglum = 1.0;
-    }
+}
 
-GL::~GL ()
-    {
-    }
+GL::~GL() {}
 
-void GL::clearScreen ()
-    {
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
+void GL::clearScreen() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
-void GL::drawScreen ()
-    {
-    glutSwapBuffers ();
-    }
+void GL::drawScreen() {
+    glutSwapBuffers();
+}
 
-void GL::rotate (int x, int y, int z)
-    {
-    glRotatef (z, 0.0f, 0.0f, 1.0f);
-    glRotatef (y, 0.0f, 1.0f, 0.0f);
-    glRotatef (x, 1.0f, 0.0f, 0.0f);
-    }
+void GL::rotate(int x, int y, int z) {
+    glRotatef(z, 0.0f, 0.0f, 1.0f);
+    glRotatef(y, 0.0f, 1.0f, 0.0f);
+    glRotatef(x, 1.0f, 0.0f, 0.0f);
+}
 
-void GL::genList (int *list)
-    {
-    *list = ++ aktlist;
-    glNewList (aktlist, GL_COMPILE_AND_EXECUTE);
-    }
+void GL::genList(int* list) {
+    *list = ++aktlist;
+    glNewList(aktlist, GL_COMPILE_AND_EXECUTE);
+}
 
-void GL::enableLinearTexture (int texnum)
-    {
-    glBindTexture (GL_TEXTURE_2D, texnum);
-    if (!tex [texnum]->mipmap)
-        {
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        }
-    else
-        {
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-        }
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+void GL::enableLinearTexture(int texnum) {
+    glBindTexture(GL_TEXTURE_2D, texnum);
+    if (!tex[texnum]->mipmap) {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    } else {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
     }
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
 
-void GL::disableLinearTexture (int texnum)
-    {
-    glBindTexture (GL_TEXTURE_2D, texnum);
-    if (!tex [texnum]->mipmap)
-        {
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        }
-    else
-        {
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-        }
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+void GL::disableLinearTexture(int texnum) {
+    glBindTexture(GL_TEXTURE_2D, texnum);
+    if (!tex[texnum]->mipmap) {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    } else {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
     }
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+}
 
-CTexture *GL::getTextureTGA (char *fname)
-    {
+CTexture* GL::getTextureTGA(char* fname) {
     int i;
-    for (i = 0; i <= texnum; i ++)
-        {
-        if (!strcmp (fname, tex [i]->name))
-            {
+    for (i = 0; i <= texnum; i++) {
+        if (!strcmp(fname, tex[i]->name)) {
             break;
-            }
         }
-    if (i <= texnum)
-        {
-        return tex [i];
-        }
+    }
+    if (i <= texnum) {
+        return tex[i];
+    }
     return NULL;
-    }
+}
 
-CTexture *GL::genTextureTGA (char *fname, int quality, int alphatype, int mipmap2, bool alpha)
-    {
-    char buf [STDSIZE];
-    CTexture *mytex;
-    if ((mytex = getTextureTGA (fname)) != NULL)
-        {
+CTexture* GL::genTextureTGA(char* fname, int quality, int alphatype, int mipmap2, bool alpha) {
+    char buf[STDSIZE];
+    CTexture* mytex;
+    if ((mytex = getTextureTGA(fname)) != NULL) {
         return mytex;
-        }
-    texnum ++;
-    glBindTexture (GL_TEXTURE_2D, texnum);
-    tex [texnum] = new CTexture ();
-    if (!tex [texnum]->loadFromTGA (fname, quality, alphatype, mipmap2))
-        {
-        sprintf (buf, "Texture %s not found", fname);
-        display (buf, LOG_ERROR);
+    }
+    texnum++;
+    glBindTexture(GL_TEXTURE_2D, texnum);
+    tex[texnum] = new CTexture();
+    if (!tex[texnum]->loadFromTGA(fname, quality, alphatype, mipmap2)) {
+        sprintf(buf, "Texture %s not found", fname);
+        display(buf, LOG_ERROR);
         // If texture cannot be loaded, allocate dummy tex buffer
-        tex [texnum]->width = 8;
-        tex [texnum]->height = 8;
-        int buflen = tex [texnum]->width * tex [texnum]->height * 4;
-        tex [texnum]->data = (unsigned char *) malloc (buflen);
-        if (tex [texnum] == NULL)
-            {
-            error_outofmemory ();
-            }
-        memset (tex [texnum]->data, 0, buflen);
+        tex[texnum]->width = 8;
+        tex[texnum]->height = 8;
+        int buflen = tex[texnum]->width * tex[texnum]->height * 4;
+        tex[texnum]->data = (unsigned char*)malloc(buflen);
+        if (tex[texnum] == NULL) {
+            error_outofmemory();
         }
-    tex [texnum]->alpha = alpha;
-    tex [texnum]->textureID = texnum;
-    if (!antialiasing)
-        {
-        disableLinearTexture (texnum);
-        }
-    else
-        {
-        enableLinearTexture (texnum);
-        }
-    if (!mipmap2)
-        {
-        glTexImage2D (GL_TEXTURE_2D, 0, 4, tex [texnum]->width, tex [texnum]->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex [texnum]->data);
-        }
-    else
-        {
-        gluBuild2DMipmaps (GL_TEXTURE_2D, 4, tex [texnum]->width, tex [texnum]->height, GL_RGBA, GL_UNSIGNED_BYTE, tex [texnum]->data);
-        }
-    return tex [texnum];
+        memset(tex[texnum]->data, 0, buflen);
     }
+    tex[texnum]->alpha = alpha;
+    tex[texnum]->textureID = texnum;
+    if (!antialiasing) {
+        disableLinearTexture(texnum);
+    } else {
+        enableLinearTexture(texnum);
+    }
+    if (!mipmap2) {
+        glTexImage2D(GL_TEXTURE_2D, 0, 4, tex[texnum]->width, tex[texnum]->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex[texnum]->data);
+    } else {
+        gluBuild2DMipmaps(GL_TEXTURE_2D, 4, tex[texnum]->width, tex[texnum]->height, GL_RGBA, GL_UNSIGNED_BYTE, tex[texnum]->data);
+    }
+    return tex[texnum];
+}
 
-void GL::enableAlphaBlending ()
-    {
-    glEnable (GL_BLEND);
-    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+void GL::enableAlphaBlending() {
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     alphablending = true;
-    }
+}
 
-void GL::disableAlphaBlending ()
-    {
-    glDisable (GL_BLEND);
+void GL::disableAlphaBlending() {
+    glDisable(GL_BLEND);
     alphablending = false;
-    }
+}
 
-void GL::enableTextures (int num)
-    {
+void GL::enableTextures(int num) {
     akttex = num;
-    glBindTexture (GL_TEXTURE_2D, num);
-    glTexParameterf (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameterf (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); /* GL_CLAMP or GL_REPEAT? */
-    glEnable (GL_TEXTURE_2D);
-    }
+    glBindTexture(GL_TEXTURE_2D, num);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); /* GL_CLAMP or GL_REPEAT? */
+    glEnable(GL_TEXTURE_2D);
+}
 
-void GL::enableFog (float view)
-    {
-    float fcol [3];
-    fcol [0] = fogcolor [0] * foglum;
-    fcol [1] = fogcolor [1] * foglum;
-    fcol [2] = fogcolor [2] * foglum;
-    glEnable (GL_FOG); // To disable fog altogether, eliminate this line and the other glEnable (GL_FOG) line in main.cpp
-    glFogfv (GL_FOG_COLOR, fcol);
-    glFogf (GL_FOG_DENSITY, 0.1);
-    glFogi (GL_FOG_MODE, GL_LINEAR);
-    if (quality <= 2)
-        {
-        glHint (GL_FOG_HINT, GL_FASTEST);
-        }
-    else
-        {
-        glHint (GL_FOG_HINT, GL_NICEST);
-        }
-    glFogf (GL_FOG_START, 1.0 * GLOBALSCALE);
-    glFogf (GL_FOG_END, view * GLOBALSCALE);
+void GL::enableFog(float view) {
+    float fcol[3];
+    fcol[0] = fogcolor[0] * foglum;
+    fcol[1] = fogcolor[1] * foglum;
+    fcol[2] = fogcolor[2] * foglum;
+    glEnable(GL_FOG); // To disable fog altogether, eliminate this line and the other glEnable (GL_FOG) line in main.cpp
+    glFogfv(GL_FOG_COLOR, fcol);
+    glFogf(GL_FOG_DENSITY, 0.1);
+    glFogi(GL_FOG_MODE, GL_LINEAR);
+    if (quality <= 2) {
+        glHint(GL_FOG_HINT, GL_FASTEST);
+    } else {
+        glHint(GL_FOG_HINT, GL_NICEST);
     }
+    glFogf(GL_FOG_START, 1.0 * GLOBALSCALE);
+    glFogf(GL_FOG_END, view * GLOBALSCALE);
+}
 
 // Frustum Culling according to OpenGL Page
-void GL::extractFrustum()
-    {
+void GL::extractFrustum() {
     float proj[16];
     float modl[16];
     float clip[16];
     float t;
     // extract transformation matrices
-    glGetFloatv( GL_PROJECTION_MATRIX, proj );
-    glGetFloatv( GL_MODELVIEW_MATRIX, modl );
+    glGetFloatv(GL_PROJECTION_MATRIX, proj);
+    glGetFloatv(GL_MODELVIEW_MATRIX, modl);
     clip[0] = modl[0] * proj[0] + modl[1] * proj[4] + modl[2] * proj[8] + modl[3] * proj[12];
     clip[1] = modl[0] * proj[1] + modl[1] * proj[5] + modl[2] * proj[9] + modl[3] * proj[13];
     clip[2] = modl[0] * proj[2] + modl[1] * proj[6] + modl[2] * proj[10] + modl[3] * proj[14];
@@ -305,29 +268,25 @@ void GL::extractFrustum()
     frustum[5][1] /= t;
     frustum[5][2] /= t;
     frustum[5][3] /= t;
-    }
+}
 
-bool GL::isPointInFrustum( float x, float y, float z )
-    {
+bool GL::isPointInFrustum(float x, float y, float z) {
     int i;
-    for (i = 0; i < 6; i ++)
-        if (frustum[i][0] * x + frustum[i][1] * y + frustum[i][2] * z + frustum[i][3] <= 0)
-            {
+    for (i = 0; i < 6; i++)
+        if (frustum[i][0] * x + frustum[i][1] * y + frustum[i][2] * z + frustum[i][3] <= 0) {
             return false;
-            }
+        }
 
     return true;
-    }
+}
 
-bool GL::isSphereInFrustum( float x, float y, float z, float radius )
-    {
+bool GL::isSphereInFrustum(float x, float y, float z, float radius) {
     int i;
-    for (i = 0; i < 6; i ++)
-        if ((frustum[i][0] * x) + (frustum[i][1] * y) + (frustum[i][2] * z) + (frustum[i][3]) <= -radius) 
-            {
-            return false; 
-            }
-    return true; 
-    }
+    for (i = 0; i < 6; i++)
+        if ((frustum[i][0] * x) + (frustum[i][1] * y) + (frustum[i][2] * z) + (frustum[i][3]) <= -radius) {
+            return false;
+        }
+    return true;
+}
 #endif
 

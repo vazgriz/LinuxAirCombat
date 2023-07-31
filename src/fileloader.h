@@ -73,85 +73,85 @@ extern int file_reverse; /* read only!!! */
   Init data structure
   Example: file_init ();
 **************************************************************************/
-extern void file_init ();
+extern void file_init();
 
-extern void file_initComments ();
+extern void file_initComments();
 
 /**************************************************************************
   Revert the file read order (forward/backward)
   Example: file_revert ();
 **************************************************************************/
-extern void file_revert ();
+extern void file_revert();
 
 /**************************************************************************
   Get current position of the file pointer
   Example: file_getPosition ();
 **************************************************************************/
-extern XLONG file_getPosition ();
+extern XLONG file_getPosition();
 
 /**************************************************************************
   Set current position of the file pointer
   Example: file_setPosition ();
 **************************************************************************/
-extern int file_setPosition ();
+extern int file_setPosition();
 
 /**************************************************************************
   Get current line of the file
   Example: file_getLine ();
 **************************************************************************/
-extern int file_getLine ();
+extern int file_getLine();
 
 /**************************************************************************
   Set the whitespace chars for this file
   Example: file_setWhitespace (" \n\t");
 **************************************************************************/
-extern void file_setWhitespace (char *string);
+extern void file_setWhitespace(char* string);
 
 /**************************************************************************
   Set the separator chars for this file
   Example: file_setSeparator (",;");
 **************************************************************************/
-extern void file_setSeparator (char *string);
+extern void file_setSeparator(char* string);
 
 /**************************************************************************
   Add comment strings for this file
   Example language C++:
     file_addComment ("//", "\n");
 **************************************************************************/
-extern void file_addComment (char *startstring, char *endstring);
+extern void file_addComment(char* startstring, char* endstring);
 
 /**************************************************************************
   Set the quote chars for string in this file
   Example: file_setQuotes ("\'\"");
 **************************************************************************/
-extern void file_setQuotes (char *string);
+extern void file_setQuotes(char* string);
 
 /**************************************************************************
   Rewind file to an initial state to restart parsing
 **************************************************************************/
-extern void file_rewind ();
+extern void file_rewind();
 
 /**************************************************************************
   Open file for parsing
 **************************************************************************/
-extern int file_open (char *filename);
+extern int file_open(char* filename);
 
 /**************************************************************************
   Close file
 **************************************************************************/
-extern int file_close ();
+extern int file_close();
 
 /**************************************************************************
   Find the first occurance of string from the cursor and set cursor
   to the new position, this is quite fast!
 **************************************************************************/
-extern int file_find (char *string);
+extern int file_find(char* string);
 
 /**************************************************************************
   Find the next token from the current cursor position and fill the
   token string. Use tokenlen to define a maximum length for token.
 **************************************************************************/
-extern int file_nextToken (char *token, int tokenlen);
-extern int file_nextChar ();
+extern int file_nextToken(char* token, int tokenlen);
+extern int file_nextChar();
 
 #endif

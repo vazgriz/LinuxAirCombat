@@ -37,15 +37,15 @@
 #include "audio.h"
 #include "pilots.h"
 
-extern char *getKeyString (int key, char *str); // get name of a keyboard's key (ENTER, SPACE)
+extern char* getKeyString(int key, char* str); // get name of a keyboard's key (ENTER, SPACE)
 
-extern AIObj *ThreeDObjects [maxfighter];
-extern AIObj *fplayer; // the active human player
-extern AIObj *missile [maxmissile];
-extern CBlackSmoke *blacksmoke [maxblacksmoke];
-extern CExplosion *explosion [maxexplosion];
+extern AIObj* ThreeDObjects[maxfighter];
+extern AIObj* fplayer; // the active human player
+extern AIObj* missile[maxmissile];
+extern CBlackSmoke* blacksmoke[maxblacksmoke];
+extern CExplosion* explosion[maxexplosion];
 extern CLoad3DS g_Load3ds;
-extern CModel *getModel (int id); // own export: main.h may be included in the cpp files
+extern CModel* getModel(int id); // own export: main.h may be included in the cpp files
 extern CModel model_Airfield00;
 extern CModel model_chaff1;
 extern CModel model_cannon1;
@@ -131,17 +131,17 @@ extern CModel model_hall2;
 extern CModel model_rubble1;
 extern CModel model_depot1;
 extern CModel model_tent1;
-extern CTexture *texsun, *texflare1, *texflare2, *texflare3, *texflare4, *texcross, *texcross2;
-extern CTexture *texradar1, *texradar2;
-extern DynamicObj *flare [maxflare];
-extern DynamicObj *groundobj [maxgroundobj];
-extern DynamicObj *chaff [maxchaff];
-extern Flash *flash1; // the thunderstorm flash
-extern Font *font1, *font2;
-extern PilotList *pilots; // other pilots of the Eagle Squad
-extern SoundSystem *sound;
-extern Space *space; // the scene (everything) without the landscape
-extern Star *star [maxstar]; // the stars at night
+extern CTexture* texsun, * texflare1, * texflare2, * texflare3, * texflare4, * texcross, * texcross2;
+extern CTexture* texradar1, * texradar2;
+extern DynamicObj* flare[maxflare];
+extern DynamicObj* groundobj[maxgroundobj];
+extern DynamicObj* chaff[maxchaff];
+extern Flash* flash1; // the thunderstorm flash
+extern Font* font1, * font2;
+extern PilotList* pilots; // other pilots of the Eagle Squad
+extern SoundSystem* sound;
+extern Space* space; // the scene (everything) without the landscape
+extern Star* star[maxstar]; // the stars at night
 
 #endif
 

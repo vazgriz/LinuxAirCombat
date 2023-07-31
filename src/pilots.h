@@ -41,43 +41,41 @@ const int maxpilotdata = 100;
 #define PILOT_HARRISON 8
 #define PILOT_PLAYER 9
 
-class Pilot
-{
-  public:
-  char name [16];
-  int mission_state [maxpilotdata]; // success/failure
-  int mission_time [maxpilotdata]; // time spent on the mission
-  int mission_fighterkills [maxpilotdata];
-  int mission_shipkills [maxpilotdata];
-  int mission_tankkills [maxpilotdata];
-  int mission_otherkills [maxpilotdata];
-  int mission_Durability [maxpilotdata]; // Durability left
-  int mission_points [maxpilotdata]; // extra points for hitting a target
-  int mission_score [maxpilotdata]; // overall score (calculated)
-  int ranking; // current ranking (calculated due to all scores)
+class Pilot {
+public:
+    char name[16];
+    int mission_state[maxpilotdata]; // success/failure
+    int mission_time[maxpilotdata]; // time spent on the mission
+    int mission_fighterkills[maxpilotdata];
+    int mission_shipkills[maxpilotdata];
+    int mission_tankkills[maxpilotdata];
+    int mission_otherkills[maxpilotdata];
+    int mission_Durability[maxpilotdata]; // Durability left
+    int mission_points[maxpilotdata]; // extra points for hitting a target
+    int mission_score[maxpilotdata]; // overall score (calculated)
+    int ranking; // current ranking (calculated due to all scores)
 
-  void load ();
-  void save ();
-  char *getRank ();
-  char *getShortRank ();
-  Pilot (char *name);
-  ~Pilot ();
+    void load();
+    void save();
+    char* getRank();
+    char* getShortRank();
+    Pilot(char* name);
+    ~Pilot();
 };
 
 const int maxpilots = 5;
 
-class PilotList
-{
-  public:
-  int aktpilots, aktpilot;
-  Pilot *pilot [maxpilots];
+class PilotList {
+public:
+    int aktpilots, aktpilot;
+    Pilot* pilot[maxpilots];
 
-  void load (char *fname);
-  void save (char *fname);
-  PilotList (char *fname);
-  ~PilotList ();
-  void rm ();
-  void add (char *name);
+    void load(char* fname);
+    void save(char* fname);
+    PilotList(char* fname);
+    ~PilotList();
+    void rm();
+    void add(char* name);
 };
 
 #endif

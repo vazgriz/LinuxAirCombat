@@ -31,98 +31,78 @@
 
 int randptr = 0;
 
-int randommaster [64] [64];
+int randommaster[64][64];
 
 float PI;
 
-float sine [360];
-float cosi [360];
-float smokezoom [MAXSMOKEELEM];
+float sine[360];
+float cosi[360];
+float smokezoom[MAXSMOKEELEM];
 
-float dist (float dx, float dy)
-    {
-    return (float) sqrt (dx*dx + dy*dy);
-    }
+float dist(float dx, float dy) {
+    return (float)sqrt(dx * dx + dy * dy);
+}
 
 // return random number, but prefer extremely high and low values
-int extremerandom (int n)
-    {
+int extremerandom(int n) {
     int ret;
-    if (n == 0)
-        {
+    if (n == 0) {
         return 0;
-        }
-    ret = rand () % n;
-    randptr ++;
-    if (randptr >= 64)
-        {
+    }
+    ret = rand() % n;
+    randptr++;
+    if (randptr >= 64) {
         randptr = 0;
+    }
+    ret = randommaster[randptr][randptr] % n;
+    if ((ret % 5) <= 4) {
+        if (ret > n / 2 && ret < 3 * n / 4) {
+            return ret + n / 4;
+        } else if (ret < n / 2 && ret > n / 4) {
+            return ret - n / 4;
         }
-    ret = randommaster [randptr] [randptr] % n;
-    if ((ret % 5) <= 4)
-        {
-        if (ret > n/2 && ret < 3*n/4)
-            {
-            return ret + n/4;
-            }
-        else if (ret < n/2 && ret > n/4)
-            {
-            return ret - n/4;
-            }
-        }
+    }
     return ret;
-    }
+}
 
-void mathtab_init ()
-    {
+void mathtab_init() {
     int i, i2;
-    PI = (float) (atan (1.0) * 4.0);
+    PI = (float)(atan(1.0) * 4.0);
 
-    for (i = 0; i < 360; i ++)
-        {
-        sine [i] = (float) sin ((float) i / 180.0 * PI);
-        cosi [i] = (float) cos ((float) i / 180.0 * PI);
-        }
-    for (i = 0; i < 63; i ++)
-        for (i2 = 0; i2 < 63; i2 ++)
-            {
-            randommaster [i] [i2] = (i * i2 * 2000) % 32678;
-            }
-    for (i = 0; i < MAXSMOKEELEM; i ++)
-        {
-        smokezoom [i] = (2.0 - (1.9 * i / MAXSMOKEELEM)) * 0.1;
-        }
+    for (i = 0; i < 360; i++) {
+        sine[i] = (float)sin((float)i / 180.0 * PI);
+        cosi[i] = (float)cos((float)i / 180.0 * PI);
     }
+    for (i = 0; i < 63; i++)
+        for (i2 = 0; i2 < 63; i2++) {
+            randommaster[i][i2] = (i * i2 * 2000) % 32678;
+        }
+    for (i = 0; i < MAXSMOKEELEM; i++) {
+        smokezoom[i] = (2.0 - (1.9 * i / MAXSMOKEELEM)) * 0.1;
+    }
+}
 
 // return random number
-int myrandom (int n)
-    {
-    if (n == 0)
-        {
+int myrandom(int n) {
+    if (n == 0) {
         return 0;
-        }
-        return rand () % n;
     }
+    return rand() % n;
+}
 
-int myrandom (int n, int x, int y)
-    {
+int myrandom(int n, int x, int y) {
     int ret;
-    if (n == 0)
-        {
+    if (n == 0) {
         return 0;
-        }
-        ret = rand () % n;
-    if ((ret % 5) <= 4)
-        {
-        if (ret > n/2 && ret < 3*n/4)
-            {
-            return ret + n/4;
-            }
-        else if (ret < n/2 && ret > n/4)
-            {
-            return ret - n/4;
-            }
-        }
-    return ret;
     }
+    ret = rand() % n;
+    if ((ret % 5) <= 4) {
+        if (ret > n / 2 && ret < 3 * n / 4) {
+            return ret + n / 4;
+        } else if (ret < n / 2 && ret > n / 4) {
+            return ret - n / 4;
+        }
+    }
+    return ret;
+}
 #endif

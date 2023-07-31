@@ -45,32 +45,31 @@ extern bool mouse_relative;
 extern int mouse_autorudder;
 
 // the abstract config file as text file in memory
-class ConfigFile
-{
-  public:
-  char buf [32000]; // max file size
-  int length;
-  FILE *out;
-  ConfigFile ();
-  ConfigFile (char *fname);
-  char *skipwhite (char *str);
-  char *skipnum (char *str);
-  char *skipalphanum (char *str);
-  char *getString (char *dest, char *str);
-  int getValue (char *str);
-  int openOutput (char *fname);
-  int write (char *str1, int n);
-  int write (char *str1, char c);
-  void writeText (char *str);
-  void close ();
+class ConfigFile {
+public:
+    char buf[32000]; // max file size
+    int length;
+    FILE* out;
+    ConfigFile();
+    ConfigFile(char* fname);
+    char* skipwhite(char* str);
+    char* skipnum(char* str);
+    char* skipalphanum(char* str);
+    char* getString(char* dest, char* str);
+    int getValue(char* str);
+    int openOutput(char* fname);
+    int write(char* str1, int n);
+    int write(char* str1, char c);
+    void writeText(char* str);
+    void close();
 };
 
 // special config files of Lac: LacConfig.txt and LacControls.txt
-extern void save_config ();
-extern void save_saveconfig ();
-extern int load_config ();
-extern int load_saveconfig ();
-extern void save_configInterface ();
-extern int load_configInterface ();
+extern void save_config();
+extern void save_saveconfig();
+extern int load_config();
+extern int load_saveconfig();
+extern void save_configInterface();
+extern int load_configInterface();
 
 #endif

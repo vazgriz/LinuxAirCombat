@@ -29,31 +29,30 @@
 #include "common.h" // ok
 #include "model.h" // ok
 
-class Cockpit
-{
-  private:
-  void cockpitvertex (float phi, float gamma);
+class Cockpit {
+private:
+    void cockpitvertex(float phi, float gamma);
 
-  public:
-  int flarewarning, chaffwarning;
-  Uint32 dt;
+public:
+    int flarewarning, chaffwarning;
+    Uint32 dt;
 
-  Cockpit ();
+    Cockpit();
 
-  void drawBlip (int shape, float x, float y, float z, unsigned char r, unsigned char g, unsigned char b);
+    void drawBlip(int shape, float x, float y, float z, unsigned char r, unsigned char g, unsigned char b);
 
-  void setColor (int alpha);
-  void setColor (CColor *color, int alpha);
-  void drawChassis ();
-  void drawCounter ();
-  void drawTargeter ();
-  void drawCross ();
-  void drawHeading ();
-  void drawTargetedElement ();
-  void drawWeapon ();
-  void drawRadar ();
-  void drawRelativeHeightBar();
-  void drawThrustBar();
+    void setColor(int alpha);
+    void setColor(CColor* color, int alpha);
+    void drawChassis();
+    void drawCounter();
+    void drawTargeter();
+    void drawCross();
+    void drawHeading();
+    void drawTargetedElement();
+    void drawWeapon();
+    void drawRadar();
+    void drawRelativeHeightBar();
+    void drawThrustBar();
 };
 
 #endif

@@ -40,36 +40,28 @@
 #include "pilots.h"
 #include "mission.h"
 
-void Pilot::load ()
-    {
-    }
+void Pilot::load() {}
 
-Pilot::Pilot (char *name)
-    {
-    strcpy (this->name, name);
-    load ();
-    }
+Pilot::Pilot(char* name) {
+    strcpy(this->name, name);
+    load();
+}
 
-Pilot::~Pilot ()
-    {
-    }
+Pilot::~Pilot() {}
 
-void PilotList::load (char *fname)
-    {
+void PilotList::load(char* fname) {
     aktpilots = 0;
     aktpilot = aktpilots;
-    pilot [aktpilot] = new Pilot ((char *)"");
-    aktpilots ++;
-    }
+    pilot[aktpilot] = new Pilot((char*)"");
+    aktpilots++;
+}
 
-PilotList::PilotList (char *fname)
-    {
+PilotList::PilotList(char* fname) {
     int i;
-    for (i = 0; i < maxpilots; i ++)
-        {
-        pilot [i] = NULL;
-        }
-    load (fname);
+    for (i = 0; i < maxpilots; i++) {
+        pilot[i] = NULL;
     }
+    load(fname);
+}
 
 #endif

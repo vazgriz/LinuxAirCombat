@@ -31,26 +31,25 @@
 const int debug3ds = 0; // set to 1 to get all Chunk IDs to stdout
 
 // abstract binary file representation in memory
-class BinaryFile
-{
-  public:
-  FILE *in; // file struct
-  uint32_t size; // file size
-  uint32_t filepointer; // pointer to char in memory
-  unsigned char *data; // file data in memory
-  unsigned char ret [11]; // big endian swapping buffer
+class BinaryFile {
+public:
+    FILE* in; // file struct
+    uint32_t size; // file size
+    uint32_t filepointer; // pointer to char in memory
+    unsigned char* data; // file data in memory
+    unsigned char ret[11]; // big endian swapping buffer
 
-  // data type conversation
-  BinaryFile (char *filename);
-  ~BinaryFile ();
-  int readFloat (float *f);
-  int readFloat (float *f, int n);
-  int readUInt32 (uint32_t *i);
-  int readUInt16 (uint16_t *i);
-  int readString (char *ptr, int ptrmax, int n);
-  int readString (char *ptr, int n);
-  int readString (char *ptr);
-  int skip (int n);
+    // data type conversation
+    BinaryFile(char* filename);
+    ~BinaryFile();
+    int readFloat(float* f);
+    int readFloat(float* f, int n);
+    int readUInt32(uint32_t* i);
+    int readUInt16(uint16_t* i);
+    int readString(char* ptr, int ptrmax, int n);
+    int readString(char* ptr, int n);
+    int readString(char* ptr);
+    int skip(int n);
 };
 
 // Primary Chunk (19789)
@@ -89,52 +88,50 @@ class BinaryFile
 
 // Structure for the 3DS indicies
 struct Indices {
-  uint16_t a, b, c, bVisible;
+    uint16_t a, b, c, bVisible;
 };
 
 // Chunk info
-struct Chunk
-{
-  uint16_t ID;
-  uint32_t length;
-  uint32_t bytesRead;
+struct Chunk {
+    uint16_t ID;
+    uint32_t length;
+    uint32_t bytesRead;
 };
 
 // CLoad3DS handles all of the loading code (see NEHE's OpenGL tutorials)
-class CLoad3DS
-{
-  public:
-  BinaryFile *file;
-  CLoad3DS ();
-  bool Import3DS (CModel *model, char *filename);
+class CLoad3DS {
+public:
+    BinaryFile* file;
+    CLoad3DS();
+    bool Import3DS(CModel* model, char* filename);
 
-  // developer specific loading routines
-  private:
-  int GetString (char *);
-  void ReadChunk (Chunk *);
-  void ProcessNextChunk (CModel *model, Chunk *);
-  void ProcessNextObjectChunk (CModel *model, CObject *object, Chunk *);
-  void ProcessNextMaterialChunk (CModel *model, Chunk *);
-  void ReadColorChunk (CMaterial *material, Chunk *pChunk);
-  void ReadVertices (CObject *object, Chunk *);
-  void ReadVertexIndices (CObject *object, Chunk *);
-  void ReadUVCoordinates (CObject *object, Chunk *);
-  void ReadMeshMatrix (CObject *object, Chunk *);
-  void ReadUScale (CMaterial *material, Chunk *);
-  void ReadVScale (CMaterial *material, Chunk *);
-  void ReadUOffset (CMaterial *material, Chunk *);
-  void ReadVOffset (CMaterial *material, Chunk *);
-  void ReadUVRotation (CMaterial *material, Chunk *);
-  void ReadObjectMaterial (CModel *model, CObject *object, Chunk *previousChunk);
-  void Compile (CModel *model);
-  void ComputeNormals (CModel *model);
-  void ComputeColors (CModel *model);
-  void LoadTextures (CModel *model);
-  void Normalize (CModel *model);
-  void CleanUp ();
-  FILE *filepointer;
-  Chunk *currentChunk;
-  Chunk *tempChunk;
+    // developer specific loading routines
+private:
+    int GetString(char*);
+    void ReadChunk(Chunk*);
+    void ProcessNextChunk(CModel* model, Chunk*);
+    void ProcessNextObjectChunk(CModel* model, CObject* object, Chunk*);
+    void ProcessNextMaterialChunk(CModel* model, Chunk*);
+    void ReadColorChunk(CMaterial* material, Chunk* pChunk);
+    void ReadVertices(CObject* object, Chunk*);
+    void ReadVertexIndices(CObject* object, Chunk*);
+    void ReadUVCoordinates(CObject* object, Chunk*);
+    void ReadMeshMatrix(CObject* object, Chunk*);
+    void ReadUScale(CMaterial* material, Chunk*);
+    void ReadVScale(CMaterial* material, Chunk*);
+    void ReadUOffset(CMaterial* material, Chunk*);
+    void ReadVOffset(CMaterial* material, Chunk*);
+    void ReadUVRotation(CMaterial* material, Chunk*);
+    void ReadObjectMaterial(CModel* model, CObject* object, Chunk* previousChunk);
+    void Compile(CModel* model);
+    void ComputeNormals(CModel* model);
+    void ComputeColors(CModel* model);
+    void LoadTextures(CModel* model);
+    void Normalize(CModel* model);
+    void CleanUp();
+    FILE* filepointer;
+    Chunk* currentChunk;
+    Chunk* tempChunk;
 };
 
 #endif

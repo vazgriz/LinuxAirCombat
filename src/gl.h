@@ -29,53 +29,52 @@
 #include "common.h" // ok
 #include "model.h" // ok
 
-class GL
-{
-  private:
-  GLint texnum; // highest used texture number
-  int akttex; // current texture number
-  CTexture *tex [200]; // support max 200 textures
-  GLuint gllistnr, gllightnr; // highest used list number
-  int aktlist; // current list number
+class GL {
+private:
+    GLint texnum; // highest used texture number
+    int akttex; // current texture number
+    CTexture* tex[200]; // support max 200 textures
+    GLuint gllistnr, gllightnr; // highest used list number
+    int aktlist; // current list number
 
-  public:
-  bool alphablending, zbuffer, antialiasing; // features turned on
-  int shading;
-  float fogcolor [3];
-  float foglum;
-  float frustum [6] [4]; // the six frustum (cone) planes
+public:
+    bool alphablending, zbuffer, antialiasing; // features turned on
+    int shading;
+    float fogcolor[3];
+    float foglum;
+    float frustum[6][4]; // the six frustum (cone) planes
 
-  GL ();
-  ~GL ();
-  void clearScreen ();
-  void drawScreen ();
-  void rotate (int x, int y, int z);
-  GLuint genListSphere (GLint slices, GLint stacks, float radius);
-  void setList (GLuint listnr);
-  void genList (int *list);
-  int genTexture ();
-  void enableLinearTexture (int texnum);
-  void disableLinearTexture (int texnum);
-  CTexture *getTextureTGA (char *fname);
-  CTexture *genTextureTGA (char *fname, int quality, int alphatype, int mipmap2, bool alpha);
-  float getTexLight ();
-  void enableAntiAliasing ();
-  void disableAntiAliasing ();
-  void enableAlphaBlending ();
-  void disableAlphaBlending ();
-  void enableTextures (int num);
-  void enableLighting ();
-  void enableZBuffer ();
-  void disableZBuffer ();
-  void shadeFlat ();
-  void shadeSmooth ();
-  void enableFog (float view); // Determines maximum visible distance
-  void extractFrustum ();
-  bool isPointInFrustum (float x, float y, float z);
-  bool isSphereInFrustum (float x, float y, float z, float radius);
-  bool isCubeInFrustum (float x, float y, float z, float size);
+    GL();
+    ~GL();
+    void clearScreen();
+    void drawScreen();
+    void rotate(int x, int y, int z);
+    GLuint genListSphere(GLint slices, GLint stacks, float radius);
+    void setList(GLuint listnr);
+    void genList(int* list);
+    int genTexture();
+    void enableLinearTexture(int texnum);
+    void disableLinearTexture(int texnum);
+    CTexture* getTextureTGA(char* fname);
+    CTexture* genTextureTGA(char* fname, int quality, int alphatype, int mipmap2, bool alpha);
+    float getTexLight();
+    void enableAntiAliasing();
+    void disableAntiAliasing();
+    void enableAlphaBlending();
+    void disableAlphaBlending();
+    void enableTextures(int num);
+    void enableLighting();
+    void enableZBuffer();
+    void disableZBuffer();
+    void shadeFlat();
+    void shadeSmooth();
+    void enableFog(float view); // Determines maximum visible distance
+    void extractFrustum();
+    bool isPointInFrustum(float x, float y, float z);
+    bool isSphereInFrustum(float x, float y, float z, float radius);
+    bool isCubeInFrustum(float x, float y, float z, float size);
 };
 
-extern GL *gl;
+extern GL* gl;
 
 #endif

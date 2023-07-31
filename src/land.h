@@ -93,54 +93,53 @@
 #define TOWN 90
 #define TRYLAKE 100
 
-class Landscape
-{
-  public:
-  // height values without fluids
-  unsigned short h [MAXX + 1] [MAXX + 1];
-  // height values including fluids
-  unsigned short hw [MAXX + 1] [MAXX + 1];
-  // landscape type (ID values)
-  unsigned char f [MAXX + 1] [MAXX + 1];
-  // landscape type
-  int type;
+class Landscape {
+public:
+    // height values without fluids
+    unsigned short h[MAXX + 1][MAXX + 1];
+    // height values including fluids
+    unsigned short hw[MAXX + 1][MAXX + 1];
+    // landscape type (ID values)
+    unsigned char f[MAXX + 1][MAXX + 1];
+    // landscape type
+    int type;
 
-  private:
-  unsigned char ftry [MAXX + 1] [MAXX + 1]; // dummy data field
-  unsigned short hg [MAXX + 1] [MAXX + 1]; // dummy data field to apply convolution kernels
-  int rockborder;
-  int maxx; // same as MAXX, 512 is ideal
-  int hoehe, maxn, n; // surface extents
+private:
+    unsigned char ftry[MAXX + 1][MAXX + 1]; // dummy data field
+    unsigned short hg[MAXX + 1][MAXX + 1]; // dummy data field to apply convolution kernels
+    int rockborder;
+    int maxx; // same as MAXX, 512 is ideal
+    int hoehe, maxn, n; // surface extents
 
-  public:
-  int highestpoint, lowestpoint;
-  int getCoord (int a); // modulo MAXX
-  void convolveGauss (int radius, int hmin, int hmax); // fast convolution function (isotropic)
-  void gauss (int x, int y); // convolution for only one raster point
-  void flatten (int x, int y, int dx, int dy); // constant height for 2*dx x 2*dy fields
-  void smoothGlacier (); // special erosion function
-  bool isType (unsigned char type, unsigned char id);
-  bool isWoods (int type);
-  bool isWater (int type);
-  bool isGlacier (int type);
-  void init (); // reset data fields
-  void genSurface (int hoehepc, int *heightmap); // alpine
-  void genErosionSurface (int hoehepc, int *heightmap); // alpine and erosion
-  void genArcticSurface (int hoehepc, int *heightmap); // alpine
-  void genCanyonSurface (int hoehepc); // canyon
-  void genMoonSurface (int height); // moon
-  void genDesertSurface (int hoehepc); // desert
-  void genTrench (int width, int height);
-  void genRocks (int diffmin, int percent);
-  int calcLake (int ys, int xs, unsigned short level, int num, int maxextent);
-  void genLake (int depthpc);
-  void calcWoods (int dy); // calculate woods on steep grass terrain
-  bool isGround (int x, int y);
-  bool riverCheck (int x, int y, int *fl, int z, int z2);
-  void genRiver ();
-  void searchPlain (int divx, int divy, int *x, int *y); // search a plain
-  Landscape ();
-  ~Landscape ();
+public:
+    int highestpoint, lowestpoint;
+    int getCoord(int a); // modulo MAXX
+    void convolveGauss(int radius, int hmin, int hmax); // fast convolution function (isotropic)
+    void gauss(int x, int y); // convolution for only one raster point
+    void flatten(int x, int y, int dx, int dy); // constant height for 2*dx x 2*dy fields
+    void smoothGlacier(); // special erosion function
+    bool isType(unsigned char type, unsigned char id);
+    bool isWoods(int type);
+    bool isWater(int type);
+    bool isGlacier(int type);
+    void init(); // reset data fields
+    void genSurface(int hoehepc, int* heightmap); // alpine
+    void genErosionSurface(int hoehepc, int* heightmap); // alpine and erosion
+    void genArcticSurface(int hoehepc, int* heightmap); // alpine
+    void genCanyonSurface(int hoehepc); // canyon
+    void genMoonSurface(int height); // moon
+    void genDesertSurface(int hoehepc); // desert
+    void genTrench(int width, int height);
+    void genRocks(int diffmin, int percent);
+    int calcLake(int ys, int xs, unsigned short level, int num, int maxextent);
+    void genLake(int depthpc);
+    void calcWoods(int dy); // calculate woods on steep grass terrain
+    bool isGround(int x, int y);
+    bool riverCheck(int x, int y, int* fl, int z, int z2);
+    void genRiver();
+    void searchPlain(int divx, int divy, int* x, int* y); // search a plain
+    Landscape();
+    ~Landscape();
 };
 
 #endif

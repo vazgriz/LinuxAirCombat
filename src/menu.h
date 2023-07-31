@@ -35,137 +35,129 @@ extern CColor menu_colgrey;
 extern CColor menu_colyellow;
 extern CColor menu_colblack;
 
-class Component
-{
-  public:
-  unsigned char colback [4];
-  float x, y, w, h;
-  int id;
-  bool highlight;
-  bool active;
-  bool visible;
-  void (*func) (Component *, int button); // button=0...3 for mouse, 0...255 for one byte keys, 256... for special+256
-  Component *parent;
-  Component ();
-  virtual void setActive (bool value);
-  virtual void setVisible (bool value);
-  virtual void setHighlight (bool value);
-  bool isActive ();
-  bool isVisible ();
-  bool isHighlight ();
-  void setBounds (float x, float y, float w, float h);
-  void setFunction (void (*func) (Component *, int button));
-  void execFunction (int button);
-  virtual void draw ();
-  virtual void eventMouse (int x, int y, int button);
-  virtual void triggerMouse (int id, int button);
-  virtual bool contains (int id);
-  virtual void eventKey (unsigned char key);
-  virtual void eventSpecial (int key);
-  virtual void eventJoystick (int button);
+class Component {
+public:
+    unsigned char colback[4];
+    float x, y, w, h;
+    int id;
+    bool highlight;
+    bool active;
+    bool visible;
+    void (*func) (Component*, int button); // button=0...3 for mouse, 0...255 for one byte keys, 256... for special+256
+    Component* parent;
+    Component();
+    virtual void setActive(bool value);
+    virtual void setVisible(bool value);
+    virtual void setHighlight(bool value);
+    bool isActive();
+    bool isVisible();
+    bool isHighlight();
+    void setBounds(float x, float y, float w, float h);
+    void setFunction(void (*func) (Component*, int button));
+    void execFunction(int button);
+    virtual void draw();
+    virtual void eventMouse(int x, int y, int button);
+    virtual void triggerMouse(int id, int button);
+    virtual bool contains(int id);
+    virtual void eventKey(unsigned char key);
+    virtual void eventSpecial(int key);
+    virtual void eventJoystick(int button);
 };
 
-class Container : public Component
-{
-  public:
-  int numcomponents;
-  Component *components [100];
-  Container ();
-  int getNumberOfComponents ();
-  void add (Component *component);
-  void draw ();
-  void eventMouse (int x, int y, int button);
-  void triggerMouse (int id, int button);
-  void setVisible (bool value);
-  void setActive (bool value);
-  void setHighlight (bool value);
-  bool contains (int id);
-  void eventKey (unsigned char key);
-  void eventSpecial (int key);
-  void eventJoystick (int button);
+class Container : public Component {
+public:
+    int numcomponents;
+    Component* components[100];
+    Container();
+    int getNumberOfComponents();
+    void add(Component* component);
+    void draw();
+    void eventMouse(int x, int y, int button);
+    void triggerMouse(int id, int button);
+    void setVisible(bool value);
+    void setActive(bool value);
+    void setHighlight(bool value);
+    bool contains(int id);
+    void eventKey(unsigned char key);
+    void eventSpecial(int key);
+    void eventJoystick(int button);
 };
 
-class Label : public Component
-{
-  public:
-  char text [64];
-  bool transparent;
-  Label ();
-  Label (char *text);
-  void setTransparent (bool transparent);
-  void setText (char *text);
-  void draw ();
-  void triggerMouse (int id, int button);
+class Label : public Component {
+public:
+    char text[64];
+    bool transparent;
+    Label();
+    Label(char* text);
+    void setTransparent(bool transparent);
+    void setText(char* text);
+    void draw();
+    void triggerMouse(int id, int button);
 };
 
-class Button : public Component
-{
-  public:
-  char text [64];
-  Button ();
-  Button (char *text);
-  void draw ();
-  void triggerMouse (int id, int button);
+class Button : public Component {
+public:
+    char text[64];
+    Button();
+    Button(char* text);
+    void draw();
+    void triggerMouse(int id, int button);
 };
 
-class TextField : public Component
-{
-  public:
-  char text [8192];
-  float fonth;
-  TextField ();
-  TextField (char *text, float fontheight);
-  void setText (char *text);
-  void draw ();
-  void triggerMouse (int id, int button);
+class TextField : public Component {
+public:
+    char text[8192];
+    float fonth;
+    TextField();
+    TextField(char* text, float fontheight);
+    void setText(char* text);
+    void draw();
+    void triggerMouse(int id, int button);
 };
 
-class EditKey : public Component
-{
-  public:
-  char text [64];
-  char key;
-  int special;
-  bool specialActive; // key or special valid?
-  EditKey ();
-  EditKey (char *text);
-  void setText (char *text);
-  void setKey (int key); // please add 0xFF to two byte keys to distinguish from one byte keys
-  int getKey (); // returns special+256 for two byte keys ('+' is special=13, ENTER is key=13)
-  void draw ();
-  void triggerMouse (int id, int button);
-  void eventKey (unsigned char key);
-  void eventSpecial (int key);
+class EditKey : public Component {
+public:
+    char text[64];
+    char key;
+    int special;
+    bool specialActive; // key or special valid?
+    EditKey();
+    EditKey(char* text);
+    void setText(char* text);
+    void setKey(int key); // please add 0xFF to two byte keys to distinguish from one byte keys
+    int getKey(); // returns special+256 for two byte keys ('+' is special=13, ENTER is key=13)
+    void draw();
+    void triggerMouse(int id, int button);
+    void eventKey(unsigned char key);
+    void eventSpecial(int key);
 };
 
-class EditJoystick : public Component
-{
-  public:
-  char text [64];
-  int button;
-  EditJoystick ();
-  EditJoystick (char *text);
-  void setText (char *text);
-  void setButton (int key); // button 0..99, hat 100..
-  int getButton (); // returns button 0..99, hat 100..
-  void draw ();
-  void triggerMouse (int id, int button);
-  void eventJoystick (int button);
+class EditJoystick : public Component {
+public:
+    char text[64];
+    int button;
+    EditJoystick();
+    EditJoystick(char* text);
+    void setText(char* text);
+    void setButton(int key); // button 0..99, hat 100..
+    int getButton(); // returns button 0..99, hat 100..
+    void draw();
+    void triggerMouse(int id, int button);
+    void eventJoystick(int button);
 };
 
-class EditField : public Component
-{
-  public:
-  char text [64];
-  int timer;
-  int ptr;
-  int maxlen;
-  EditField ();
-  EditField (int maxlen);
-  void setText (char *text);
-  void draw ();
-  void triggerMouse (int id, int button);
-  void eventKey (unsigned char key);
+class EditField : public Component {
+public:
+    char text[64];
+    int timer;
+    int ptr;
+    int maxlen;
+    EditField();
+    EditField(int maxlen);
+    void setText(char* text);
+    void draw();
+    void triggerMouse(int id, int button);
+    void eventKey(unsigned char key);
 };
 
 #endif
