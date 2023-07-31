@@ -1002,7 +1002,9 @@ extern LacUdpApiPacket InPacket;
 extern LacUdpApiPacket OutPacket;
 
 extern void ConvertStringToUpperCase(char* Pointer);
-extern void TestForWindNoise();
+extern void TestForWindNoise(); 
+
+SDL_Window* window;
 
 // Function Prototypes:
 void AileronSettings(int x, int y);
@@ -1024,7 +1026,6 @@ void event_TrimRudderLeft();
 void event_TrimRudderRight();
 void event_ZoomFOVCycle();
 void ExcessGamma();
-void GetExePath();
 int  GetNetworkApiPacket();
 void InertiaEffects();
 void mission_display();
@@ -1059,19 +1060,20 @@ static void LacJoystickHatFunc(int);
 
 int getJoystickAxisIndex(int n);
 
+SDL_Window* setScreen(int width, int height, int fullscreen);
+void checkargs(int argc, char** argv);
+void createMenu();
+void LacFirstInit();
+void LacReshapeFunc(int width, int height);
+void playRandomMusic();
+void sdlMainLoop();
+
+
 /****************************************************************************
   LAC ENTRY POINT
 ****************************************************************************/
 
 int main(int argc, char** argv) {
-    void checkargs(int argc, char** argv);
-    void createMenu();
-    int  setScreen(int w, int h, int b, int f);
-    void LacFirstInit();
-    void LacReshapeFunc(int width, int height);
-    void playRandomMusic();
-    void sdlMainLoop();
-
     char buf[STDSIZE]; // temp buffer
     int i;
 
@@ -1315,16 +1317,16 @@ int main(int argc, char** argv) {
         }
     atexit(SDL_Quit);
     if (!ConfigInit) {
-        if (!setScreen(width, height, bpp, fullscreen)) {
+        if (!setScreen(width, height, fullscreen)) {
             load_saveconfig();
-            if (!setScreen(width, height, bpp, fullscreen)) {
+            if (!setScreen(width, height, fullscreen)) {
                 sprintf(buf, "No working display mode %dx%d found.", width, height);
                 display(buf, LOG_FATAL);
                 exit(EXIT_INIT);
             }
         }
     }
-    SDL_Window* window = SDL_CreateWindow("LINUX Air Combat", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow("LINUX Air Combat", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
     display((char*)"Creating sound system", LOG_MOST);
     sound = new SoundSystem();
     sound->volumesound = volumesound;
@@ -10070,7 +10072,7 @@ void game_quit() {
 
 void game_view() {
     frame();
-    SDL_GL_SwapBuffers();
+    SDL_GL_SwapWindow(window);
 }
 
 int getJoystickAxisIndex(int n) {
@@ -13779,11 +13781,11 @@ void sdlMainLoop() {
             }
             case SDL_KEYDOWN:
             {
-                if (!event.key.keysym.unicode) {
+                //if (!event.key.keysym.unicode) {
                     LacSpecialFunc(event.key.keysym.sym, 0, 0);
-                } else {
-                    LacKeyboardFunc(event.key.keysym.sym, 0, 0);
-                }
+                //} else {
+                //    LacKeyboardFunc(event.key.keysym.sym, 0, 0);
+                //}
                 break;
             }
             case SDL_KEYUP:
@@ -13887,12 +13889,6 @@ void sdlMainLoop() {
                         display((char*)"sdlMainLoop(): event_MapScrollEast().", LOG_MOST);
                     }
                 }
-                break;
-            }
-            case SDL_ACTIVEEVENT:
-            {
-                sdlreshape = true;
-                sdldisplay = true;
                 break;
             }
             }
@@ -14045,65 +14041,32 @@ void setPlaneVolume() {
     }
 }
 
-int setScreen(int w, int h, int b, int f) {
+SDL_Window* setScreen(int w, int h, int f) {
 
     uint32_t video_flags;
     if (f) {
-        video_flags = SDL_OPENGL | SDL_FULLSCREEN;
+        video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN;
     } else {
-        video_flags = SDL_OPENGL;
+        video_flags = SDL_WINDOW_OPENGL;
     }
-    int rgb_size[3];
-    switch (b) {
-    case 8:
-        rgb_size[0] = 2;
-        rgb_size[1] = 3;
-        rgb_size[2] = 3;
-        break;
-    case 15:
-    case 16:
-        rgb_size[0] = 5;
-        rgb_size[1] = 5;
-        rgb_size[2] = 5;
-        break;
-    default:
-        rgb_size[0] = 8;
-        rgb_size[1] = 8;
-        rgb_size[2] = 8;
-        break;
-    }
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, rgb_size[0]);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, rgb_size[1]);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, rgb_size[2]);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    if (SDL_SetVideoMode(w, h, b, video_flags) == NULL) {
-        if ((b = SDL_VideoModeOK(w, h, b, video_flags)) != 0) {
-            b = 16;
-            SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
-            SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
-            SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
-            if (SDL_SetVideoMode(w, h, b, video_flags) == NULL) {
-                b = 8;
-                SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 2);
-                SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 3);
-                SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 3);
-                if (SDL_SetVideoMode(w, h, b, video_flags) == NULL) {
-                    return 0;
-                }
-            }
-        }
-    }
-    glViewport(0, 0, (GLint)w, (GLint)h);
+
+    SDL_Window* result = SDL_CreateWindow("LINUX Air Combat", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, video_flags);
+
+    glViewport(0, 0, (GLint)width, (GLint)height);
 
     width = w;
     height = h;
-    bpp = b;
     fullscreen = f;
     wantwidth = w;
     wantheight = h;
     wantfullscreen = f;
-    return 1;
+    return result;
 }
 
 void switch_credits() {
@@ -14176,8 +14139,6 @@ void switch_game() {
     sprintf(SystemMessageBuffer2, " ");
     sprintf(SystemMessageBufferA, " ");
     NewSystemMessageNeedsScrolling = true;
-    SDL_WM_GrabInput(SDL_GRAB_ON);
-
 }
 
 void switch_menu() {
@@ -14208,7 +14169,7 @@ void switch_menu() {
     } else {
         mainbutton[6]->setVisible(false);
     }
-    SDL_WM_GrabInput(SDL_GRAB_OFF);
+
     //
     // OK. This is a good place to manage the "GoodMenuBehavior"
     // variable in order to detect one special configuration
