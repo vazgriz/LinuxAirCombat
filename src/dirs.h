@@ -23,30 +23,26 @@
 
 /* This file handles all input/output directories. */
 
-#ifndef IS_DIRS_H
-#define IS_DIRS_H
+#pragma once
+#include <string>
 
 class Dirs {
 public:
-    char dir[4096];
-    char saves[4096]; // path to saves, UNIX and Windows differ
-    char textures[4096]; // path to textures, ...
-    char music[4096];
-    char sound[4096];
-    char models[4096];
-    char maps[4096];
+    std::string dir;
+    std::string saves;
+    std::string textures;
+    std::string music;
+    std::string sound;
+    std::string models;
+    std::string maps;
 
-    void append(char* target, char* str); // append subdir/file to path using (back-)slashes
-    Dirs(char* arg);
-    virtual ~Dirs();
-    char* getSaves(char* name); // get dir name containing the saves, ...
-    char* getTextures(char* name);
-    char* getSounds(char* name);
-    char* getMusic(char* name);
-    char* getModels(char* name);
-    char* getMaps(char* name);
+    Dirs();
+    std::string getSaves(const std::string& name) const; // get dir name containing the saves, ...
+    std::string getTextures(const std::string& name) const;
+    std::string getSounds(const std::string& name) const;
+    std::string getMusic(const std::string& name) const;
+    std::string getModels(const std::string& name) const;
+    std::string getMaps(const std::string& name) const;
 };
 
-extern Dirs* dirs; // paths to directories with game data or saves
-
-#endif
+extern Dirs* dirs;

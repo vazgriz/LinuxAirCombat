@@ -75,7 +75,7 @@ public:
     bool alpha; // alpha blending necessary
     CTexture();
     ~CTexture();
-    int loadFromTGA(char* fname, int quality, int alphatype, int mipmap); // called via gl->genTextureTGA()
+    int loadFromTGA(const char* fname, int quality, int alphatype, int mipmap); // called via gl->genTextureTGA()
     void getColor(CColor* c, int x, int y); // color of a special pixel
 };
 

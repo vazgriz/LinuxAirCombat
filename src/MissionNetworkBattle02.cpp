@@ -270,7 +270,7 @@ int MissionNetworkBattle02::processtimer(Uint32 dt) {
         } else { // Get here if user disabled LAC's management of Mumble channel changes.
             MumbleChannelPresumed = 95; //@ Signal cockpit Mumble Panel
             if (!(NetworkMode & 16)) { // Get here if Mumble vocalization is NOT disabled.
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
             }
             sprintf(SystemMessageBufferA, "TEAM SWITCHING TO TEAMCAST CHANNEL.");
             //  And inform cockpit.cpp to scroll our new message into view:
@@ -336,7 +336,7 @@ int MissionNetworkBattle02::processtimer(Uint32 dt) {
             sprintf(SystemMessageBufferA, "ABUSE OF <ESC> DETECTED.");
             NewSystemMessageNeedsScrolling = true;
             if (!(NetworkMode & 16)) { // Get here if the user has not disabled espeak
-                popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
+                //popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
             }
         }
         if (MissionIdNegotiationCount > 32) { //  Get here if we've been unable to negotiate unique value for "MyNetworkId" after 32 attempts

@@ -118,7 +118,7 @@ typedef struct {
  * There are several other (uncommon) Targa formats which this function can't currently handle
  */
 
-unsigned char* tga_load(char* im_file, int* w, int* h) {
+unsigned char* tga_load(const char* im_file, int* w, int* h) {
     FILE* fp;
     int         bpp, vinverted = 0;
     int         rle = 0, footer_present = 0;

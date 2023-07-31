@@ -49,7 +49,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdio.h>
-#include <string.h>
+#include <string>
 
 #include "3ds.h"
 #include "common.h"
@@ -370,22 +370,11 @@ bool CLoad3DS::Import3DS(CModel* model, char* filename) {
 }
 
 void CLoad3DS::LoadTextures(CModel* model) {
-    int i, i2;
-    char str[256];
-
-    for (i = 0; i < model->numObjects; i++) {
+    for (int i = 0; i < model->numObjects; i++) {
         if (model->object[i]->hasTexture) {
-            strncpy(str, dirs->getTextures(model->object[i]->material->filename), sizeof(dirs->getTextures(model->object[i]->material->filename)));
-            for (i2 = (int)strlen(str) - 1; i2 >= 0; i2--) {
-                if (i2 > 2 && str[i2] == '.') {
-                    str[i2 + 1] = 't';
-                    str[i2 + 2] = 'g';
-                    str[i2 + 3] = 'a';
-                    str[i2 + 4] = 0;
-                    break;
-                }
-            }
-            model->object[i]->material->texture = gl->genTextureTGA(str, 0, -1, 1, false);
+            std::string filename = dirs->getTextures(model->object[i]->material->filename);
+
+            model->object[i]->material->texture = gl->genTextureTGA(filename.c_str(), 0, -1, 1, false);
             if (model->object[i]->material->texture == NULL) {
                 model->object[i]->hasTexture = false;
             }

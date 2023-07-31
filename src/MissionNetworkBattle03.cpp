@@ -312,7 +312,7 @@ int MissionNetworkBattle03::processtimer(Uint32 dt) {
         } else { // Get here if user disabled LAC's management of Mumble channel changes.
             MumbleChannelPresumed = 95; //@ Signal cockpit Mumble Panel
             if (!(NetworkMode & 16)) { // Get here if Mumble vocalization is NOT disabled.
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
             }
             sprintf(SystemMessageBufferA, "TEAM SWITCHING TO TEAMCAST CHANNEL.");
             //  And inform cockpit.cpp to scroll our new message into view:

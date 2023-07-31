@@ -1078,7 +1078,7 @@ int main(int argc, char** argv) {
     int i;
 
     checkargs(argc, argv); // process command line parameters
-    dirs = new Dirs(argv[0]); // get data directory(DATADIR, defined via autoconf)
+    dirs = new Dirs();
     sprintf(buf, "Startup %s, %s ... ", argv[0], VERSIONSTRING);
     display(buf, LOG_MOST);
     display(DebugBuf, LOG_MOST);

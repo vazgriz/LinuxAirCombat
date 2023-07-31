@@ -117,7 +117,7 @@ void MissionNetworkBattle06::start() {
     //
     //
     if (!(NetworkMode & 16)) {
-        popen("espeak -p 10 -a 66  -s 160 \"Welcome to Peabody's Mission 06! It is bigger and more sophisticated than any of our three classic multi-player missions. Victory requires destruction of two opposing airfields, and HQ airfields are defended by an additional artillery battery.\"", "r");
+        //popen("espeak -p 10 -a 66  -s 160 \"Welcome to Peabody's Mission 06! It is bigger and more sophisticated than any of our three classic multi-player missions. Victory requires destruction of two opposing airfields, and HQ airfields are defended by an additional artillery battery.\"", "r");
     }
     MissionStateNetworkBattle = 0;
     display((char*)"MissionNetworkBattle06::start()", LOG_MOST);
@@ -921,7 +921,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "13":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 14.\"", "r");
+            // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 14.\"", "r");
         }
         MissionStateNetworkBattle = 14;
         PriorStateEndTimer = timer;
@@ -930,7 +930,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "14":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 15.\"", "r");
+            // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 15.\"", "r");
         }
         MissionStateNetworkBattle = 15;
         PriorStateEndTimer = timer;
@@ -951,11 +951,11 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
             // strncpy (&MorseCharacterOut[0], "CCCCCCCCCC11", 15);
             MissionChronoMilestone = 1;
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 16 and I am the MissionCommander. Transmitting Milestone 1.\"", "r");
+                // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 16 and I am the MissionCommander. Transmitting Milestone 1.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 16 and I am Not the MissionCommander.\"", "r");
+                // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 16 and I am Not the MissionCommander.\"", "r");
             }
         }
         MissionStateNetworkBattle = 16;
@@ -965,7 +965,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "16":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 17.\"", "r");
+            // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 17.\"", "r");
         }
         MissionStateNetworkBattle = 17;
         PriorStateEndTimer = timer;
@@ -974,7 +974,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "17":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 18.\"", "r");
+            // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 18.\"", "r");
         }
         MissionStateNetworkBattle = 18;
         PriorStateEndTimer = timer;
@@ -984,7 +984,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "18":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 19.\"", "r");
+            // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 19.\"", "r");
         }
         MissionStateNetworkBattle = 19;
         PriorStateEndTimer = timer;
@@ -994,7 +994,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "19":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 20.\"", "r");
+            // //popen ("espeak -p 10 -a 66  -s 140 \"Mission State = 20.\"", "r");
         }
         MissionStateNetworkBattle = 20;
         PriorStateEndTimer = timer;
@@ -1016,11 +1016,11 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
             // strncpy (&MorseCharacterOut[0], "CCCCCCCCCC22", 16);
             MissionChronoMilestone = 2;
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am the MissionCommander. Transmitting Milestone 2.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am the MissionCommander. Transmitting Milestone 2.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am Not the MissionCommander.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am Not the MissionCommander.\"", "r");
             }
         }
         MissionStateNetworkBattle = 21;
@@ -1031,7 +1031,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "21":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 22.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 22.\"", "r");
         }
         MissionStateNetworkBattle = 22;
         PriorStateEndTimer = timer;
@@ -1042,7 +1042,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "22":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 23.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 23.\"", "r");
         }
         MissionStateNetworkBattle = 23;
         PriorStateEndTimer = timer;
@@ -1053,7 +1053,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "23":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 24.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 24.\"", "r");
         }
         MissionStateNetworkBattle = 24;
         PriorStateEndTimer = timer;
@@ -1064,7 +1064,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "24":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 25.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 25.\"", "r");
         }
         MissionStateNetworkBattle = 25;
         PriorStateEndTimer = timer;
@@ -1075,7 +1075,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "25":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 26.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 26.\"", "r");
         }
         MissionStateNetworkBattle = 26;
         PriorStateEndTimer = timer;
@@ -1086,7 +1086,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "26":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 27.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 27.\"", "r");
         }
         MissionStateNetworkBattle = 27;
         PriorStateEndTimer = timer;
@@ -1097,7 +1097,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "27":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 28.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 28.\"", "r");
         }
         MissionStateNetworkBattle = 28;
         PriorStateEndTimer = timer;
@@ -1108,7 +1108,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "28":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 29.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 29.\"", "r");
         }
         MissionStateNetworkBattle = 29;
         PriorStateEndTimer = timer;
@@ -1119,7 +1119,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "29":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 30.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 30.\"", "r");
         }
         MissionStateNetworkBattle = 30;
         PriorStateEndTimer = timer;
@@ -1142,11 +1142,11 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
             // strncpy (&MorseCharacterOut[0], "CCCCCCCCCC33", 16);
             MissionChronoMilestone = 3;
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 31 and I am the MissionCommander. Transmitting Milestone 3.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 31 and I am the MissionCommander. Transmitting Milestone 3.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 31 and I am Not the MissionCommander.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 31 and I am Not the MissionCommander.\"", "r");
             }
         }
         MissionStateNetworkBattle = 31;
@@ -1157,7 +1157,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "31":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 32.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 32.\"", "r");
         }
         MissionStateNetworkBattle = 32;
         PriorStateEndTimer = timer;
@@ -1168,7 +1168,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "32":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 33.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 33.\"", "r");
         }
         MissionStateNetworkBattle = 33;
         PriorStateEndTimer = timer;
@@ -1178,7 +1178,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "33":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 34.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 34.\"", "r");
         }
         MissionStateNetworkBattle = 34;
         PriorStateEndTimer = timer;
@@ -1188,7 +1188,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "34":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 35.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 35.\"", "r");
         }
         MissionStateNetworkBattle = 35;
         PriorStateEndTimer = timer;
@@ -1198,7 +1198,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "35":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 36.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 36.\"", "r");
         }
         MissionStateNetworkBattle = 36;
         PriorStateEndTimer = timer;
@@ -1209,7 +1209,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "36":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 37.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 37.\"", "r");
         }
         MissionStateNetworkBattle = 37;
         PriorStateEndTimer = timer;
@@ -1220,7 +1220,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "37":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 38.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 38.\"", "r");
         }
         MissionStateNetworkBattle = 38;
         PriorStateEndTimer = timer;
@@ -1231,7 +1231,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "38":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 39.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 39.\"", "r");
         }
         MissionStateNetworkBattle = 39;
         PriorStateEndTimer = timer;
@@ -1242,7 +1242,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "39":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 40.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 40.\"", "r");
         }
         MissionStateNetworkBattle = 40;
         PriorStateEndTimer = timer;
@@ -1265,11 +1265,11 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
             // strncpy (&MorseCharacterOut[0], "CCCCCCCCCC44", 16);
             MissionChronoMilestone = 4;
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am the MissionCommander. Transmitting Milestone 4.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am the MissionCommander. Transmitting Milestone 4.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am Not the MissionCommander.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am Not the MissionCommander.\"", "r");
             }
         }
         MissionStateNetworkBattle = 41;
@@ -1280,7 +1280,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "41":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 42.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 42.\"", "r");
         }
         MissionStateNetworkBattle = 42;
         PriorStateEndTimer = timer;
@@ -1291,7 +1291,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "42":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 43.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 43.\"", "r");
         }
         MissionStateNetworkBattle = 43;
         PriorStateEndTimer = timer;
@@ -1302,7 +1302,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "43":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 44.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 44.\"", "r");
         }
         MissionStateNetworkBattle = 44;
         PriorStateEndTimer = timer;
@@ -1313,7 +1313,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "44":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 45.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 45.\"", "r");
         }
         MissionStateNetworkBattle = 45;
         PriorStateEndTimer = timer;
@@ -1324,7 +1324,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "45":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 46.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 46.\"", "r");
         }
         MissionStateNetworkBattle = 46;
         PriorStateEndTimer = timer;
@@ -1335,7 +1335,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "46":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 47.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 47.\"", "r");
         }
         MissionStateNetworkBattle = 47;
         PriorStateEndTimer = timer;
@@ -1345,7 +1345,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "47":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 48.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 48.\"", "r");
         }
         MissionStateNetworkBattle = 48;
         PriorStateEndTimer = timer;
@@ -1355,7 +1355,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "48":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 49.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 49.\"", "r");
         }
         MissionStateNetworkBattle = 49;
         PriorStateEndTimer = timer;
@@ -1365,7 +1365,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         //  advances to "49":
         //
         if (!(NetworkMode & 16)) {
-            // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 50.\"", "r");
+            // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 50.\"", "r");
         }
         MissionStateNetworkBattle = 50;
         PriorStateEndTimer = timer;
@@ -1387,11 +1387,11 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
             // strncpy (&MorseCharacterOut[0], "CCCCCCCCCC55", 16);
             MissionChronoMilestone = 5;
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 51 and I am the MissionCommander. Transmitting Milestone 5.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 51 and I am the MissionCommander. Transmitting Milestone 5.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                // popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 51 and I am Not the MissionCommander.\"", "r");
+                // //popen ("espeak -p 10 -a 66 -s 140 \"Mission State = 51 and I am Not the MissionCommander.\"", "r");
             }
         }
         MissionStateNetworkBattle = 51;
@@ -1519,7 +1519,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
         } else { // Get here if user disabled LAC's management of Mumble channel changes.
             MumbleChannelPresumed = 95; //@ Signal cockpit Mumble Panel
             if (!(NetworkMode & 16)) { // Get here if Mumble vocalization is NOT disabled.
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
             }
             sprintf(SystemMessageBufferA, "TEAM SWITCHING TO TEAMCAST CHANNEL.");
             //  And inform cockpit.cpp to scroll our new message into view:
@@ -1597,7 +1597,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 1.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 1 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 1 sync command.\"", "r");
                 }
                 MissionStateNetworkBattle = 16;
                 break;
@@ -1612,7 +1612,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 2.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 2 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 2 sync command.\"", "r");
                 }
                 MissionStateNetworkBattle = 21;
                 break;
@@ -1627,7 +1627,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 3.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 3 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 3 sync command.\"", "r");
                 }
                 MissionStateNetworkBattle = 31;
                 break;
@@ -1642,7 +1642,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 4.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 4 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 4 sync command.\"", "r");
                 }
                 MissionStateNetworkBattle = 41;
                 break;
@@ -1657,7 +1657,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 5.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 5 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 5 sync command.\"", "r");
                 }
                 MissionStateNetworkBattle = 51;
                 break;
@@ -1672,7 +1672,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 6.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 6 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 6 sync command.\"", "r");
                 }
                 break;
             }
@@ -1686,7 +1686,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 7.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 7 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 7 sync command.\"", "r");
                 }
                 break;
             }
@@ -1700,7 +1700,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 8.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 8 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 8 sync command.\"", "r");
                 }
                 break;
             }
@@ -1714,7 +1714,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 9.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 9 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 9 sync command.\"", "r");
                 }
                 break;
             }
@@ -1728,7 +1728,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 10.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    // popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 10 sync command.\"", "r");
+                    // //popen ("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 10 sync command.\"", "r");
                 }
                 break;
             }
@@ -1812,7 +1812,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
             sprintf(SystemMessageBufferA, "ABUSE OF <ESC> DETECTED.");
             NewSystemMessageNeedsScrolling = true;
             if (!(NetworkMode & 16)) { // Get here if the user has not disabled espeak
-                popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
+                //popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
             }
         }
         if (MissionIdNegotiationCount > 32) { //  Get here if we've been unable to negotiate unique value for "MyNetworkId" after 32 attempts
@@ -2107,7 +2107,7 @@ int MissionNetworkBattle06::processtimer(Uint32 dt) {
             display((char*)"MissionNetworkBattle06::processtimer() Playing audio file MissionEndingIn15SecCountdown.wav", LOG_MOST);
             sound->play(SOUND_MISSIONENDINGIN15SECCOUNTDOWN, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission ending in 15 seconds.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission ending in 15 seconds.\"", "r");
             }
             CountdownLatch2 = true; //  Prevent immediate restart of that audio file.
             MissionEndingTimer2 = 17000; //  Allow 17 seconds for next phase.

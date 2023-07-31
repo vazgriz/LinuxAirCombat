@@ -198,7 +198,7 @@ void MissionNetworkBattle08::start() {
     //
     //
     if (!(NetworkMode & 16)) {
-        popen("espeak -p 10 -a 66  -s 160 \"Welcome to Net Mission 08! This is an experimental, new mission, still under development. At present it is bigger and more sophisticated than any of our three classic multi-player missions. Victory requires destruction of two opposing airfields.\"", "r");
+        //popen("espeak -p 10 -a 66  -s 160 \"Welcome to Net Mission 08! This is an experimental, new mission, still under development. At present it is bigger and more sophisticated than any of our three classic multi-player missions. Victory requires destruction of two opposing airfields.\"", "r");
     }
     MissionStateNetworkBattle = 0;
     display((char*)"MissionNetworkBattle08::start()", LOG_MOST);
@@ -1058,7 +1058,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "13":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 140 \"Mission State = 14.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 140 \"Mission State = 14.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1073,7 +1073,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "14":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 140 \"Mission State = 15.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 140 \"Mission State = 15.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1117,11 +1117,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC11", 16);
             MissionChronoMilestone = 1;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 16 and I am the MissionCommander. Transmitting Milestone 1.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 16 and I am the MissionCommander. Transmitting Milestone 1.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 16 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 16 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -1160,7 +1160,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "16":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 140 \"Mission State = 17.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 140 \"Mission State = 17.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1175,7 +1175,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "17":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 140 \"Mission State = 18.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 140 \"Mission State = 18.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1190,7 +1190,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "18":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 140 \"Mission State = 19.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 140 \"Mission State = 19.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1205,7 +1205,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "19":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 140 \"Mission State = 20.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 140 \"Mission State = 20.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1249,11 +1249,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC22", 16);
             MissionChronoMilestone = 2;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am the MissionCommander. Transmitting Milestone 2.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am the MissionCommander. Transmitting Milestone 2.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 21 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -1292,7 +1292,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "21":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 22.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 22.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1307,7 +1307,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "22":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 23.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 23.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1322,7 +1322,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "23":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 24.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 24.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1337,7 +1337,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "24":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 25.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 25.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1352,7 +1352,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "25":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 26.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 26.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1367,7 +1367,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "26":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 27.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 27.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1382,7 +1382,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "27":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 28.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 28.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1397,7 +1397,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "28":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 29.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 29.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1412,7 +1412,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "29":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 30.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 30.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1427,7 +1427,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "30":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 31.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 31.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1443,7 +1443,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "31":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 32.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 32.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1459,7 +1459,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "32":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 33.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 33.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1475,7 +1475,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "33":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 34.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 34.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1491,7 +1491,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "34":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 35.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 35.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1507,7 +1507,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "35":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 36.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 36.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1523,7 +1523,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "36":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 37.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 37.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1539,7 +1539,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "37":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 38.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 38.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1555,7 +1555,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "38":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 39.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 39.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1571,7 +1571,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "39":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 40.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 40.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1616,11 +1616,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC33", 16);
             MissionChronoMilestone = 3;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am the MissionCommander. Transmitting Milestone 3.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am the MissionCommander. Transmitting Milestone 3.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 41 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -1659,7 +1659,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "41":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 42.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 42.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1674,7 +1674,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "42":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 43.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 43.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1689,7 +1689,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "43":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 44.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 44.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1704,7 +1704,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "44":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 45.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 45.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1719,7 +1719,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "45":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 46.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 46.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1734,7 +1734,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "46":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 47.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 47.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1749,7 +1749,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "47":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 48.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 48.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1764,7 +1764,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "48":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 49.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 49.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1779,7 +1779,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "49":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 50.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 50.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1794,7 +1794,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "50":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 51.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 51.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1809,7 +1809,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "51":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 52.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 52.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1824,7 +1824,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "52":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 53.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 53.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1839,7 +1839,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "53":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 54.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 54.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1854,7 +1854,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "54":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 55.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 55.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1869,7 +1869,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "55":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 56.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 56.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1884,7 +1884,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "56":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 57.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 57.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1899,7 +1899,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "57":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 58.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 58.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1914,7 +1914,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "58":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 59.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 59.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1929,7 +1929,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "59":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 60.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 60.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -1973,11 +1973,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC44", 16);
             MissionChronoMilestone = 4;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 61 and I am the MissionCommander. Transmitting Milestone 4.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 61 and I am the MissionCommander. Transmitting Milestone 4.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 61 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 61 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -2016,7 +2016,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "61":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 62.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 62.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2031,7 +2031,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "62":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 63.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 63.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2046,7 +2046,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "63":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 64.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 64.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2061,7 +2061,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "64":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 65.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 65.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2076,7 +2076,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "65":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 66.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 66.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2091,7 +2091,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "66":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 67.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 67.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2106,7 +2106,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "67":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 68.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 68.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2121,7 +2121,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "68":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 69.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 69.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2136,7 +2136,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "69":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 70.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 70.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2151,7 +2151,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "70":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State =71.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State =71.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2166,7 +2166,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "71":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 72.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 72.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2181,7 +2181,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "72":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 73.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 73.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2196,7 +2196,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "73":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 74.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 74.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2211,7 +2211,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "74":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 75.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 75.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2226,7 +2226,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "75":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 76.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 76.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2241,7 +2241,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "76":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 77.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 77.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2256,7 +2256,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "77":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 78.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 78.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2271,7 +2271,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "78":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 79.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 79.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2286,7 +2286,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "79":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 80.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 80.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2330,11 +2330,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC55", 16);
             MissionChronoMilestone = 5;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 81 and I am the MissionCommander. Transmitting Milestone 5.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 81 and I am the MissionCommander. Transmitting Milestone 5.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 81 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 81 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -2373,7 +2373,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "81":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 82.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 82.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2388,7 +2388,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "82":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 83.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 83.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2403,7 +2403,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "83":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 84.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 84.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2418,7 +2418,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "84":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 85.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 85.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2433,7 +2433,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "85":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 86.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 86.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2448,7 +2448,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "86":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 87.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 87.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2463,7 +2463,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "87":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 88.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 88.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2478,7 +2478,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "88":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 89.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 89.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2493,7 +2493,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "89":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 90.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 90.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2508,7 +2508,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "90":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 91.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 91.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2523,7 +2523,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "91":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 92.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 92.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2538,7 +2538,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "92":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 93.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 93.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2553,7 +2553,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "93":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 94.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 94.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2568,7 +2568,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "94":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 95.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 95.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2583,7 +2583,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "95":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 96.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 96.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2598,7 +2598,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "96":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 97.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 97.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2613,7 +2613,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "97":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 98.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 98.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2628,7 +2628,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "98":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 99.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 99.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2643,7 +2643,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "99":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 100.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 100.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2687,11 +2687,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC66", 16);
             MissionChronoMilestone = 6;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 101 and I am the MissionCommander. Transmitting Milestone 6.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 101 and I am the MissionCommander. Transmitting Milestone 6.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 101 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 101 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -2730,7 +2730,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "101":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 102.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 102.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2745,7 +2745,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "102":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 103.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 103.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2760,7 +2760,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "103":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 104.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 104.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2775,7 +2775,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "104":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 105.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 105.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2790,7 +2790,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "105":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 106.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 106.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2805,7 +2805,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "106":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 107.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 107.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2820,7 +2820,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "107":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 108.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 108.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2835,7 +2835,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "108":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 109.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 109.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2850,7 +2850,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "109":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 110.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 110.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2865,7 +2865,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "110":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 111.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 111.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2880,7 +2880,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "111":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 112.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 112.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2895,7 +2895,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "112":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 113.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 113.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2910,7 +2910,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "113":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 114.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 114.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2925,7 +2925,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "114":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 115.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 115.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2940,7 +2940,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "115":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 116.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 116.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2955,7 +2955,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "116":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 117.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 117.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2970,7 +2970,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "117":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 118.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 118.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -2985,7 +2985,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "118":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 119.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 119.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3000,7 +3000,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "119":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 120.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 120.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3044,11 +3044,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC77", 16);
             MissionChronoMilestone = 7;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 121 and I am the MissionCommander. Transmitting Milestone 7.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 121 and I am the MissionCommander. Transmitting Milestone 7.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 121 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 121 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -3087,7 +3087,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "121":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 122.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 122.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3102,7 +3102,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "122":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 123.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 123.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3117,7 +3117,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "123":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 124.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 124.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3132,7 +3132,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "124":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 125.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 125.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3147,7 +3147,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "125":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 126.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 126.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3162,7 +3162,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "126":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 127.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 127.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3177,7 +3177,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "127":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 128.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 128.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3192,7 +3192,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "128":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 129.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 129.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3207,7 +3207,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "129":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 130.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 130.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3222,7 +3222,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "130":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 131.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 131.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3237,7 +3237,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "131":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 132.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 132.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3252,7 +3252,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "132":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 133.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 133.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3267,7 +3267,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "133":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 134.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 134.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3282,7 +3282,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "134":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 135.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 135.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3297,7 +3297,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "135":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 136.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 136.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3312,7 +3312,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "136":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 137.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 137.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3327,7 +3327,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "137":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 138.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 138.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3342,7 +3342,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "138":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 139.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 139.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3357,7 +3357,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "139":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 140.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 140.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3401,11 +3401,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC88", 16);
             MissionChronoMilestone = 8;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 141 and I am the MissionCommander. Transmitting Milestone 8.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 141 and I am the MissionCommander. Transmitting Milestone 8.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 141 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 141 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -3447,7 +3447,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "141":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 142.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 142.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3465,7 +3465,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "142":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 143.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 143.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3483,7 +3483,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "143":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 144.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 144.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3501,7 +3501,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "144":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 145.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 145.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3519,7 +3519,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "145":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 146.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 146.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3537,7 +3537,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "146":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 147.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 147.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3555,7 +3555,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "147":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 148.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 148.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3573,7 +3573,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "148":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 149.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 149.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3591,7 +3591,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "149":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 150.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 150.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3609,7 +3609,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "150":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 151.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 151.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3627,7 +3627,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "151":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 152.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 152.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3645,7 +3645,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "152":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 153.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 153.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3663,7 +3663,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "153":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 154.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 154.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3681,7 +3681,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "154":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 155.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 155.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3699,7 +3699,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "155":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 156.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 156.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3717,7 +3717,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "156":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 157.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 157.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3735,7 +3735,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "157":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 158.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 158.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3753,7 +3753,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "158":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 159.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 159.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3771,7 +3771,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "159":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 160.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 160.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3818,11 +3818,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC99", 16);
             MissionChronoMilestone = 9;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 161 and I am the MissionCommander. Transmitting Milestone 9.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 161 and I am the MissionCommander. Transmitting Milestone 9.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 161 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 161 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -3864,7 +3864,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "161":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 162.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 162.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3882,7 +3882,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "162":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 163.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 163.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3900,7 +3900,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "163":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 164.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 164.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3918,7 +3918,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "164":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 165.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 165.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3936,7 +3936,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "165":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 166.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 166.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3954,7 +3954,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "166":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 167.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 167.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3972,7 +3972,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "167":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 168.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 168.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -3990,7 +3990,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "168":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 169.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 169.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4008,7 +4008,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "169":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 170.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 170.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4026,7 +4026,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "170":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 171.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 171.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4044,7 +4044,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "171":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 172.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 172.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4059,7 +4059,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "172":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 173.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 173.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4077,7 +4077,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "173":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 174.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 174.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4092,7 +4092,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "174":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 175.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 175.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4107,7 +4107,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "175":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 176.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 176.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4122,7 +4122,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "176":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 177.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 177.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4137,7 +4137,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "177":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 178.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 178.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4152,7 +4152,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "178":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 179.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 179.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4167,7 +4167,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "179":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 180.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 180.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4211,11 +4211,11 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             strncpy(&MorseCharacterOut[0], "CCCCCCCCCC00", 16);
             MissionChronoMilestone = 10;
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 181 and I am the MissionCommander. Transmitting Milestone 10.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 181 and I am the MissionCommander. Transmitting Milestone 10.\"", "r");
             }
         } else {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission State = 181 and I am Not the MissionCommander.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 181 and I am Not the MissionCommander.\"", "r");
             }
         }
         //
@@ -4254,7 +4254,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "181":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 182.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 182.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4269,7 +4269,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "182":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 183.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 183.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4284,7 +4284,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "183":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 184.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 184.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4299,7 +4299,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "184":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 185.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 185.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4314,7 +4314,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "185":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 186.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 186.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4329,7 +4329,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "186":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 187.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 187.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4344,7 +4344,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "187":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 188.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 188.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4359,7 +4359,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "188":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 189.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 189.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4374,7 +4374,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "189":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 190.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 190.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4389,7 +4389,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "190":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 191.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 191.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4404,7 +4404,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "191":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 192.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 192.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4419,7 +4419,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "192":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 193.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 193.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4434,7 +4434,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "193":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 194.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 194.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4449,7 +4449,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "194":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 195.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 195.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4464,7 +4464,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "195":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 196.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 196.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4479,7 +4479,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "196":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 197.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 197.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4494,7 +4494,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "197":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 198.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 198.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4509,7 +4509,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "198":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 199.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 199.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4524,7 +4524,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "199":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 200.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 200.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4539,7 +4539,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         //  advances to "200":
         //
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66 -s 140 \"Mission State = 201.\"", "r");
+            //popen("espeak -p 10 -a 66 -s 140 \"Mission State = 201.\"", "r");
         }
         // Now, if we want to change heading or thrust of our ships as a consequence of
         // the mission advancing through this MissionState, we adjust "RudderDegrees"
@@ -4673,7 +4673,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
         } else { // Get here if user disabled LAC's management of Mumble channel changes.
             MumbleChannelPresumed = 95; //@ Signal cockpit Mumble Panel
             if (!(NetworkMode & 16)) { // Get here if Mumble vocalization is NOT disabled.
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
             }
             sprintf(SystemMessageBufferA, "TEAM SWITCHING TO TEAMCAST CHANNEL.");
             //  And inform cockpit.cpp to scroll our new message into view:
@@ -4736,7 +4736,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             static bool FirstVerbalization = true;
             if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
                 if (FirstVerbalization) { // Get here if we have not yet verbalized "Dead in the water".
-                    popen("espeak -p 10 -a 66 \"Now hear this! Now hear this! RedTeam aircraft carrier has been destroyed!\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Now hear this! Now hear this! RedTeam aircraft carrier has been destroyed!\"", "r");
                     FirstVerbalization = false; // Prevent re-verbalizing
                 }
             }
@@ -4754,7 +4754,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             static bool FirstVerbalization = true;
             if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
                 if (FirstVerbalization) { // Get here if we have not yet verbalized "Dead in the water".
-                    popen("espeak -p 10 -a 66 \"Now hear this! Now hear this! BlueTeam aircraft carrier has been destroyed!\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Now hear this! Now hear this! BlueTeam aircraft carrier has been destroyed!\"", "r");
                     FirstVerbalization = false; // Prevent re-verbalizing
                 }
             }
@@ -4820,7 +4820,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 1.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 1 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 1 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone1;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone1;
@@ -4841,7 +4841,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 2.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 2 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 2 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone2;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone2;
@@ -4862,7 +4862,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 3.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 3 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 3 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone3;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone3;
@@ -4883,7 +4883,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 4.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 4 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 4 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone4;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone4;
@@ -4904,7 +4904,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 5.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 5 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 5 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone5;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone5;
@@ -4925,7 +4925,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 6.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 6 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 6 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone6;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone6;
@@ -4946,7 +4946,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 7.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 7 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 7 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone7;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone7;
@@ -4967,7 +4967,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 8.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 8 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 8 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone8;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone8;
@@ -4988,7 +4988,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 9.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 9 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 9 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone9;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone9;
@@ -5009,7 +5009,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
                 // MissionChronoMilestone 10.
                 //
                 if (!(NetworkMode & 16)) { // Get here if the user has not blocked use of espeak
-                    popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 10 sync command.\"", "r");
+                    //popen("espeak -p 10 -a 66 \"Received Mission Chrono Milestone 10 sync command.\"", "r");
                 }
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->x = RedTeamCarrier08XPositionAtMilestone10;
                 ThreeDObjects[MissionObjectCarrierRed1]->tl->z = RedTeamCarrier08ZPositionAtMilestone10;
@@ -5100,7 +5100,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             sprintf(SystemMessageBufferA, "ABUSE OF <ESC> DETECTED.");
             NewSystemMessageNeedsScrolling = true;
             if (!(NetworkMode & 16)) { // Get here if the user has not disabled espeak
-                popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
+                //popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
             }
         }
         if (MissionIdNegotiationCount > 32) { //  Get here if we've been unable to negotiate unique value for "MyNetworkId" after 32 attempts
@@ -5358,7 +5358,7 @@ int MissionNetworkBattle08::processtimer(Uint32 dt) {
             display((char*)"MissionNetworkBattle08::processtimer() Playing audio file MissionEndingIn15SecCountdown.wav", LOG_MOST);
             sound->play(SOUND_MISSIONENDINGIN15SECCOUNTDOWN, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission ending in 15 seconds.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission ending in 15 seconds.\"", "r");
             }
             CountdownLatch2 = true; //  Prevent immediate restart of that audio file.
             MissionEndingTimer2 = 17000; //  Allow 17 seconds for next phase.

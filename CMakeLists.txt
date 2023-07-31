@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 
 project(LinuxAirCombat)
 
@@ -18,17 +18,19 @@ add_library(Common
 )
 target_include_directories(Common PUBLIC ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include})
 target_link_libraries(Common ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})
+set_property(TARGET Common PROPERTY CXX_STANDARD 17)
 
 add_library(ModelLoader3DS
     "src/3ds.cpp"
 )
 target_link_libraries(ModelLoader3DS Common)
+set_property(TARGET ModelLoader3DS PROPERTY CXX_STANDARD 17)
 
 add_executable(LinuxAirCombat
     "src/main.cpp"
     "src/FlightModel.cpp"
-    "src/NetworkApi.cpp"
-    "src/NetworkApi.h"
+    #"src/NetworkApi.cpp"
+    #"src/NetworkApi.h"
     "src/aiobject.cpp"
     "src/aiobject.h"
     "src/audio.cpp"
@@ -67,7 +69,10 @@ add_executable(LinuxAirCombat
     "src/objload.h"
     "src/pilots.cpp"
     "src/pilots.h"
+    "src/PlatformFolders.cpp"
+    "src/PlatformFolders.h"
     "src/vertexarray.cpp"
     "src/vertexarray.h"
 )
 target_link_libraries(LinuxAirCombat ModelLoader3DS Common)
+set_property(TARGET LinuxAirCombat PROPERTY CXX_STANDARD 17)

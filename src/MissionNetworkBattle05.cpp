@@ -123,7 +123,7 @@ void MissionNetworkBattle05::start() {
     //
     //
     if (!(NetworkMode & 16)) { // Get here if LAC is NOT configured to ignore espeak
-        popen("espeak -p 10 -a 66  -s 160 \"Welcome to Blake's Mission! This is a very simple, fighter versus fighter mission. You can land on any flat ground for refuel, re-arm, and repair services.\"", "r");
+        //popen("espeak -p 10 -a 66  -s 160 \"Welcome to Blake's Mission! This is a very simple, fighter versus fighter mission. You can land on any flat ground for refuel, re-arm, and repair services.\"", "r");
     }
     // Initialize the "mission state", which is tracked in the global variable "MissionStateNetworkBattle".
     // That value will increase at carefully selected time intervals, and is used to trigger time-dependent
@@ -971,7 +971,7 @@ int MissionNetworkBattle05::processtimer(Uint32 dt) {
             //
             MumbleChannelPresumed = 95; //@ Signal cockpit Mumble Panel
             if (!(NetworkMode & 16)) { // Get here if Mumble vocalization is NOT disabled.
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching back to the TeamCast Channel.\"", "r");
             }
             sprintf(SystemMessageBufferA, "TEAM SWITCHING TO TEAMCAST CHANNEL.");
             //  And inform cockpit.cpp to scroll our new message into view:
@@ -1083,7 +1083,7 @@ int MissionNetworkBattle05::processtimer(Uint32 dt) {
             sprintf(SystemMessageBufferA, "ABUSE OF <ESC> DETECTED.");
             NewSystemMessageNeedsScrolling = true;
             if (!(NetworkMode & 16)) { // Get here if the user has not disabled espeak
-                popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
+                //popen("espeak -p 130 -a 127 -s 165 \"Escape abuse detected.\"", "r");
             }
         }
         if (MissionIdNegotiationCount > 32) { //  Get here if we've been unable to negotiate unique value for "MyNetworkId" after 32 attempts
@@ -1268,7 +1268,7 @@ int MissionNetworkBattle05::processtimer(Uint32 dt) {
             display((char*)"MissionNetworkBattle05::processtimer() Playing audio file MissionEndingIn15SecCountdown.wav", LOG_MOST);
             sound->play(SOUND_MISSIONENDINGIN15SECCOUNTDOWN, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66 -s 140 \"Mission ending in 15 seconds.\"", "r");
+                //popen("espeak -p 10 -a 66 -s 140 \"Mission ending in 15 seconds.\"", "r");
             }
             CountdownLatch2 = true; //  Prevent immediate restart of that audio file.
             MissionEndingTimer2 = 17000; //  Allow 17 seconds for next phase.

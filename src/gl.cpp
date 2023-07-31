@@ -90,7 +90,7 @@ void GL::disableLinearTexture(int texnum) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
-CTexture* GL::getTextureTGA(char* fname) {
+CTexture* GL::getTextureTGA(const char* fname) {
     int i;
     for (i = 0; i <= texnum; i++) {
         if (!strcmp(fname, tex[i]->name)) {
@@ -103,7 +103,7 @@ CTexture* GL::getTextureTGA(char* fname) {
     return NULL;
 }
 
-CTexture* GL::genTextureTGA(char* fname, int quality, int alphatype, int mipmap2, bool alpha) {
+CTexture* GL::genTextureTGA(const char* fname, int quality, int alphatype, int mipmap2, bool alpha) {
     char buf[STDSIZE];
     CTexture* mytex;
     if ((mytex = getTextureTGA(fname)) != NULL) {

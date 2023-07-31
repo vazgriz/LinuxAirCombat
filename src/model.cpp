@@ -111,7 +111,7 @@ CTexture::~CTexture() {
     }
 }
 
-int CTexture::loadFromTGA(char* fname, int quality, int alphatype, int mipmap) // only 24 bit TGA
+int CTexture::loadFromTGA(const char* fname, int quality, int alphatype, int mipmap) // only 24 bit TGA
 {
     int i, i2;
     data = tga_load(fname, &width, &height); // global 32 bpp texture buffer

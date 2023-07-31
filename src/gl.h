@@ -55,8 +55,8 @@ public:
     int genTexture();
     void enableLinearTexture(int texnum);
     void disableLinearTexture(int texnum);
-    CTexture* getTextureTGA(char* fname);
-    CTexture* genTextureTGA(char* fname, int quality, int alphatype, int mipmap2, bool alpha);
+    CTexture* getTextureTGA(const char* fname);
+    CTexture* genTextureTGA(const char* fname, int quality, int alphatype, int mipmap2, bool alpha);
     float getTexLight();
     void enableAntiAliasing();
     void disableAntiAliasing();

@@ -51,13 +51,13 @@ public:
     int length;
     FILE* out;
     ConfigFile();
-    ConfigFile(char* fname);
+    ConfigFile(const char* fname);
     char* skipwhite(char* str);
     char* skipnum(char* str);
     char* skipalphanum(char* str);
-    char* getString(char* dest, char* str);
-    int getValue(char* str);
-    int openOutput(char* fname);
+    char* getString(char* dest, const char* str);
+    int getValue(const char* str);
+    int openOutput(const char* fname);
     int write(char* str1, int n);
     int write(char* str1, char c);
     void writeText(char* str);

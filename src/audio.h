@@ -39,9 +39,9 @@ public:
     int volume;
 
     WaveFile();
-    WaveFile(char* filename);
+    WaveFile(const std::string& filename);
     ~WaveFile();
-    void load(char* filename);
+    void load(const std::string& filename);
     void play(int channel, bool loop);
     void stop();
     void setVolume(int level);

@@ -351,7 +351,7 @@ void StringToUpperCase(char* StringPointer);
 
 ConfigFile::ConfigFile() {}
 
-ConfigFile::ConfigFile(char* fname) {
+ConfigFile::ConfigFile(const char* fname) {
     char buf2[STDSIZE];
     bool commentmode = false;
     FILE* in;
@@ -520,7 +520,7 @@ char* ConfigFile::skipalphanum(char* str) {
     return str;
 }
 
-char* ConfigFile::getString(char* dest, char* str) {
+char* ConfigFile::getString(char* dest, const char* str) {
 
     char* strf, * stre;
     char cmpstr[256];
@@ -578,7 +578,7 @@ char* ConfigFile::getString(char* dest, char* str) {
     return dest;
 }
 
-int ConfigFile::getValue(char* str) {
+int ConfigFile::getValue(const char* str) {
     char res[256];
     getString(res, str);
 
@@ -589,7 +589,7 @@ int ConfigFile::getValue(char* str) {
     return atoi(res);
 }
 
-int ConfigFile::openOutput(char* fname) {
+int ConfigFile::openOutput(const char* fname) {
     out = fopen(fname, "wb");
 
     if (out == NULL) {
@@ -636,7 +636,7 @@ void ConfigFile::close() {
 void save_config() {
     char buf[STDSIZE];
     ConfigFile* cf = new ConfigFile();
-    char* confname = dirs->getSaves((char*)"LacConfig.txt");
+    const char* confname = dirs->getSaves((char*)"LacConfig.txt").c_str();
     sprintf(buf, "Saving %s ", confname);
     display(buf, LOG_MOST);
     int ret1 = cf->openOutput(confname);
@@ -1163,7 +1163,8 @@ int load_config() {
     char buf[STDSIZE];
     char ret[256];
     char* str;
-    char* confname = dirs->getSaves((char*)"LacConfig.txt");
+    auto name = dirs->getSaves("LacConfig.txt");
+    const char* confname = name.c_str();
     sprintf(buf, "Loading %s ", confname);
     display(buf, LOG_MOST);
     ConfigFile* cf = new ConfigFile(confname);
@@ -1867,7 +1868,8 @@ int load_saveconfig() {
     char buf[STDSIZE];
     char ret[256];
     char* str;
-    char* confname = dirs->getSaves((char*)"saveconf");
+    auto name = dirs->getSaves("saveconf");
+    const char* confname = name.c_str();
     sprintf(buf, "Loading %s ", confname);
     display(buf, LOG_MOST);
     ConfigFile* cf = new ConfigFile(confname);
@@ -1930,7 +1932,8 @@ void writeJoystick(ConfigFile* cf, char* str, int jn) {
 void save_configInterface() {
     char buf[STDSIZE];
     ConfigFile* cf = new ConfigFile();
-    char* confname = dirs->getSaves((char*)"LacControls.txt");
+    auto name = dirs->getSaves("LacControls.txt");
+    const char* confname = name.c_str();
     sprintf(buf, "Saving %s ", confname);
     display(buf, LOG_MOST);
     int ret1 = cf->openOutput(confname);
@@ -2191,7 +2194,8 @@ int load_configInterface() {
     char ret[256];
     char* str;
 
-    char* confname = dirs->getSaves((char*)"LacControls.txt");
+    auto name = dirs->getSaves("LacControls.txt");
+    const char* confname = name.c_str();
     sprintf(buf, "Loading %s ", confname);
     display(buf, LOG_MOST);
     ConfigFile* cf = new ConfigFile(confname);
