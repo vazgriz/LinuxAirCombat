@@ -1005,6 +1005,7 @@ extern unsigned int key_ZoomFovOut;
 //extern void ConvertStringToUpperCase(char* Pointer);
 extern void TestForWindNoise(); 
 
+SDL_GLContext context;
 SDL_Window* window;
 
 // Function Prototypes:
@@ -1308,16 +1309,21 @@ int main(int argc, char** argv) {
         }
     atexit(SDL_Quit);
     if (!ConfigInit) {
-        if (!setScreen(width, height, fullscreen)) {
+        window = setScreen(width, height, fullscreen);
+        if (!window) {
             load_saveconfig();
-            if (!setScreen(width, height, fullscreen)) {
+            window = setScreen(width, height, fullscreen);
+            if (!window) {
                 sprintf(buf, "No working display mode %dx%d found.", width, height);
                 display(buf, LOG_FATAL);
                 exit(EXIT_INIT);
             }
         }
     }
-    window = SDL_CreateWindow("LINUX Air Combat", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
+
+    context = SDL_GL_CreateContext(window);
+    SDL_GL_MakeCurrent(window, context);
+
     display((char*)"Creating sound system", LOG_MOST);
     sound = new SoundSystem();
     sound->volumesound = volumesound;
