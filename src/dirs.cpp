@@ -247,9 +247,7 @@ char *Dirs::getMusic (char *name)
     {
     
     GetExePath();
-    sprintf (DebugBuf, "Dirs::getMusic(): Actual path to Active Executable is now: %s", PathToActiveExecutable);
     display ((char *)DebugBuf, LOG_MOST);
-    sprintf (DebugBuf, PathToActiveExecutable, sizeof(PathToActiveExecutable[0]));
     strcpy (dir, DebugBuf);
     strcat (dir,"../share/lac/music/");
     strcat (dir, name);
@@ -260,7 +258,6 @@ char *Dirs::getMusic (char *name)
 
 char *Dirs::getSounds (char *name)
     {
-    sprintf (DebugBuf, PathToActiveExecutable, sizeof(PathToActiveExecutable[0]));
     strcpy (dir, DebugBuf);
     strcat (dir,"../share/lac/sounds/");
     strcat (dir, name);
@@ -271,7 +268,6 @@ char *Dirs::getSounds (char *name)
 
 char *Dirs::getModels (char *name)
     {
-    sprintf (DebugBuf, PathToActiveExecutable, sizeof(PathToActiveExecutable[0]));
     strcpy (dir, DebugBuf);
     strcat (dir,"../share/lac/models/");
     strcat (dir, name);
