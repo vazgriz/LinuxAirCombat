@@ -33,7 +33,7 @@
 
 extern char DebugBuf[];
 
-void display_stream(FILE* stream, char* str, int level) {
+void display_stream(FILE* stream, const char* str, int level) {
     if (level == LOG_NONE) {
         fprintf(stream, "%s\n", str);
     } else if (level == LOG_FATAL) {
@@ -62,7 +62,7 @@ void display_exit() {
 }
 
 // display log/debug message
-void display(char* str, int level) {
+void display(const char* str, int level) {
     int len = strlen(str);
     if (!len) {
         return;

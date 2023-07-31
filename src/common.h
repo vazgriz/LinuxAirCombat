@@ -36,6 +36,7 @@
 #include <string>
 #include <limits.h>
 #include <GL/glut.h>
+#define SDL_MAIN_HANDLED
 #include "SDL/SDL.h"
 #include "SDL/SDL_thread.h"
 #include "SDL/SDL_mixer.h"
@@ -123,7 +124,7 @@ extern float sunlight; // dynamically adjustable light (0=black...1=default...br
 extern float view;
 extern float view_x, view_y; // angles for joystick-controlled view
 
-extern void display (char *str, int level);
+extern void display(const char *str, int level);
 extern void display_exit ();
 extern void error_outofmemory (); // display "out of memory" error and exit
 extern void key2string (int key, char *buf);

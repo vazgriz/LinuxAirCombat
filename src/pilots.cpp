@@ -49,14 +49,14 @@ Pilot::Pilot(char* name) {
 
 Pilot::~Pilot() {}
 
-void PilotList::load(char* fname) {
+void PilotList::load(const char* fname) {
     aktpilots = 0;
     aktpilot = aktpilots;
     pilot[aktpilot] = new Pilot((char*)"");
     aktpilots++;
 }
 
-PilotList::PilotList(char* fname) {
+PilotList::PilotList(const char* fname) {
     int i;
     for (i = 0; i < maxpilots; i++) {
         pilot[i] = NULL;

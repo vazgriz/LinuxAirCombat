@@ -40,7 +40,7 @@ public:
     unsigned char ret[11]; // big endian swapping buffer
 
     // data type conversation
-    BinaryFile(char* filename);
+    BinaryFile(const char* filename);
     ~BinaryFile();
     int readFloat(float* f);
     int readFloat(float* f, int n);
@@ -103,7 +103,7 @@ class CLoad3DS {
 public:
     BinaryFile* file;
     CLoad3DS();
-    bool Import3DS(CModel* model, char* filename);
+    bool Import3DS(CModel* model, const char* filename);
 
     // developer specific loading routines
 private:

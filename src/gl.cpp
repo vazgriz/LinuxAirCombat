@@ -56,7 +56,7 @@ void GL::clearScreen() {
 }
 
 void GL::drawScreen() {
-    glutSwapBuffers();
+    //glutSwapBuffers();
 }
 
 void GL::rotate(int x, int y, int z) {

@@ -119,7 +119,7 @@ public:
     CColor* stdcol;
     CColor* highlightcol;
 
-    Font(char* filename, int height, char start, int num); // new Font
+    Font(const char* filename, int height, char start, int num); // new Font
     virtual ~Font();
 
     bool isPixel(int x, int y); // is pixel set in the texture?

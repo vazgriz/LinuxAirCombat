@@ -325,7 +325,7 @@ extern char CommsMacro18String2[64];
 extern char CommsMacro19String1[64];
 extern char CommsMacro19String2[64];
 extern char DebugBuf[];
-extern char FileSystemDefaultHeightMapFilePath[];
+extern std::string FileSystemDefaultHeightMapFilePath;
 extern char NetworkPassword[32];
 extern char PreferredBrowser[64];
 extern char RemoteDnsIpAddress[];
@@ -337,14 +337,14 @@ extern char RemoteDnsIpAddressTopLevelDomain[32];
 extern char PlayerIdStrings[10][9];
 
 //external integers:
-extern int MyInPortNumber; // Network API default value 51100 (Unsigned).
-extern int NetworkTransmitTimerInterval;
-extern int PeerInPortNumber; // Network API default value 51100 (Unsigned).
+//extern int MyInPortNumber; // Network API default value 51100 (Unsigned).
+//extern int NetworkTransmitTimerInterval;
+//extern int PeerInPortNumber; // Network API default value 51100 (Unsigned).
 
 /* Function Prototypes: */
 
-extern void ConvertStringToUpperCase(char* Pointer);
-extern void SetNetworkTransmitTimerIntervalByRealm();
+//extern void ConvertStringToUpperCase(char* Pointer);
+//extern void SetNetworkTransmitTimerIntervalByRealm();
 void StringToUpperCase(char* StringPointer);
 
 /* Functions and Methods: */
@@ -381,7 +381,7 @@ ConfigFile::ConfigFile(const char* fname) {
         if (SourceHeightMap != NULL) {
             display((char*)"Succesfully located backup copy of DefaultHeightMap.LAC.", LOG_MOST);
             DefaultHeightMapFileIsMissing = false;
-            DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath, "wb");
+            DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath.c_str(), "wb");
             if (DestHeightMap != NULL) {
                 display((char*)"Succesfully created blank new DefaultHeightMap.LAC.", LOG_MOST);
                 display((char*)"Try running LAC again now....", LOG_MOST);
@@ -414,7 +414,7 @@ ConfigFile::ConfigFile(const char* fname) {
                 display((char*)"   NOTE THAT LAC DOES NOT LIKE TO RUN FROM THE SAME FOLDER CONTAINING ITS SOURCE CODE.", LOG_MOST);
                 display((char*)"   The preferred installation and execution tactics can be found in our online documentation.", LOG_MOST);
                 DefaultHeightMapFileIsMissing = false;
-                DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath, "wb");
+                DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath.c_str(), "wb");
                 if (DestHeightMap != NULL) {
                     display((char*)"Succesfully created blank new DefaultHeightMap.LAC.", LOG_MOST);
                     display((char*)"Try running LAC again now....", LOG_MOST);
@@ -446,7 +446,7 @@ ConfigFile::ConfigFile(const char* fname) {
             if (SourceHeightMap != NULL) {
                 display((char*)"Succesfully located DefaultHeightMap.LAC from two directories higher up in the filesystem.", LOG_MOST);
                 DefaultHeightMapFileIsMissing = false;
-                DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath, "wb");
+                DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath.c_str(), "wb");
                 if (DestHeightMap != NULL) {
                     display((char*)"Succesfully created blank new DefaultHeightMap.LAC.", LOG_MOST);
                     display((char*)"Try running LAC again now....", LOG_MOST);
@@ -811,8 +811,8 @@ void save_config() {
     cf->writeText((char*)"# As a general rule, you can just leave this at the default value of 51100 in both of");
     cf->writeText((char*)"# the following Configuration Lines:");
     cf->writeText((char*)"");
-    cf->write((char*)" PeerInPortNumber", PeerInPortNumber);
-    cf->write((char*)" MyInPortNumber", MyInPortNumber);
+    cf->write((char*)" PeerInPortNumber", 0);// PeerInPortNumber);
+    cf->write((char*)" MyInPortNumber", 0);// MyInPortNumber);
     cf->writeText((char*)"");
     cf->writeText((char*)"# The following field is used to assert your preferred, default identity in Multiplayer");
     cf->writeText((char*)"# missions. Within each mission, every player must have a unique number. LAC will try to");
@@ -846,7 +846,7 @@ void save_config() {
     cf->writeText((char*)"# NetworkTransmitTimerInterval to 101 whenever odd-numbered Realms are in use. The");
     cf->writeText((char*)"# value set here affects only the other Realms.");
     cf->writeText((char*)"");
-    cf->write((char*)" NetworkTransmitTimerInterval", NetworkTransmitTimerInterval);
+    cf->write((char*)" NetworkTransmitTimerInterval", 0);// NetworkTransmitTimerInterval);
     cf->writeText((char*)"");
     cf->writeText((char*)"# NetworkMode. (Although LAC's documentation consistently refers to this variable");
     cf->writeText((char*)"# by that name for historical reasons, perhaps it would be better described as");
@@ -1388,26 +1388,26 @@ int load_config() {
     sprintf(RemoteDnsIpAddress, "%s.%s.%s", RemoteDnsIpAddressHost, RemoteDnsIpAddressSecondLevelDomain, RemoteDnsIpAddressTopLevelDomain);
     str = cf->getString(ret, (char*)"PeerInPortNumber");
     if (str == NULL) {
-        PeerInPortNumber = 0;
+        //PeerInPortNumber = 0;
     } else {
-        PeerInPortNumber = atoi(str);
+        //PeerInPortNumber = atoi(str);
     }
     str = cf->getString(ret, (char*)"MyInPortNumber");
     if (str == NULL) {
-        MyInPortNumber = 51100;
+        //MyInPortNumber = 51100;
     } else {
-        MyInPortNumber = atoi(str);
+        //MyInPortNumber = atoi(str);
     }
     str = cf->getString(ret, (char*)"NetworkTransmitTimerInterval");
     if (str == NULL) {
-        NetworkTransmitTimerInterval = 200;
+        //NetworkTransmitTimerInterval = 200;
     } else {
-        NetworkTransmitTimerInterval = atoi(str);
+        /*NetworkTransmitTimerInterval = atoi(str);
         if (NetworkTransmitTimerInterval < 100) {
             NetworkTransmitTimerInterval = 100;
         } else if (NetworkTransmitTimerInterval > 4000) {
             NetworkTransmitTimerInterval = 4000;
-        }
+        }*/
     }
     str = cf->getString(ret, (char*)"MyNetworkId");
     if (str == NULL) {
@@ -1438,11 +1438,11 @@ int load_config() {
     display((char*)"RemoteDnsIpAddress=", LOG_MOST);
     sprintf(DebugBuf, "%s", RemoteDnsIpAddress);
     display(DebugBuf, LOG_MOST);
-    display((char*)"PeerInPortNumber =", LOG_MOST);
-    sprintf(DebugBuf, "%d", PeerInPortNumber);
+    //display((char*)"PeerInPortNumber =", LOG_MOST);
+    //sprintf(DebugBuf, "%d", PeerInPortNumber);
     display(DebugBuf, LOG_MOST);
-    display((char*)"MyInPortNumber (only when in PeerToPeer mode) =", LOG_MOST);
-    sprintf(DebugBuf, "%d", MyInPortNumber);
+    //display((char*)"MyInPortNumber (only when in PeerToPeer mode) =", LOG_MOST);
+    //sprintf(DebugBuf, "%d", MyInPortNumber);
     display(DebugBuf, LOG_MOST);
     display((char*)"MyNetworkId=", LOG_MOST);
     sprintf(DebugBuf, "%d", MyNetworkId);
@@ -1475,9 +1475,9 @@ int load_config() {
         sprintf(DebugBuf, "%d", Realm);
         display(DebugBuf, LOG_MOST);
     }
-    SetNetworkTransmitTimerIntervalByRealm();
+    //SetNetworkTransmitTimerIntervalByRealm();
     display((char*)"NetworkTransmitTimerInterval=", LOG_MOST);
-    sprintf(DebugBuf, "%d", NetworkTransmitTimerInterval);
+    //sprintf(DebugBuf, "%d", NetworkTransmitTimerInterval);
     display(DebugBuf, LOG_MOST);
     str = cf->getString(ret, (char*)"CommunityHandle");
     if (str == NULL) {
@@ -1486,7 +1486,7 @@ int load_config() {
     } else {
         display((char*)"load_config() Found CommunityHandle within LacConfig.txt file.", LOG_MOST);
         strncpy(&CommunityHandle[0], str, 16);
-        ConvertStringToUpperCase(CommunityHandle);
+        //ConvertStringToUpperCase(CommunityHandle);
     }
 
     str = cf->getString(ret, (char*)"DefaultAircraft");

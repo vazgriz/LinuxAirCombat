@@ -165,6 +165,7 @@ public:
     virtual void draw();
 };
 
+/*
 class MissionNetworkBattle01 : public Mission {
 public:
     int laststate, texttimer;
@@ -254,6 +255,7 @@ public:
     virtual int processtimer(Uint32 dt);
     virtual void draw();
 };
+*/
 
 class MissionFreeFlightWW2 : public Mission {
 public:

@@ -33,6 +33,7 @@
 #include "menu.h"
 #include "mission.h"
 #include "NetworkApi.h"
+#include <PlatformFolders.h>
 
 #ifdef STEAMDECK
 //
@@ -347,15 +348,15 @@ char SystemMessageBufferA[64] = "_______________________________________________
 char TargetVocalize1State = 0;
 char TargetVocalize2State = 0;
 
-char* FileSystemHomeDir = getenv("HOME");
-char* FileSystemDefaultHeightMapFileName = (char*)"/.LAC/DefaultHeightMap.LAC";
-char* FileSystemGunCamHistoryFileName = (char*)"/.LAC/GunCamHistory.LAC";
-char* FileSystemLastTerrainFileName = (char*)"/.LAC/LastTerrain.LAC";
-char* FileSystemOnlineLineScoreLogFileName = (char*)"/.LAC/OnlineScoreLog.LAC";
-char  FileSystemDefaultHeightMapFilePath[512];
-char  FileSystemGunCamHistoryFilePath[512];
-char  FileSystemLastTerrainFilePath[512];
-char  FileSystemOnlineScoreLogFilePath[512];
+std::string FileSystemHomeDir = sago::getDataHome();
+std::string FileSystemDefaultHeightMapFileName = "/.LAC/DefaultHeightMap.LAC";
+std::string FileSystemGunCamHistoryFileName = "/.LAC/GunCamHistory.LAC";
+std::string FileSystemLastTerrainFileName = "/.LAC/LastTerrain.LAC";
+std::string FileSystemOnlineLineScoreLogFileName = "/.LAC/OnlineScoreLog.LAC";
+std::string FileSystemDefaultHeightMapFilePath;
+std::string FileSystemGunCamHistoryFilePath;
+std::string FileSystemLastTerrainFilePath;
+std::string FileSystemOnlineScoreLogFilePath;
 
 // global char array variables(two-dimensional):
 char PlayerIdStrings[10][9] =
@@ -997,11 +998,11 @@ extern unsigned int key_ZoomFovIn;
 extern unsigned int key_ZoomFovOut;
 
 // Extern LacUdpApiPacket Variables;
-extern Admin013Packet Admin013OutPacket;
-extern LacUdpApiPacket InPacket;
-extern LacUdpApiPacket OutPacket;
+//extern Admin013Packet Admin013OutPacket;
+//extern LacUdpApiPacket InPacket;
+//extern LacUdpApiPacket OutPacket;
 
-extern void ConvertStringToUpperCase(char* Pointer);
+//extern void ConvertStringToUpperCase(char* Pointer);
 extern void TestForWindNoise(); 
 
 SDL_Window* window;
@@ -1084,29 +1085,19 @@ int main(int argc, char** argv) {
     display(DebugBuf, LOG_MOST);
     display((char*)DebugBuf, LOG_MOST);
 
-    size_t size1 = strlen(FileSystemHomeDir) + strlen(FileSystemLastTerrainFileName) + 1;
-    snprintf(FileSystemLastTerrainFilePath, size1, "%s%s", FileSystemHomeDir, FileSystemLastTerrainFileName);
+    FileSystemLastTerrainFilePath = FileSystemHomeDir = FileSystemLastTerrainFileName;
     display((char*)"GLLandscape::GLLandscape() path to LastTerrain.LAC file =", LOG_MOST);
-    display(FileSystemLastTerrainFilePath, LOG_MOST);
+    display(FileSystemLastTerrainFilePath.c_str(), LOG_MOST);
 
-    size_t size2 = strlen(FileSystemHomeDir) + strlen(FileSystemDefaultHeightMapFileName) + 1;
-    snprintf(FileSystemDefaultHeightMapFilePath, size2, "%s%s", FileSystemHomeDir, FileSystemDefaultHeightMapFileName);
+    FileSystemDefaultHeightMapFilePath = FileSystemHomeDir + FileSystemDefaultHeightMapFileName;
 
-    display(DebugBuf, LOG_MOST);
-
-    strcat(FileSystemDefaultHeightMapFilePath, "../share/lac/DefaultHeightMap.LAC");
-    display((char*)"main(): seeking DefaultHeightMap.LAC from:", LOG_MOST);
-    display(FileSystemDefaultHeightMapFilePath, LOG_MOST);
-
-    size_t size3 = strlen(FileSystemHomeDir) + strlen(FileSystemOnlineLineScoreLogFileName) + 1;
-    snprintf(FileSystemOnlineScoreLogFilePath, size3, "%s%s", FileSystemHomeDir, FileSystemOnlineLineScoreLogFileName);
+    FileSystemOnlineScoreLogFilePath = FileSystemHomeDir + FileSystemOnlineLineScoreLogFileName;
     display((char*)"GLLandscape::GLLandscape() path to OnlineScoreLog.LAC file =", LOG_MOST);
-    display(FileSystemOnlineScoreLogFilePath, LOG_MOST);
+    display(FileSystemOnlineScoreLogFilePath.c_str(), LOG_MOST);
 
-    size_t size4 = strlen(FileSystemHomeDir) + strlen(FileSystemGunCamHistoryFileName) + 1;
-    snprintf(FileSystemGunCamHistoryFilePath, size4, "%s%s", FileSystemHomeDir, FileSystemGunCamHistoryFileName);
+    FileSystemGunCamHistoryFilePath = FileSystemHomeDir + FileSystemGunCamHistoryFileName;
     display((char*)"GLLandscape::GLLandscape() path to GunCamHistory.LAC file =", LOG_MOST);
-    display(FileSystemGunCamHistoryFilePath, LOG_MOST);
+    display(FileSystemGunCamHistoryFilePath.c_str(), LOG_MOST);
 
     if (!load_config()) {
 
@@ -1120,20 +1111,20 @@ int main(int argc, char** argv) {
     sprintf(DebugBuf, "main(): After save_configinterface, diffiulty=%d", difficulty);
     display(DebugBuf, LOG_MOST);
 
-    GunCamHistoryFile = fopen(FileSystemGunCamHistoryFilePath, "a");
+    GunCamHistoryFile = fopen(FileSystemGunCamHistoryFilePath.c_str(), "a");
     if (GunCamHistoryFile == NULL) {
         display((char*)"main() failed to open GunCamHistory.LAC", LOG_MOST);
     } else {
         display((char*)"main() succesfully opened GunCamHistory.LAC", LOG_MOST);
     }
 
-    OnlineScoreLogFile = fopen(FileSystemOnlineScoreLogFilePath, "a");
+    OnlineScoreLogFile = fopen(FileSystemOnlineScoreLogFilePath.c_str(), "a");
     if (OnlineScoreLogFile == NULL) {
         display((char*)"main() failed to open OnlineScoreLogFile.LAC", LOG_MOST);
     } else {
         display((char*)"main() succesfully opened OnlineScoreLogFile.LAC", LOG_MOST);
     }
-    UpdateOnlineScoreLogFileWithNewSession();
+    //UpdateOnlineScoreLogFileWithNewSession();
 
     //
     // Determine whether Mumble has been installed and
@@ -1306,7 +1297,7 @@ int main(int argc, char** argv) {
     display((char*)"joystick_MapScrollSouth", LOG_MOST);
     sprintf(DebugBuf, "%d", joystick_MapScrollSouth);
     display(DebugBuf, LOG_MOST);
-    pilots = new PilotList(dirs->getSaves((char*)"pilots"));
+    pilots = new PilotList(dirs->getSaves("pilots").c_str());
     display((char*)"Using SDL and GLUT", LOG_MOST);
 
     if (!ConfigInit)
@@ -3886,6 +3877,7 @@ void createMission(int missionid) {
     } else if (missionid == MISSION_HEADTOHEAD00) {
         MissionNumber = 12;
         missionnew = new MissionHeadToHead00();
+    /*
     } else if (missionid == MISSION_NETWORKBATTLE01) {
         MissionNumber = 13;
         display((char*)"Setting missionnew to MissionNetworkBattle01", LOG_MOST);
@@ -3936,6 +3928,7 @@ void createMission(int missionid) {
         display((char*)"Setting missionnew to MissionNetworkBattle10", LOG_MOST);
         missionnew = new MissionNetworkBattle10();
         sound->haltMusic();
+    */
     }
 }
 
@@ -8850,7 +8843,7 @@ void event_targetNext() {
             SelectedMissionTarget = 1;
         }
 
-        UpdatePlayerIdStringsArrayFromServer();
+        //UpdatePlayerIdStringsArrayFromServer();
         switch (SelectedMissionTarget % 2) {
         case 0:
         {
@@ -8917,7 +8910,7 @@ void event_targetNextRed() {
             }
         }
 
-        UpdatePlayerIdStringsArrayFromServer();
+        //UpdatePlayerIdStringsArrayFromServer();
         switch (SelectedMissionTarget % 2) {
         case 0:
         {
@@ -8990,7 +8983,7 @@ void event_targetPreviousBlue() {
         }
         sound->play(SOUND_BEEP1, false);
 
-        UpdatePlayerIdStringsArrayFromServer();
+        //UpdatePlayerIdStringsArrayFromServer();
         switch (SelectedMissionTarget % 2) {
         case 0:
         {
@@ -11041,226 +11034,226 @@ void LacFirstInit() {
     gl = new GL();
 
     display((char*)"Loading textures", LOG_MOST);
-    texgrass = gl->genTextureTGA(dirs->getTextures((char*)"grass1.tga"), 0, 0, 1, false);
-    texrocks = gl->genTextureTGA(dirs->getTextures((char*)"rocks1.tga"), 0, 0, 1, false);
-    texwater = gl->genTextureTGA(dirs->getTextures((char*)"water1.tga"), 0, 0, 1, false);
-    texsand = gl->genTextureTGA(dirs->getTextures((char*)"sand1.tga"), 0, 0, 1, false);
-    texredsand = gl->genTextureTGA(dirs->getTextures((char*)"redsand1.tga"), 0, 0, 1, false);
-    texredstone = gl->genTextureTGA(dirs->getTextures((char*)"redstone2.tga"), 0, 0, 1, false);
-    texgravel1 = gl->genTextureTGA(dirs->getTextures((char*)"gravel1.tga"), 0, 0, 1, false);
-    texglitter1 = gl->genTextureTGA(dirs->getTextures((char*)"glitter.tga"), 0, -1, 0, true);
-    textree = gl->genTextureTGA(dirs->getTextures((char*)"tree2.tga"), 0, -1, 1, true);
-    textreeu = gl->genTextureTGA(dirs->getTextures((char*)"treeu2.tga"), 0, -1, 1, true);
-    textree2 = gl->genTextureTGA(dirs->getTextures((char*)"tree1.tga"), 0, -1, 1, true);
-    textreeu2 = gl->genTextureTGA(dirs->getTextures((char*)"treeu1.tga"), 0, -1, 1, true);
-    textree3 = gl->genTextureTGA(dirs->getTextures((char*)"tree3.tga"), 0, 3, 1, true);
-    textreeu3 = gl->genTextureTGA(dirs->getTextures((char*)"treeu3.tga"), 0, 3, 1, true);
-    textree4 = gl->genTextureTGA(dirs->getTextures((char*)"tree4.tga"), 0, 3, 1, true);
-    textreeu4 = gl->genTextureTGA(dirs->getTextures((char*)"treeu4.tga"), 0, 3, 1, true);
-    textree5 = gl->genTextureTGA(dirs->getTextures((char*)"tree5.tga"), 0, -1, 1, true);
-    textreeu5 = gl->genTextureTGA(dirs->getTextures((char*)"treeu5.tga"), 0, -1, 1, true);
-    texcactus1 = gl->genTextureTGA(dirs->getTextures((char*)"cactus1.tga"), 0, 3, 1, true);
-    texcactusu1 = gl->genTextureTGA(dirs->getTextures((char*)"cactusu1.tga"), 0, 3, 1, true);
-    texsmoke = gl->genTextureTGA(dirs->getTextures((char*)"smoke1.tga"), 0, -1, 1, true);
-    texsmoke2 = gl->genTextureTGA(dirs->getTextures((char*)"smoke2.tga"), 0, -1, 1, true);
-    texsmoke3 = gl->genTextureTGA(dirs->getTextures((char*)"smoke3.tga"), 0, 5, 1, true);
-    texsun = gl->genTextureTGA(dirs->getTextures((char*)"sun2.tga"), 1, -1, 0, true);
-    texmoon = gl->genTextureTGA(dirs->getTextures((char*)"moon1.tga"), 1, 2, 0, true);
-    texearth = gl->genTextureTGA(dirs->getTextures((char*)"earth.tga"), 1, 0, 0, true);
-    texflare1 = gl->genTextureTGA(dirs->getTextures((char*)"flare1.tga"), 1, -1, 0, true);
-    texflare2 = gl->genTextureTGA(dirs->getTextures((char*)"flare2.tga"), 1, -1, 0, true);
-    texflare3 = gl->genTextureTGA(dirs->getTextures((char*)"flare3.tga"), 1, -1, 0, true);
-    texflare4 = gl->genTextureTGA(dirs->getTextures((char*)"flare4.tga"), 1, -1, 0, true);
-    texcross = gl->genTextureTGA(dirs->getTextures((char*)"cross.tga"), 0, -1, 1, true);
-    texcross2 = gl->genTextureTGA(dirs->getTextures((char*)"cross2.tga"), 0, -1, 1, true);
-    texclouds1 = gl->genTextureTGA(dirs->getTextures((char*)"clouds1.tga"), 0, -1, 1, true);
-    texclouds2 = gl->genTextureTGA(dirs->getTextures((char*)"clouds2.tga"), 0, 4, 1, true);
-    texclouds3 = gl->genTextureTGA(dirs->getTextures((char*)"clouds3.tga"), 0, 6, 1, true);
-    texradar1 = gl->genTextureTGA(dirs->getTextures((char*)"radar2.tga"), 0, -1, 0, true);
-    texradar2 = gl->genTextureTGA(dirs->getTextures((char*)"radar1.tga"), 0, -1, 0, true);
-    display((char*)"Loading Fonts", LOG_MOST);
-    font1 = new Font(dirs->getTextures((char*)"font1.tga"), 32, '!', 64);
-    font2 = new Font(dirs->getTextures((char*)"font2.tga"), 32, '!', 64);
-    display((char*)"Loading 3ds models:", LOG_MOST);
-    display((char*)" * p38Laa.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_fig, dirs->getModels((char*)"p38Laa.3ds"));
-    model_fig.setName((char*)"P38");
-    display((char*)" * gl-14c.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figb, dirs->getModels((char*)"gl-14c.3ds"));
-    model_figb.setName((char*)"HAWK");
-    display((char*)" * gl-50.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figi, dirs->getModels((char*)"spitfire.3ds"));
-    model_figi.setName((char*)"SPITFIRE");
-    display((char*)" * b17aa.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figu, dirs->getModels((char*)"b17aa.3ds"));
-    model_figu.setName((char*)"B17");
-    display((char*)" * a6m2.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figv, dirs->getModels((char*)"a6m2.3ds"));
-    model_figv.setName((char*)"A6M2");
-    display((char*)" * P51.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figc, dirs->getModels((char*)"P51a00.3ds"));
-    model_figc.setName((char*)"P51D");
-    display((char*)" * P47.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figw, dirs->getModels((char*)"P47aa.3ds"));
-    model_figw.setName((char*)"P47D");
-    display((char*)" * F4F.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAO, dirs->getModels((char*)"F4F.3ds"));
-    model_figAO.setName((char*)"F4F");
-    display((char*)" * F6F.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figx, dirs->getModels((char*)"F6F.3ds"));
-    model_figx.setName((char*)"F6F");
-    display((char*)" * F4U.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figy, dirs->getModels((char*)"F4U.3ds"));
-    model_figy.setName((char*)"F4U");
-    display((char*)" * FW190.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figz, dirs->getModels((char*)"FW190.3ds"));
-    model_figz.setName((char*)"FW190");
-    display((char*)" * JU87.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAA, dirs->getModels((char*)"JU87.3ds"));
-    model_figAA.setName((char*)"jU87");
-    display((char*)" * IL16.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAB, dirs->getModels((char*)"IL16.3ds"));
-    model_figAB.setName((char*)"IL16");
-    display((char*)" * FIATG55.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAC, dirs->getModels((char*)"FIATG55.3ds"));
-    model_figAC.setName((char*)"FIATG55");
-    display((char*)" * ME109.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAD, dirs->getModels((char*)"ME109.3ds"));
-    model_figAD.setName((char*)"ME109");
-    display((char*)" * P40.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAE, dirs->getModels((char*)"P40.3ds"));
-    model_figAE.setName((char*)"P40");
-    display((char*)" * HURRICANE.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAF, dirs->getModels((char*)"HURRICANE.3ds"));
-    model_figAF.setName((char*)"HURRICANE");
-    display((char*)" * KI43.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAG, dirs->getModels((char*)"KI43.3ds"));
-    model_figAG.setName((char*)"KI43");
-    display((char*)" * Yak9.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAH, dirs->getModels((char*)"Yak9.3ds"));
-    model_figAH.setName((char*)"YAK9");
-    display((char*)" * N1K1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAI, dirs->getModels((char*)"N1K1.3ds"));
-    model_figAI.setName((char*)"N1K1");
-    display((char*)" * b24.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAJ, dirs->getModels((char*)"b24.3ds"));
-    model_figAJ.setName((char*)"B24");
-    display((char*)" * P39.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAK, dirs->getModels((char*)"P39.3ds"));
-    model_figAK.setName((char*)"P38");
-    display((char*)" * G4m.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAL, dirs->getModels((char*)"G4m.3ds"));
-    model_figAL.setName((char*)"G4M");
-    display((char*)" * B25.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAM, dirs->getModels((char*)"B25.3ds"));
-    model_figAM.setName((char*)"B25");
-    display((char*)" * B26.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAN, dirs->getModels((char*)"B26.3ds"));
-    model_figAN.setName((char*)"B26");
-    display((char*)" * La5.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAP, dirs->getModels((char*)"La5.3ds"));
-    model_figAP.setName((char*)"LA5");
-    display((char*)" * La7.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAQ, dirs->getModels((char*)"La7.3ds"));
-    model_figAQ.setName((char*)"LA7");
-    display((char*)" * IL2.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAR, dirs->getModels((char*)"IL2.3ds"));
-    model_figAR.setName((char*)"IL2");
-    display((char*)" * MacciC202.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAS, dirs->getModels((char*)"MacciC202.3ds"));
-    model_figAS.setName((char*)"MACCI");
-    display((char*)" * Lancaster.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAT, dirs->getModels((char*)"Lancaster.3ds"));
-    model_figAT.setName((char*)"LANCASTER");
-    display((char*)" * MosquitoB.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAU, dirs->getModels((char*)"MosquitoB.3ds"));
-    model_figAU.setName((char*)"MOSQUIOB");
-    display((char*)" * Typhoon.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAV, dirs->getModels((char*)"Typhoon.3ds"));
-    model_figAV.setName((char*)"Typhoon");
-    display((char*)" * Yak1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAW, dirs->getModels((char*)"Yak1.3ds"));
-    model_figAW.setName((char*)"YAK1");
-    display((char*)" * B29.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAX, dirs->getModels((char*)"B29.3ds"));
-    model_figAX.setName((char*)"B29");
-    display((char*)" * DW520.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAY, dirs->getModels((char*)"DW520.3ds"));
-    model_figAY.setName((char*)"DW520");
-    display((char*)" * SB2C.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figAZ, dirs->getModels((char*)"SB2C.3ds"));
-    model_figAZ.setName((char*)"SB2C");
-    display((char*)" * TBF.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBA, dirs->getModels((char*)"TBF.3ds"));
-    model_figBA.setName((char*)"TBF");
-    display((char*)" * ME163.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBB, dirs->getModels((char*)"ME163.3ds"));
-    model_figBB.setName((char*)"ME163");
-    display((char*)" * TEMPEST.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBC, dirs->getModels((char*)"TEMPEST.3ds"));
-    model_figBC.setName((char*)"TEMPEST");
-    display((char*)" * D3A.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBD, dirs->getModels((char*)"D3A.3ds"));
-    model_figBD.setName((char*)"D3A");
-    display((char*)" * B5N.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBE, dirs->getModels((char*)"B5N.3ds"));
-    model_figBE.setName((char*)"B5N");
-    display((char*)" * Dauntless.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBF, dirs->getModels((char*)"Dauntless.3ds"));
-    model_figBF.setName((char*)"Dauntless");
-    display((char*)" * Me110.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBG, dirs->getModels((char*)"ME110.3ds"));
-    model_figBG.setName((char*)"ME110");
-    display((char*)" * DORNIER.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBH, dirs->getModels((char*)"Dornier17.3ds"));
-    model_figBH.setName((char*)"DORNIER");
-    display((char*)" * He111.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBI, dirs->getModels((char*)"HE111.3ds"));
-    model_figBI.setName((char*)"HE111");
-    display((char*)" * JU88.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBJ, dirs->getModels((char*)"JU88.3ds"));
-    model_figBJ.setName((char*)"JU88");
-    display((char*)" * KI84.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBK, dirs->getModels((char*)"KI84.3ds"));
-    model_figBK.setName((char*)"KI84");
-    display((char*)" * KI61.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBL, dirs->getModels((char*)"KI61.3ds"));
-    model_figBL.setName((char*)"KI61");
-    display((char*)" * Generic01.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBM, dirs->getModels((char*)"Generic01.3ds"));
-    model_figBM.setName((char*)"GENERIC01");
-    display((char*)" * A6M5.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBN, dirs->getModels((char*)"a6m5.3ds"));
-    model_figBN.setName((char*)"A6M5");
-    display((char*)" * SPIT5.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBO, dirs->getModels((char*)"SPIT5.3ds"));
-    model_figBO.setName((char*)"SPIT5");
-    display((char*)" * P51B.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBP, dirs->getModels((char*)"P51B.3ds"));
-    model_figBP.setName((char*)"P51B");
-    display((char*)" * P47B.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBQ, dirs->getModels((char*)"P47B.3ds"));
-    model_figBQ.setName((char*)"P47B");
-    display((char*)" * ME109F.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBR, dirs->getModels((char*)"ME109F.3ds"));
-    model_figBR.setName((char*)"ME109F");
-    display((char*)" * P38F.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_figBS, dirs->getModels((char*)"P38F.3ds"));
-    model_figBS.setName((char*)"P38F");
+    texgrass = gl->genTextureTGA(dirs->getTextures("grass1.tga").c_str(), 0, 0, 1, false);
+    texrocks = gl->genTextureTGA(dirs->getTextures("rocks1.tga").c_str(), 0, 0, 1, false);
+    texwater = gl->genTextureTGA(dirs->getTextures("water1.tga").c_str(), 0, 0, 1, false);
+    texsand = gl->genTextureTGA(dirs->getTextures("sand1.tga").c_str(), 0, 0, 1, false);
+    texredsand = gl->genTextureTGA(dirs->getTextures("redsand1.tga").c_str(), 0, 0, 1, false);
+    texredstone = gl->genTextureTGA(dirs->getTextures("redstone2.tga").c_str(), 0, 0, 1, false);
+    texgravel1 = gl->genTextureTGA(dirs->getTextures("gravel1.tga").c_str(), 0, 0, 1, false);
+    texglitter1 = gl->genTextureTGA(dirs->getTextures("glitter.tga").c_str(), 0, -1, 0, true);
+    textree = gl->genTextureTGA(dirs->getTextures("tree2.tga").c_str(), 0, -1, 1, true);
+    textreeu = gl->genTextureTGA(dirs->getTextures("treeu2.tga").c_str(), 0, -1, 1, true);
+    textree2 = gl->genTextureTGA(dirs->getTextures("tree1.tga").c_str(), 0, -1, 1, true);
+    textreeu2 = gl->genTextureTGA(dirs->getTextures("treeu1.tga").c_str(), 0, -1, 1, true);
+    textree3 = gl->genTextureTGA(dirs->getTextures("tree3.tga").c_str(), 0, 3, 1, true);
+    textreeu3 = gl->genTextureTGA(dirs->getTextures("treeu3.tga").c_str(), 0, 3, 1, true);
+    textree4 = gl->genTextureTGA(dirs->getTextures("tree4.tga").c_str(), 0, 3, 1, true);
+    textreeu4 = gl->genTextureTGA(dirs->getTextures("treeu4.tga").c_str(), 0, 3, 1, true);
+    textree5 = gl->genTextureTGA(dirs->getTextures("tree5.tga").c_str(), 0, -1, 1, true);
+    textreeu5 = gl->genTextureTGA(dirs->getTextures("treeu5.tga").c_str(), 0, -1, 1, true);
+    texcactus1 = gl->genTextureTGA(dirs->getTextures("cactus1.tga").c_str(), 0, 3, 1, true);
+    texcactusu1 = gl->genTextureTGA(dirs->getTextures("cactusu1.tga").c_str(), 0, 3, 1, true);
+    texsmoke = gl->genTextureTGA(dirs->getTextures("smoke1.tga").c_str(), 0, -1, 1, true);
+    texsmoke2 = gl->genTextureTGA(dirs->getTextures("smoke2.tga").c_str(), 0, -1, 1, true);
+    texsmoke3 = gl->genTextureTGA(dirs->getTextures("smoke3.tga").c_str(), 0, 5, 1, true);
+    texsun = gl->genTextureTGA(dirs->getTextures("sun2.tga").c_str(), 1, -1, 0, true);
+    texmoon = gl->genTextureTGA(dirs->getTextures("moon1.tga").c_str(), 1, 2, 0, true);
+    texearth = gl->genTextureTGA(dirs->getTextures("earth.tga").c_str(), 1, 0, 0, true);
+    texflare1 = gl->genTextureTGA(dirs->getTextures("flare1.tga").c_str(), 1, -1, 0, true);
+    texflare2 = gl->genTextureTGA(dirs->getTextures("flare2.tga").c_str(), 1, -1, 0, true);
+    texflare3 = gl->genTextureTGA(dirs->getTextures("flare3.tga").c_str(), 1, -1, 0, true);
+    texflare4 = gl->genTextureTGA(dirs->getTextures("flare4.tga").c_str(), 1, -1, 0, true);
+    texcross = gl->genTextureTGA(dirs->getTextures("cross.tga").c_str(), 0, -1, 1, true);
+    texcross2 = gl->genTextureTGA(dirs->getTextures("cross2.tga").c_str(), 0, -1, 1, true);
+    texclouds1 = gl->genTextureTGA(dirs->getTextures("clouds1.tga").c_str(), 0, -1, 1, true);
+    texclouds2 = gl->genTextureTGA(dirs->getTextures("clouds2.tga").c_str(), 0, 4, 1, true);
+    texclouds3 = gl->genTextureTGA(dirs->getTextures("clouds3.tga").c_str(), 0, 6, 1, true);
+    texradar1 = gl->genTextureTGA(dirs->getTextures("radar2.tga").c_str(), 0, -1, 0, true);
+    texradar2 = gl->genTextureTGA(dirs->getTextures("radar1.tga").c_str(), 0, -1, 0, true);
+    display("Loading Fonts", LOG_MOST);
+    font1 = new Font(dirs->getTextures("font1.tga").c_str(), 32, '!', 64);
+    font2 = new Font(dirs->getTextures("font2.tga").c_str(), 32, '!', 64);
+    display("Loading 3ds models:", LOG_MOST);
+    display(" * p38Laa.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_fig, dirs->getModels("p38Laa.3ds").c_str());
+    model_fig.setName("P38");
+    display(" * gl-14c.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figb, dirs->getModels("gl-14c.3ds").c_str());
+    model_figb.setName("HAWK");
+    display(" * gl-50.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figi, dirs->getModels("spitfire.3ds").c_str());
+    model_figi.setName("SPITFIRE");
+    display(" * b17aa.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figu, dirs->getModels("b17aa.3ds").c_str());
+    model_figu.setName("B17");
+    display(" * a6m2.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figv, dirs->getModels("a6m2.3ds").c_str());
+    model_figv.setName("A6M2");
+    display(" * P51.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figc, dirs->getModels("P51a00.3ds").c_str());
+    model_figc.setName("P51D");
+    display(" * P47.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figw, dirs->getModels("P47aa.3ds").c_str());
+    model_figw.setName("P47D");
+    display(" * F4F.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAO, dirs->getModels("F4F.3ds").c_str());
+    model_figAO.setName("F4F");
+    display(" * F6F.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figx, dirs->getModels("F6F.3ds").c_str());
+    model_figx.setName("F6F");
+    display(" * F4U.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figy, dirs->getModels("F4U.3ds").c_str());
+    model_figy.setName("F4U");
+    display(" * FW190.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figz, dirs->getModels("FW190.3ds").c_str());
+    model_figz.setName("FW190");
+    display(" * JU87.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAA, dirs->getModels("JU87.3ds").c_str());
+    model_figAA.setName("jU87");
+    display(" * IL16.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAB, dirs->getModels("IL16.3ds").c_str());
+    model_figAB.setName("IL16");
+    display(" * FIATG55.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAC, dirs->getModels("FIATG55.3ds").c_str());
+    model_figAC.setName("FIATG55");
+    display(" * ME109.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAD, dirs->getModels("ME109.3ds").c_str());
+    model_figAD.setName("ME109");
+    display(" * P40.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAE, dirs->getModels("P40.3ds").c_str());
+    model_figAE.setName("P40");
+    display(" * HURRICANE.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAF, dirs->getModels("HURRICANE.3ds").c_str());
+    model_figAF.setName("HURRICANE");
+    display(" * KI43.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAG, dirs->getModels("KI43.3ds").c_str());
+    model_figAG.setName("KI43");
+    display(" * Yak9.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAH, dirs->getModels("Yak9.3ds").c_str());
+    model_figAH.setName("YAK9");
+    display(" * N1K1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAI, dirs->getModels("N1K1.3ds").c_str());
+    model_figAI.setName("N1K1");
+    display(" * b24.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAJ, dirs->getModels("b24.3ds").c_str());
+    model_figAJ.setName("B24");
+    display(" * P39.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAK, dirs->getModels("P39.3ds").c_str());
+    model_figAK.setName("P38");
+    display(" * G4m.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAL, dirs->getModels("G4m.3ds").c_str());
+    model_figAL.setName("G4M");
+    display(" * B25.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAM, dirs->getModels("B25.3ds").c_str());
+    model_figAM.setName("B25");
+    display(" * B26.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAN, dirs->getModels("B26.3ds").c_str());
+    model_figAN.setName("B26");
+    display(" * La5.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAP, dirs->getModels("La5.3ds").c_str());
+    model_figAP.setName("LA5");
+    display(" * La7.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAQ, dirs->getModels("La7.3ds").c_str());
+    model_figAQ.setName("LA7");
+    display(" * IL2.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAR, dirs->getModels("IL2.3ds").c_str());
+    model_figAR.setName("IL2");
+    display(" * MacciC202.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAS, dirs->getModels("MacciC202.3ds").c_str());
+    model_figAS.setName("MACCI");
+    display(" * Lancaster.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAT, dirs->getModels("Lancaster.3ds").c_str());
+    model_figAT.setName("LANCASTER");
+    display(" * MosquitoB.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAU, dirs->getModels("MosquitoB.3ds").c_str());
+    model_figAU.setName("MOSQUIOB");
+    display(" * Typhoon.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAV, dirs->getModels("Typhoon.3ds").c_str());
+    model_figAV.setName("Typhoon");
+    display(" * Yak1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAW, dirs->getModels("Yak1.3ds").c_str());
+    model_figAW.setName("YAK1");
+    display(" * B29.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAX, dirs->getModels("B29.3ds").c_str());
+    model_figAX.setName("B29");
+    display(" * DW520.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAY, dirs->getModels("DW520.3ds").c_str());
+    model_figAY.setName("DW520");
+    display(" * SB2C.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figAZ, dirs->getModels("SB2C.3ds").c_str());
+    model_figAZ.setName("SB2C");
+    display(" * TBF.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBA, dirs->getModels("TBF.3ds").c_str());
+    model_figBA.setName("TBF");
+    display(" * ME163.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBB, dirs->getModels("ME163.3ds").c_str());
+    model_figBB.setName("ME163");
+    display(" * TEMPEST.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBC, dirs->getModels("TEMPEST.3ds").c_str());
+    model_figBC.setName("TEMPEST");
+    display(" * D3A.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBD, dirs->getModels("D3A.3ds").c_str());
+    model_figBD.setName("D3A");
+    display(" * B5N.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBE, dirs->getModels("B5N.3ds").c_str());
+    model_figBE.setName("B5N");
+    display(" * Dauntless.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBF, dirs->getModels("Dauntless.3ds").c_str());
+    model_figBF.setName("Dauntless");
+    display(" * Me110.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBG, dirs->getModels("ME110.3ds").c_str());
+    model_figBG.setName("ME110");
+    display(" * DORNIER.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBH, dirs->getModels("Dornier17.3ds").c_str());
+    model_figBH.setName("DORNIER");
+    display(" * He111.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBI, dirs->getModels("HE111.3ds").c_str());
+    model_figBI.setName("HE111");
+    display(" * JU88.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBJ, dirs->getModels("JU88.3ds").c_str());
+    model_figBJ.setName("JU88");
+    display(" * KI84.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBK, dirs->getModels("KI84.3ds").c_str());
+    model_figBK.setName("KI84");
+    display(" * KI61.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBL, dirs->getModels("KI61.3ds").c_str());
+    model_figBL.setName("KI61");
+    display(" * Generic01.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBM, dirs->getModels("Generic01.3ds").c_str());
+    model_figBM.setName("GENERIC01");
+    display(" * A6M5.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBN, dirs->getModels("a6m5.3ds").c_str());
+    model_figBN.setName("A6M5");
+    display(" * SPIT5.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBO, dirs->getModels("SPIT5.3ds").c_str());
+    model_figBO.setName("SPIT5");
+    display(" * P51B.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBP, dirs->getModels("P51B.3ds").c_str());
+    model_figBP.setName("P51B");
+    display(" * P47B.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBQ, dirs->getModels("P47B.3ds").c_str());
+    model_figBQ.setName("P47B");
+    display(" * ME109F.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBR, dirs->getModels("ME109F.3ds").c_str());
+    model_figBR.setName("ME109F");
+    display(" * P38F.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_figBS, dirs->getModels("P38F.3ds").c_str());
+    model_figBS.setName("P38F");
 
-    display((char*)" * cannon1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_cannon1, dirs->getModels((char*)"cannon1.3ds"));
+    display(" * cannon1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_cannon1, dirs->getModels("cannon1.3ds").c_str());
     model_cannon1.cubex = HitBubbleRadius;
     model_cannon1.cubey = HitBubbleRadius;
     model_cannon1.cubez = HitBubbleRadius;
-    display((char*)" * cannon1b.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_cannon1b, dirs->getModels((char*)"cannon1b.3ds"));
+    display(" * cannon1b.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_cannon1b, dirs->getModels("cannon1b.3ds").c_str());
     model_cannon1b.cubex = HitBubbleRadius;
     model_cannon1b.cubey = HitBubbleRadius;
     model_cannon1b.cubez = HitBubbleRadius;
 
-    display((char*)" * cannon2.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_cannon2, dirs->getModels((char*)"cannon2.3ds"));
+    display(" * cannon2.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_cannon2, dirs->getModels("cannon2.3ds").c_str());
     model_cannon2.nolight = true;
     model_cannon2.alpha = true;
     for (i = 0; i < 4; i++) {
@@ -11274,8 +11267,8 @@ void LacFirstInit() {
     model_cannon2.cubex = HitBubbleRadius;
     model_cannon2.cubey = HitBubbleRadius;
     model_cannon2.cubez = HitBubbleRadius;
-    display((char*)" * cannon2b.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_cannon2b, dirs->getModels((char*)"cannon2b.3ds"));
+    display(" * cannon2b.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_cannon2b, dirs->getModels("cannon2b.3ds").c_str());
     model_cannon2b.nolight = true;
     model_cannon2b.alpha = true;
     for (int i2 = 0; i2 < 2; i2++) {
@@ -11291,89 +11284,89 @@ void LacFirstInit() {
     model_cannon2b.cubex = HitBubbleRadius;
     model_cannon2b.cubey = HitBubbleRadius;
     model_cannon2b.cubez = HitBubbleRadius;
-    display((char*)" * flare1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_flare1, dirs->getModels((char*)"flare1.3ds"));
-    model_flare1.setName((char*)"FLARE");
+    display(" * flare1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_flare1, dirs->getModels("flare1.3ds").c_str());
+    model_flare1.setName("FLARE");
     model_flare1.alpha = true;
     model_flare1.nolight = true;
-    display((char*)" * chaff1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_chaff1, dirs->getModels((char*)"chaff1.3ds"));
-    model_chaff1.setName((char*)"CHAFF");
+    display(" * chaff1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_chaff1, dirs->getModels("chaff1.3ds").c_str());
+    model_chaff1.setName("CHAFF");
     model_chaff1.alpha = true;
     model_chaff1.nolight = true;
-    display((char*)" * bomb1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_bomb01, dirs->getModels((char*)"bomb1.3ds"));
-    model_bomb01.setName((char*)"BOMB 500 LB.");
-    display((char*)" * missile2.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_missile2, dirs->getModels((char*)"missile2.3ds"));
-    model_missile2.setName((char*)"AAM HS MK2");
-    display((char*)" * missile3.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_missile3, dirs->getModels((char*)"missile3.3ds"));
-    model_missile3.setName((char*)"AAM HS MK3");
-    display((char*)" * missile4.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_missile4, dirs->getModels((char*)"missile4.3ds"));
-    model_missile4.setName((char*)"AGM MK1");
-    display((char*)" * missile5.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_missile5, dirs->getModels((char*)"missile5.3ds"));
-    model_missile5.setName((char*)"AGM MK2");
-    display((char*)" * missile6.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_missile6, dirs->getModels((char*)"missile6.3ds"));
-    model_missile6.setName((char*)"ROCKETS");
-    display((char*)" * missile7.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_missile7, dirs->getModels((char*)"missile7.3ds"));
-    model_missile7.setName((char*)"AAM FF MK1");
-    display((char*)" * missile8.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_missile8, dirs->getModels((char*)"missile8.3ds"));
-    model_missile8.setName((char*)"AAM FF MK2");
-    display((char*)" * flak2.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_flak1, dirs->getModels((char*)"flak2.3ds"));
-    model_flak1.setName((char*)"SA CANNON");
-    display((char*)" * tank1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_tank1, dirs->getModels((char*)"tank1.3ds"));
-    model_tank1.setName((char*)"WIESEL");
+    display(" * bomb1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_bomb01, dirs->getModels("bomb1.3ds").c_str());
+    model_bomb01.setName("BOMB 500 LB.");
+    display(" * missile2.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_missile2, dirs->getModels("missile2.3ds").c_str());
+    model_missile2.setName("AAM HS MK2");
+    display(" * missile3.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_missile3, dirs->getModels("missile3.3ds").c_str());
+    model_missile3.setName("AAM HS MK3");
+    display(" * missile4.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_missile4, dirs->getModels("missile4.3ds").c_str());
+    model_missile4.setName("AGM MK1");
+    display(" * missile5.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_missile5, dirs->getModels("missile5.3ds").c_str());
+    model_missile5.setName("AGM MK2");
+    display(" * missile6.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_missile6, dirs->getModels("missile6.3ds").c_str());
+    model_missile6.setName("ROCKETS");
+    display(" * missile7.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_missile7, dirs->getModels("missile7.3ds").c_str());
+    model_missile7.setName("AAM FF MK1");
+    display(" * missile8.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_missile8, dirs->getModels("missile8.3ds").c_str());
+    model_missile8.setName("AAM FF MK2");
+    display(" * flak2.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_flak1, dirs->getModels("flak2.3ds").c_str());
+    model_flak1.setName("SA CANNON");
+    display(" * tank1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_tank1, dirs->getModels("tank1.3ds").c_str());
+    model_tank1.setName("WIESEL");
     model_tank1.scaleTexture(0.5, 0.5);
-    display((char*)" * tank2.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_tank2, dirs->getModels((char*)"tank2.3ds"));
-    model_tank2.setName((char*)"PANTHER");
+    display(" * tank2.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_tank2, dirs->getModels("tank2.3ds").c_str());
+    model_tank2.setName("PANTHER");
     model_tank2.scaleTexture(0.5, 0.5);
 
-    display((char*)" * Battery.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_battery, dirs->getModels((char*)"Battery.3ds"));
-    model_battery.setName((char*)"BATTERY");
+    display(" * Battery.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_battery, dirs->getModels("Battery.3ds").c_str());
+    model_battery.setName("BATTERY");
 
-    display((char*)" * Battleship.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_battleship, dirs->getModels((char*)"Battleship.3ds"));
-    model_battleship.setName((char*)"BATTLESHIP");
+    display(" * Battleship.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_battleship, dirs->getModels("Battleship.3ds").c_str());
+    model_battleship.setName("BATTLESHIP");
 
-    display((char*)" * Destroyer.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_destroyer, dirs->getModels((char*)"Destroyer.3ds"));
-    model_destroyer.setName((char*)"DESTROYER");
+    display(" * Destroyer.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_destroyer, dirs->getModels("Destroyer.3ds").c_str());
+    model_destroyer.setName("DESTROYER");
 
-    display((char*)" * Carrier00.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_carrier00, dirs->getModels((char*)"Carrier00.3ds"));
-    model_carrier00.setName((char*)"CARRIER00");
+    display(" * Carrier00.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_carrier00, dirs->getModels("Carrier00.3ds").c_str());
+    model_carrier00.setName("CARRIER00");
 
-    display((char*)" * radar.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_radar, dirs->getModels((char*)"radar.3ds"));
-    model_radar.setName((char*)"RADAR");
-    display((char*)" * RadarReflector01.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_RadarReflector, dirs->getModels((char*)"RadarReflector01.3ds"));
-    model_RadarReflector.setName((char*)"HQRADAR");
-    display((char*)" * Airfield00.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_Airfield00, dirs->getModels((char*)"Airfield00.3ds"));
-    model_Airfield00.setName((char*)"AIRFIELD00");
-    display((char*)" * rubble.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_rubble1, dirs->getModels((char*)"rubble.3ds"));
-    model_rubble1.setName((char*)"RUBBLE");
-    display((char*)" * depot1.3ds", LOG_MOST);
-    g_Load3ds.Import3DS(&model_depot1, dirs->getModels((char*)"depot1.3ds"));
-    model_depot1.setName((char*)"DEPOT");
+    display(" * radar.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_radar, dirs->getModels("radar.3ds").c_str());
+    model_radar.setName("RADAR");
+    display(" * RadarReflector01.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_RadarReflector, dirs->getModels("RadarReflector01.3ds").c_str());
+    model_RadarReflector.setName("HQRADAR");
+    display(" * Airfield00.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_Airfield00, dirs->getModels("Airfield00.3ds").c_str());
+    model_Airfield00.setName("AIRFIELD00");
+    display(" * rubble.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_rubble1, dirs->getModels("rubble.3ds").c_str());
+    model_rubble1.setName("RUBBLE");
+    display(" * depot1.3ds", LOG_MOST);
+    g_Load3ds.Import3DS(&model_depot1, dirs->getModels("depot1.3ds").c_str());
+    model_depot1.setName("DEPOT");
     model_depot1.scaleTexture(2, 2);
     // enable Z-Buffer
     glEnable(GL_DEPTH_TEST);
     // fill polygons(GL_LINE for wireframe models)
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    display((char*)"Setting up world geometry", LOG_MOST);
+    display("Setting up world geometry", LOG_MOST);
     space = new Space();
     space->drawlight = true;
     clip1 = space->z1;
@@ -11396,7 +11389,7 @@ void LacFirstInit() {
     rot.c = 00;
     textitle = new CTexture();
 
-    textitle = gl->genTextureTGA(dirs->getTextures((char*)"LacTitle.tga"), 0, 0, 0, false);
+    textitle = gl->genTextureTGA(dirs->getTextures("LacTitle.tga").c_str(), 0, 0, 0, false);
     sungamma = 60;
     setLightSource(60);
     event_setAntialiasing();
@@ -12669,6 +12662,7 @@ void mission_display() {
     font1->drawText((textx / fontscale) - 12, -1 / fontscale, -3, (char*)"CURRENT AIRCRAFT:", col);
     font2->drawText((textx / fontscale) - 38, -16 / fontscale, -5, getModelName(missionnew->selfighter[missionnew->wantfighter]), col);
     font1->drawText(xstats - 0.25 / fontscale, ystats / fontscale, -2, (char*)"MISSION NOTES:", col);
+    /*
     if (
         CurrentMissionNumber == MISSION_NETWORKBATTLE01 ||
         CurrentMissionNumber == MISSION_NETWORKBATTLE02 ||
@@ -13288,7 +13282,7 @@ void mission_display() {
         *col = &colorwhite;
         //font1->drawText((xaircraft -1) / fontscale,(yaircraft -4) / fontscale, -2.5,(char *)"  NOTE: ONLY REALMS 00\nAND 01 ARE IN POPULAR USE.", col);
         //font1->drawText(xaircraft / fontscale,(yaircraft -1) / fontscale, -2,(char *)"OTHER AIRCRAFT ARE AVAILABLE\nFROM PRIOR MENU.", col);
-    }
+    }*/
     if (CurrentMissionNumber == MISSION_TUTORIAL) {
         font1->drawText(xstats / fontscale, (ystats - 1) / fontscale, -2, (char*)"THIS IS A GOOD WAY TO LEARN\nENOUGH TO GET STARTED.", col);
         font1->drawText(xstats / fontscale, (ystats - 7) / fontscale, -3, (char*)"AFTER COMPLETING THE FOUR OFFLINE TUTORIAL\nMISSIONS, GRADUATE TO NETWORK BATTLE 03\nBECAUSE IT IS THE SIMPLEST OF THE ONLINE\nMISSIONS.\n\nIF NO OTHER PLAYERS ARE ONLINE, TRY THE\nMISSIONS OF REALM01. EVEN IF NOBODY ELSE IS\nONLINE, REALM01 NETWORK BATTLE 03 IS\nSOPHISTICATED, WITH LOTS OF FUN, BECAUSE\nTHE SERVER POPULATES IT WITH RECORDINGS\nOF PREVIOUS PLAYERS THAT YOU CAN SHOOT.", col);
@@ -13394,7 +13388,7 @@ void MouseMission(int button, int state, int x, int y) {
                         sound->play(SOUND_BEEP1, false);
                     }
                     SetNetworkTransmitTimerIntervalByRealm();
-                    UpdatePlayerIdStringsArrayFromServer();
+                    //UpdatePlayerIdStringsArrayFromServer();
                 } else {
                     sound->setVolume(SOUND_CLICK1, 40);
                     sound->play(SOUND_CLICK1, false);
@@ -13415,7 +13409,7 @@ void MouseMission(int button, int state, int x, int y) {
                     display((char*)"MouseMission() sending Admin13 OutPacket...", LOG_MOST);
                     sprintf(DebugBuf, "MouseMission(): Realm = %d, MissionNumber = %d ", Realm, MissionNumber);
                     display(DebugBuf, LOG_MOST);
-                    UpdatePlayerIdStringsArrayFromServer();
+                    //UpdatePlayerIdStringsArrayFromServer();
                     display((char*)"MouseMission() sent Admin13 OutPacket...", LOG_MOST);
                 } else {
                     sound->play(SOUND_CLICK1, false);
@@ -15635,7 +15629,7 @@ void TransmitCharacterViaMorseRadio(int key) {
 
         if ((RepeatedMorseOutCharCount >= 9) && key == 'S') {
             if (HaveNotYetSwitchedOurMumbleToSecret) {
-                SwitchMumbleToSecretChannel(OutPacket.UdpObjPlayerNumber);
+                //SwitchMumbleToSecretChannel(OutPacket.UdpObjPlayerNumber);
                 HaveNotYetSwitchedOurMumbleToSecret = false;
             }
         }
@@ -15754,6 +15748,7 @@ void UpdateOnlineScoreLogFileWithCrashes() {
 }
 
 void UpdateOnlineScoreLogFileWithDefeats() {
+    /*
     time_t now = time(NULL);
     struct tm* CurrentTimeStruct = gmtime(&now);
     char AircraftName[32];
@@ -16384,9 +16379,11 @@ void UpdateOnlineScoreLogFileWithDefeats() {
     fwrite(DebugBuf, strlen(DebugBuf), 1, OnlineScoreLogFile);
     sprintf(DebugBuf, "   My Aircraft Damage State before this hit = %3.0f\n\n", 100 * (1 - (fplayer->Durability / fplayer->maxDurability)));
     fwrite(DebugBuf, strlen(DebugBuf), 1, OnlineScoreLogFile);
+    */
 }
 
 void UpdateOnlineScoreLogFileWithLandings() {
+    /*
     if (!LandingLogged) {
         LandingLogged = true;
         display((char*)"UpdateOnlineScoreLogFileWithNewLandings()\n", LOG_MOST);
@@ -16409,8 +16406,10 @@ void UpdateOnlineScoreLogFileWithLandings() {
         sprintf(DebugBuf, "   My Aircraft Damage State = %3.0f\n\n", 100 * (1 - (fplayer->Durability / fplayer->maxDurability)));
         fwrite(DebugBuf, strlen(DebugBuf), 1, OnlineScoreLogFile);
     }
+    */
 }
 
+/*
 void UpdateOnlineScoreLogFileWithNewSession() {
     display((char*)"UpdateOnlineScoreLogFileWithNewSession()\n", LOG_MOST);
     time_t now = time(NULL);
@@ -17410,7 +17409,7 @@ void UpdatePlayerIdStringsArrayFromServer() {
     Admin013OutPacket.UdpObjMissionId = CurrentMissionNumber;
     SendAdmin013Packet();
 }
-
+*/
 void viewParameters() {
 
     display((char*)" ", LOG_NONE);

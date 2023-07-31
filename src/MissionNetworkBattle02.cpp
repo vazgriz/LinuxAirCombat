@@ -35,6 +35,8 @@ MissionNetworkBattle02::MissionNetworkBattle02() {
     //  for InPackets about twelve times as frequently as we send
     //  OutPackets as follows:
     //
+
+    /*
     NetworkReceiveTimerInterval = NetworkTransmitTimerInterval / 12;
     //
     LoadServerIpAddress(); //  Get Peer IP address from LacConfig.txt
@@ -61,6 +63,8 @@ MissionNetworkBattle02::MissionNetworkBattle02() {
     //
     //  Now switch the user's "Mumble" application to the appropriate channel according to his team affiliation.
     //
+    */
+
     event_CommsMacro17();
 } //  end MissionNetworkBattle02::MissionNetworkBattle02 ()
 
@@ -712,6 +716,7 @@ int MissionNetworkBattle02::processtimer(Uint32 dt) {
             sound->setVolume(SOUND_BEEP1, 20); //  and beep softly
             sound->play(SOUND_BEEP1, false);
         }
+        /*
         if (!ThreeDObjects[MissionAircraftNumber]->active && (myrandom(1000) > 995)) { //  Get here 0.5% of the time when any other plane explodes or crashes. Re-spawn destroyed aircraft.
             GetNetworkApiPacket(); //  Throw away any InPacket that has already sneaked in....
             DiscardAnyInPacketsInQueue(); //  Remove any stale inpackets that might otherwise corrupt our respawning parameters
@@ -776,6 +781,7 @@ int MissionNetworkBattle02::processtimer(Uint32 dt) {
             ThreeDObjects[MissionAircraftNumber]->explode = 0; //  Stop the explosion.
             ThreeDObjects[MissionAircraftNumber]->target = NULL;
         } //  End of logic that replaces destroyed aircraft to keep the mission running for awhile.
+        */
     } //  End of loop that examines each mission aircraft to preserve their type and respawn those destroyed.
 // Check to see if the player's aircraft has been destroyed:
     if (!ThreeDObjects[0]->active) { //  Get here whenever the player's aircraft has been destroyed.
@@ -793,6 +799,8 @@ int MissionNetworkBattle02::processtimer(Uint32 dt) {
     //  Update NetworkReceiveTimer and determine if it's now time
     //  to check for arrival of a new NetworkApi UDP packet:
     //
+
+    /*
     NetworkReceiveTimer += dt;
     if (NetworkReceiveTimer > NetworkReceiveTimerInterval) {
         NetworkReceiveTimer = 0;
@@ -823,6 +831,8 @@ int MissionNetworkBattle02::processtimer(Uint32 dt) {
         MissionNetworkBattle02RetrieveFirstDamageDescription();
         SendNetworkApiPacket();
     }
+    */
+
     if (MissionEndingTimer) { //  Get here if one of the two teams has won the battle
         if (MissionEndingTimer == 13000 && !MissionEndingTimer2) { // Get here just once, as soon as an airfield is destroyed.
             display((char*)"MissionNetworkBattle02::processtimer(): Playing SOUND_MISSIONENDINGINSTRUMENTAL.", LOG_MOST);

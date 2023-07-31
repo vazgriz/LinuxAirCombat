@@ -38,7 +38,7 @@
 ****************************************************************************/
 extern bool DefaultHeightMapFileIsMissing;
 extern char DebugBuf[];
-extern char  FileSystemDefaultHeightMapFilePath[];
+extern std::string FileSystemDefaultHeightMapFilePath;
 
 extern int AirfieldXMin;
 extern int AirfieldXMax;
@@ -265,7 +265,7 @@ void Landscape::genSurface(int hoehepc, int* heightmap) {
     int htest, h1, h2, step;
     unsigned short int LineBuffer[MAXX + 1];
 
-    ActiveTerrainFile = fopen(FileSystemDefaultHeightMapFilePath, "rb");
+    ActiveTerrainFile = fopen(FileSystemDefaultHeightMapFilePath.c_str(), "rb");
     if (ActiveTerrainFile != NULL) {
         display((char*)"Terrain file DefaultHeightMap.LAC found.", LOG_MOST);
         display((char*)"Loading previously active terrain....", LOG_MOST);
@@ -650,7 +650,7 @@ void Landscape::genDesertSurface(int hoehepc) {
     sprintf(DebugBuf, "MissionNumber = %d", MissionNumber);
     display(DebugBuf, LOG_MOST);
 
-    ActiveTerrainFile = fopen(FileSystemDefaultHeightMapFilePath, "rb");
+    ActiveTerrainFile = fopen(FileSystemDefaultHeightMapFilePath.c_str(), "rb");
     if (ActiveTerrainFile != NULL) {
         display((char*)"Terrain file DefaultHeightMap.LAC found.", LOG_MOST);
         display((char*)"Loading previously active terrain....", LOG_MOST);

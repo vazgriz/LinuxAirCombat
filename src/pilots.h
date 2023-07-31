@@ -70,9 +70,9 @@ public:
     int aktpilots, aktpilot;
     Pilot* pilot[maxpilots];
 
-    void load(char* fname);
-    void save(char* fname);
-    PilotList(char* fname);
+    void load(const char* fname);
+    void save(const char* fname);
+    PilotList(const char* fname);
     ~PilotList();
     void rm();
     void add(char* name);

@@ -450,7 +450,7 @@ void Font::extractLetters(int height, char start, int num) {
     }
 }
 
-Font::Font(char* filename, int height, char start, int num) {
+Font::Font(const char* filename, int height, char start, int num) {
     texture = gl->genTextureTGA(filename, 0, 1, 0, true);
     extractLetters(height, start, num);
     zoom = 0.1F;

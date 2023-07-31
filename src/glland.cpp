@@ -34,7 +34,7 @@
 FILE* TerrainFile;
 
 extern char DebugBuf[];
-extern char FileSystemLastTerrainFilePath[512];
+extern std::string FileSystemLastTerrainFilePath;
 
 float xtree[256];
 float ytree[256];
@@ -2803,9 +2803,9 @@ GLLandscape::GLLandscape(Space* space2, int type, int* heightmask) {
 
     display((char*)"Saving height map in file LastTerrain.LAC", LOG_MOST);
     display((char*)"GLLandscape::GLLandscape() path to LastTerrain.LAC file =", LOG_MOST);
-    display(FileSystemLastTerrainFilePath, LOG_MOST);
+    display(FileSystemLastTerrainFilePath.c_str(), LOG_MOST);
 
-    TerrainFile = fopen(FileSystemLastTerrainFilePath, "wb");
+    TerrainFile = fopen(FileSystemLastTerrainFilePath.c_str(), "wb");
     if (TerrainFile == NULL) {
         display((char*)"GLLandscape::GLLandscape() failed to open LastTerrain.LAC", LOG_MOST);
         return;

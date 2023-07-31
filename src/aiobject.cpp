@@ -169,7 +169,7 @@ extern float RegulatedForceZ;
 extern float SeaLevel;
 extern float TrueAirSpeed;
 
-extern LacUdpApiPacket InPacket;
+//extern LacUdpApiPacket InPacket;
 
 extern FILE* OnlineScoreLogFile;
 
@@ -6097,7 +6097,7 @@ void DynamicObj::crashGround(Uint32 dt) {
                                 )
                                 ) {
                                 LandedAtSafeSpeed = true;
-                                UpdateOnlineScoreLogFileWithLandings();
+                                //UpdateOnlineScoreLogFileWithLandings();
 
                                 if (TakeoffLogged == true) {
                                     TakeoffLogged = false;
@@ -6108,7 +6108,7 @@ void DynamicObj::crashGround(Uint32 dt) {
                                 fplayer->accx = 0;
                                 fplayer->accy = 0;
                                 fplayer->accz = 0;
-                                UpdateOnlineScoreLogFileWithLandings();
+                                //UpdateOnlineScoreLogFileWithLandings();
 
                                 if (TakeoffLogged == true) {
                                     TakeoffLogged = false;
@@ -6190,7 +6190,7 @@ void DynamicObj::crashGround(Uint32 dt) {
                 if (Durability < 0.5) {
                     setExplosion(0.2, 25 * timestep);
                     setBlackSmoke(0.5, 25 * timestep);
-                    UpdateOnlineScoreLogFileWithCrashes();
+                    //UpdateOnlineScoreLogFileWithCrashes();
                 }
             }
         } else {
@@ -6215,7 +6215,7 @@ void DynamicObj::crashGround(Uint32 dt) {
             PlayerCollidedWithAircraftCarrier = false;
             if (LandedAtSafeSpeed) {
 
-                UpdateOnlineScoreLogFileWithTakeoffs();
+                //UpdateOnlineScoreLogFileWithTakeoffs();
 
                 LandedAtSafeSpeed = false;
                 Me163LandingTimer = 90000;
@@ -6495,12 +6495,12 @@ void DynamicObj::move(Uint32 dt) {
         thrust -= (throttlechange);
     }
 
-    if (NetworkOpponent && (MissionNumber == MISSION_HEADTOHEAD00)) {
+    /*if (NetworkOpponent && (MissionNumber == MISSION_HEADTOHEAD00)) {
 
         ThreeDObjects[MissionHeadToHead00State]->realspeed = InPacket.UdpObjSpeed;
         ThreeDObjects[MissionHeadToHead00State]->thrust = InPacket.UdpObjThrust;
         ThreeDObjects[MissionHeadToHead00State]->recthrust = InPacket.UdpObjThrust;
-    }
+    }*/
     // PHYSICS (simplified model)
     CVector3 vaxis, uaxis, utemp, utemp2, utemp3;
     float gammaup, phiup, thetaup, RealSpeedTemp2;

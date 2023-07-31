@@ -254,14 +254,16 @@ extern float NetworkApiPriorXPosition[];
 extern float NetworkApiPriorYPosition[];
 extern float NetworkApiPriorZPosition[];
 
-extern LacUdpApiPacket InPacket;
-extern LacUdpApiPacket OutPacket;
+//extern LacUdpApiPacket InPacket;
+//extern LacUdpApiPacket OutPacket;
 
+/*
 extern int  DiscardAnyInPacketsInQueue();
 extern int  GetNetworkApiPacket();
 extern int  OpenClientUdpSocket();
 extern int  OpenUdpSocketForReceiving();
 extern int  OpenUdpSocketForSending();
+*/
 
 bool TestForSentience(unsigned char PlayerNumber);
 
@@ -297,13 +299,13 @@ extern void event_TrimElevatorDn();
 extern void event_TrimElevatorUp();
 extern void event_ZoomFovOut();
 extern void game_quit();
-extern void LoadServerIpAddress();
-extern void LoadVariablesFromNetworkApiPacket();
+//extern void LoadServerIpAddress();
+//extern void LoadVariablesFromNetworkApiPacket();
 extern void MumbleChannelChange(char MumbleUrl[]);
-extern void SendNetworkApiPacket();
+//extern void SendNetworkApiPacket();
 extern void event_UnMuteMorseAll();
-extern void UpdateOnlineScoreLogFileWithCalculatedRisks();
-extern void UpdateOnlineScoreLogFileWithNewSorties();
+//extern void UpdateOnlineScoreLogFileWithCalculatedRisks();
+//extern void UpdateOnlineScoreLogFileWithNewSorties();
 extern void VocalizeBlueHqStatus();
 extern void VocalizeRedHqStatus();
 
@@ -1310,6 +1312,7 @@ void DetermineCurrentAirfield() {
     }
 }
 
+/*
 void LoadVariablesFromNetworkApiPacket(int timer) {
 
     static unsigned char BlueTeamAirfieldDestroyedNotificationCount = 0.0;
@@ -1676,6 +1679,7 @@ void LoadVariablesFromNetworkApiPacket(int timer) {
         }
     }
 }
+*/
 
 void MilestoneCorrectionCheck() {
     MilestoneCorrectionTimer -= (DeltaTime * 1000);
@@ -1746,6 +1750,7 @@ void MilestoneCorrectionCheck() {
     }
 }
 
+/*
 void ProcessUdpObjFlightDetails() {
     if (InPacket.UdpObjFlightDetails & 4) {
         ThreeDObjects[InPacket.UdpObjPlayerNumber]->SpeedBrake = 1;
@@ -1792,6 +1797,7 @@ void ProcessUdpObjFlightDetails() {
         }
     }
 }
+*/
 
 void RepairDamagedAirfields() {
     static bool FoundHeavilyDamagedBlueAirfield;
@@ -2511,7 +2517,7 @@ int MissionTutorial3::processtimer(Uint32 dt) {
             sprintf(DebugBuf, "MissionTutorial3::processtimer fplayer->Durability is now %f.", fplayer->Durability);
             display(DebugBuf, LOG_MOST);
             if (fplayer->Durability < 0) { //  Get here if damage from locally managed airfields or bombers killed us.
-                UpdateOnlineScoreLogFileWithCalculatedRisks();
+                //UpdateOnlineScoreLogFileWithCalculatedRisks();
             }
         }
         CalculatedDamageDueToCurrentRisk = 0; //  After admitting that damage amount, clear it.
@@ -2632,6 +2638,7 @@ MissionHeadToHead00::MissionHeadToHead00() {
     selfighters = 2;
     selweapons = 1;
 
+    /*
     NetworkReceiveTimerInterval = NetworkTransmitTimerInterval / 3;
     LoadServerIpAddress();
 
@@ -2652,6 +2659,7 @@ MissionHeadToHead00::MissionHeadToHead00() {
         }
     } else {
     }
+    */
     event_CommsMacro10();
 }
 
@@ -2801,11 +2809,12 @@ int MissionHeadToHead00::processtimer(Uint32 dt) {
     texttimer += dt;
     timer += dt;
     if (StateTransitionTimer < 0) {
-        DiscardAnyInPacketsInQueue();
+        //DiscardAnyInPacketsInQueue();
     }
 
     PriorPeerId = ThreeDObjects[state]->id;
 
+    /*
     NetworkReceiveTimer += dt;
     if ((NetworkReceiveTimer > NetworkReceiveTimerInterval) && (StateTransitionTimer >= 0)) {
         NetworkReceiveTimer = 0;
@@ -2858,6 +2867,7 @@ int MissionHeadToHead00::processtimer(Uint32 dt) {
         display((char*)"MissionHeadToHead00::processtimer() NetworkPlayerKilled.", LOG_MOST);
         game_quit();
     }
+    */
 
     for (i = 0; i <= 9; i++) {
         if (ThreeDObjects[i]->active)
@@ -2869,7 +2879,7 @@ int MissionHeadToHead00::processtimer(Uint32 dt) {
         return 0;
     }
 
-    DiscardAnyInPacketsInQueue();
+    //DiscardAnyInPacketsInQueue();
 
     NetworkReceiveTimer = -2500; // Wait awhile before getting next InPacket
     StateTransitionTimer = -2000;
@@ -2969,6 +2979,7 @@ void MissionHeadToHead00LoadVariablesFromNetworkApiPacket(int timer) {
 
     unsigned char PlayerNumber;
 
+    /*
     extern LacUdpApiPacket InPacket;
     display((char*)"MissionHeadToHead00LoadVariablesFromNetworkApiPacket()", LOG_NET);
 
@@ -3018,6 +3029,7 @@ void MissionHeadToHead00LoadVariablesFromNetworkApiPacket(int timer) {
     NetworkApiPriorZPosition[MissionHeadToHead00State] = InPacket.UdpObjZPosition;
     NetworkApiPriorTimer[MissionHeadToHead00State] = timer;
     fplayer->Durability -= InPacket.UdpObjDamageAmount; // Accept damage from peer
+    */
 }
 
 bool MissionHeadToHead00RetrieveFirstDamageDescription() {
@@ -3197,6 +3209,7 @@ void TestDamageMissionObjectCarrierRed1() {
     }
 }
 
+/*
 #include "MissionNetworkBattle01.cpp"
 
 #include "MissionNetworkBattle02.cpp"
@@ -3216,6 +3229,7 @@ void TestDamageMissionObjectCarrierRed1() {
 #include "MissionNetworkBattle09.cpp"
 
 #include "MissionNetworkBattle10.cpp"
+*/
 
 void RearmRefuelRepair() {
     char TerrainTypeHere;

@@ -61,7 +61,7 @@ extern char DebugBuf[];
 
 FILE* debugstream3ds = stdout;
 
-BinaryFile::BinaryFile(char* filename) {
+BinaryFile::BinaryFile(const char* filename) {
     char buf[STDSIZE];
     in = fopen(filename, "rb");
 
@@ -337,7 +337,7 @@ int CLoad3DS::GetString(char* buffer) {
     return file->readString(buffer);
 }
 
-bool CLoad3DS::Import3DS(CModel* model, char* filename) {
+bool CLoad3DS::Import3DS(CModel* model, const char* filename) {
     char message[255] = { 0 };
     file = new BinaryFile(filename);
 
