@@ -1502,6 +1502,7 @@ void callbackControls(Component* comp, int key) {
 }
 
 void callbackCheckForMissionMultiMedia(Component* comp, int key) {
+    /*
     FILE* PopenStatus;
     unsigned int BrowserWidth;
     unsigned int BrowserHeight;
@@ -1514,14 +1515,14 @@ void callbackCheckForMissionMultiMedia(Component* comp, int key) {
     }
     display((char*)"Function entry: callbackCheckForMissionMultiMedia()", LOG_MOST);
     if (!(NetworkMode & 16)) {
-        popen("espeak -p 10 -a 66  \"LAC is searching for a video about this mission.\"", "r");
+        //popen("espeak -p 10 -a 66  \"LAC is searching for a video about this mission.\"", "r");
     }
 
     if (!strcmp(&PreferredBrowser[0], "firefox")) {
         sprintf(DebugBuf, "%s -width %d -height %d https://AskMisterWizard.com/2019/LinuxAirCombat/Missions/%.2d.htm", PreferredBrowser, BrowserWidth, BrowserHeight, CurrentMissionNumber);
         display(DebugBuf, LOG_MOST);
 
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             sprintf(DebugBuf, "callbackCheckForMissionMultiMedia() is attempting to invoke %s.", PreferredBrowser);
             display(DebugBuf, LOG_MOST);
@@ -1534,7 +1535,7 @@ void callbackCheckForMissionMultiMedia(Component* comp, int key) {
         sprintf(DebugBuf, "%s --app=\"https://AskMisterWizard.com/2019/LinuxAirCombat/Missions/%.2d.htm\"", PreferredBrowser, CurrentMissionNumber);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackCheckForMissionMultiMedia() is attempting to invoke chromium.", LOG_MOST);
             sound->haltMusic();
@@ -1544,7 +1545,7 @@ void callbackCheckForMissionMultiMedia(Component* comp, int key) {
         sprintf(DebugBuf, "chromium --no-sandbox --app=\"https://AskMisterWizard.com/2019/LinuxAirCombat/Missions/%.2d.htm\"", CurrentMissionNumber);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackCheckForMissionMultiMedia() is attempting to invoke chromium --no-sandbox.", LOG_MOST);
             sound->haltMusic();
@@ -1554,13 +1555,14 @@ void callbackCheckForMissionMultiMedia(Component* comp, int key) {
         sprintf(DebugBuf, "%s --app=\"https://AskMisterWizard.com/2019/LinuxAirCombat/Missions/%.2d.htm\"", PreferredBrowser, CurrentMissionNumber);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackCheckForMissionMultiMedia() is attempting to invoke chromium-browser.", LOG_MOST);
             sound->haltMusic();
             sound->stopAll();
         }
     }
+    */
 }
 
 void callbackCredits(Component* comp, int key) {
@@ -2152,17 +2154,18 @@ void callbackMusic(Component* comp, int key) {
 }
 
 void callbackOnlineDocs(Component* comp, int key) {
+    /*
     display((char*)"Function Entry callbackOnlineDocs()", LOG_MOST);
     GoodMenuBehavior += 10;
 
     if (strncmp(CommunityHandle, "NEW", 3) == 0) {
 
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  \"New Player, welcome to Linux Air Combat! Your online name, or CommunityHandle, has been configured with a random identity in your LacConffig.txt file. It would be a good idea to edit it. A menu of our Online Docs should soon be visible. Use the prominent Frequently Asked Questions link to find help about this in Frequently Asked Question number 15. Thank you.\"", "r");
+            //popen("espeak -p 10 -a 66  \"New Player, welcome to Linux Air Combat! Your online name, or CommunityHandle, has been configured with a random identity in your LacConffig.txt file. It would be a good idea to edit it. A menu of our Online Docs should soon be visible. Use the prominent Frequently Asked Questions link to find help about this in Frequently Asked Question number 15. Thank you.\"", "r");
         }
     } else {
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  \"LAC is attempting to activate your browser and access its online documentation.\"", "r");
+            //popen("espeak -p 10 -a 66  \"LAC is attempting to activate your browser and access its online documentation.\"", "r");
         }
     }
 
@@ -2173,7 +2176,7 @@ void callbackOnlineDocs(Component* comp, int key) {
         sprintf(DebugBuf, "%s  -width %d -height %d https://askmisterwizard.com/2019/LinuxAirCombat/LacOnlineDocs.htm", PreferredBrowser, BrowserWidth, BrowserHeight);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackOnlineDocs() is attempting to invoke firefox.", LOG_MOST);
             sound->haltMusic();
@@ -2183,7 +2186,7 @@ void callbackOnlineDocs(Component* comp, int key) {
         sprintf(DebugBuf, "%s --app=\"https://askmisterwizard.com/2019/LinuxAirCombat/LacOnlineDocs.htm\"", PreferredBrowser);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackOnlineDocs() is attempting to invoke chromium.", LOG_MOST);
             sound->haltMusic();
@@ -2193,7 +2196,7 @@ void callbackOnlineDocs(Component* comp, int key) {
         sprintf(DebugBuf, "%s --app=\"https://askmisterwizard.com/2019/LinuxAirCombat/LacOnlineDocs.htm\"", PreferredBrowser);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackOnlineDocs() is attempting to invoke chromium-browser.", LOG_MOST);
             sound->haltMusic();
@@ -2203,7 +2206,7 @@ void callbackOnlineDocs(Component* comp, int key) {
         sprintf(DebugBuf, "chromium --no-sandbox --app=\"https://askmisterwizard.com/2019/LinuxAirCombat/LacOnlineDocs.htm\"");
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackOnlineDocs() is attempting to invoke chromium --no-sandbox.", LOG_MOST);
             sound->haltMusic();
@@ -2212,6 +2215,7 @@ void callbackOnlineDocs(Component* comp, int key) {
     } else {
         display((char*)"callbackOnlineDocs(): Unknown PreferredBrowser specified in LacConfig.txt.", LOG_MOST);
     }
+    */
 }
 
 void callbackPhysics(Component* comp, int key) {
@@ -2255,7 +2259,7 @@ void callbackQuit(Component* comp, int key) {
 void callbackQuitNow(Component* comp, int key) {
     display((char*)"Function entry: callbackQuitNow()", LOG_MOST);
     if (!(NetworkMode & 16)) {
-        popen("espeak -a 33 -s 190 -p 10 \"Thank you for joining us. We hope to see you in the Linux Air Combat online community again soon!\"", "r");
+        ////popen("espeak -a 33 -s 190 -p 10 \"Thank you for joining us. We hope to see you in the Linux Air Combat online community again soon!\"", "r");
     }
     void game_quit();
     game_quit();
@@ -2366,6 +2370,7 @@ void callbackSwitchMainMenu(Component* comp, int key) {
 }
 
 void callbackSwitchMultimedia(Component* comp, int key) {
+    /*
     FILE* PopenStatus;
     unsigned int BrowserWidth;
     unsigned int BrowserHeight;
@@ -2378,14 +2383,14 @@ void callbackSwitchMultimedia(Component* comp, int key) {
     }
     display((char*)"Function entry: callbackSwitchMultiMedia()", LOG_MOST);
     if (!(NetworkMode & 16)) {
-        popen("espeak -p 10 -a 66  \"LAC is attempting to activate your browser for video about this aircraft.\"", "r");
+        //popen("espeak -p 10 -a 66  \"LAC is attempting to activate your browser for video about this aircraft.\"", "r");
     }
 
     if (!strcmp(&PreferredBrowser[0], "firefox")) {
         sprintf(DebugBuf, "%s -width %d -height %d https://AskMisterWizard.com/2019/LinuxAirCombat/Planes/%.2d.htm", PreferredBrowser, BrowserWidth, BrowserHeight, SelectedAircraft);
         display(DebugBuf, LOG_MOST);
 
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             sprintf(DebugBuf, "callbackSwitchMultimedia() is attempting to invoke %s.", PreferredBrowser);
             display(DebugBuf, LOG_MOST);
@@ -2398,7 +2403,7 @@ void callbackSwitchMultimedia(Component* comp, int key) {
         sprintf(DebugBuf, "%s --app=\"https://AskMisterWizard.com/2019/LinuxAirCombat/Planes/%.2d.htm\"", PreferredBrowser, SelectedAircraft);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackSwitchMultimedia() is attempting to invoke chromium-browser.", LOG_MOST);
             sound->haltMusic();
@@ -2408,7 +2413,7 @@ void callbackSwitchMultimedia(Component* comp, int key) {
         sprintf(DebugBuf, "%s --app=\"https://AskMisterWizard.com/2019/LinuxAirCombat/Planes/%.2d.htm\"", PreferredBrowser, SelectedAircraft);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackSwitchMultimedia() is attempting to invoke chromium.", LOG_MOST);
             sound->haltMusic();
@@ -2418,13 +2423,14 @@ void callbackSwitchMultimedia(Component* comp, int key) {
         sprintf(DebugBuf, "chromium --no-sandbox --app=\"https://AskMisterWizard.com/2019/LinuxAirCombat/Planes/%.2d.htm\"", SelectedAircraft);
 
         FILE* PopenStatus;
-        PopenStatus = popen(DebugBuf, "r");
+        PopenStatus = //popen(DebugBuf, "r");
         if (PopenStatus != NULL) {
             display((char*)"callbackSwitchMultimedia() is attempting to invoke chromium no-sandbox.", LOG_MOST);
             sound->haltMusic();
             sound->stopAll();
         }
     }
+    */
 }
 
 void callbackSwitchStartMission(Component* comp, int key) {
@@ -2548,6 +2554,7 @@ void checkargs(int argc, char** argv) {
 }
 
 void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
+    /*
     static unsigned char SecretChannel = 0;
     SecretChannel += Realm;
     SecretChannel += PlayerId;
@@ -2565,7 +2572,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 001.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 001.\"", "r");
             }
         }
         break;
@@ -2579,7 +2586,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 002.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 002.\"", "r");
             }
         }
         break;
@@ -2593,7 +2600,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 003.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 003.\"", "r");
             }
         }
         break;
@@ -2607,7 +2614,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 004.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 004.\"", "r");
             }
         }
         break;
@@ -2621,7 +2628,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 005.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 005.\"", "r");
             }
         }
         break;
@@ -2635,7 +2642,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 006.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 006.\"", "r");
             }
         }
         break;
@@ -2649,7 +2656,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 007.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 007.\"", "r");
             }
         }
         break;
@@ -2663,7 +2670,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 008.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 008.\"", "r");
             }
         }
         break;
@@ -2677,7 +2684,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 009.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 009.\"", "r");
             }
         }
         break;
@@ -2691,7 +2698,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
             sound->setVolume(SOUND_BEEP1, 60);
             sound->play(SOUND_BEEP1, false);
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 010.\"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Team is switching to channel 010.\"", "r");
             }
         }
         break;
@@ -2704,6 +2711,7 @@ void SwitchMumbleToSecretChannel(unsigned char PlayerId) {
     MumbleChannelPresumed = 97;
     SecretChannel = 0;
     MumbleTimeRemainingBeforeChannelReset = 120000;
+    */
 }
 
 CModel* getModel(int id) {
@@ -6211,7 +6219,7 @@ void event_CommsMacro01() {
                 sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM1 --m", CommunityHandle, Realm, Realm);
             }
             if (!(NetworkMode & 4)) {
-                popen(DebugBuf, "r");
+                ////popen(DebugBuf, "r");
                 display(DebugBuf, LOG_MOST);
             }
         } else {
@@ -6221,7 +6229,7 @@ void event_CommsMacro01() {
                 sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM1 --m", CommunityHandle, Realm, Realm);
             }
             if (!(NetworkMode & 4)) {
-                popen(DebugBuf, "r");
+                ////popen(DebugBuf, "r");
                 display(DebugBuf, LOG_MOST);
             }
         }
@@ -6406,7 +6414,7 @@ void event_CommsMacro04() {
                 sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM2 --m", CommunityHandle, Realm, Realm);
             }
             if (!(NetworkMode & 4)) {
-                popen(DebugBuf, "r");
+                ////popen(DebugBuf, "r");
                 display(DebugBuf, LOG_MOST);
             }
         } else {
@@ -6416,7 +6424,7 @@ void event_CommsMacro04() {
                 sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM2 --m", CommunityHandle, Realm, Realm);
             }
             if (!(NetworkMode & 4)) {
-                popen(DebugBuf, "r");
+                ////popen(DebugBuf, "r");
                 display(DebugBuf, LOG_MOST);
             }
         }
@@ -6601,7 +6609,7 @@ void event_CommsMacro07() {
                 sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM3 --m", CommunityHandle, Realm, Realm);
             }
             if (!(NetworkMode & 4)) {
-                popen(DebugBuf, "r");
+                ////popen(DebugBuf, "r");
                 display(DebugBuf, LOG_MOST);
             }
         } else {
@@ -6611,7 +6619,7 @@ void event_CommsMacro07() {
                 sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM3 --m", CommunityHandle, Realm, Realm);
             }
             if (!(NetworkMode & 4)) {
-                popen(DebugBuf, "r");
+                ////popen(DebugBuf, "r");
                 display(DebugBuf, LOG_MOST);
             }
         }
@@ -6923,7 +6931,7 @@ void event_CommsMacro17() {
                             MumbleChannelPresumed = 91;
                         }
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle01a:", LOG_MOST);
                 } else {
@@ -6942,7 +6950,7 @@ void event_CommsMacro17() {
                             MumbleChannelPresumed = 91;
                         }
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle01b:", LOG_MOST);
                 }
@@ -7012,7 +7020,7 @@ void event_CommsMacro17() {
                             MumbleChannelPresumed = 91;
                         }
                     }
-                    popen(DebugBuf, "r");
+                    ////popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle02a:", LOG_MOST);
                 } else {
@@ -7031,7 +7039,7 @@ void event_CommsMacro17() {
                             MumbleChannelPresumed = 91;
                         }
                     }
-                    popen(DebugBuf, "r");
+                    ////popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle02b:", LOG_MOST);
                 }
@@ -7102,7 +7110,7 @@ void event_CommsMacro17() {
                             MumbleChannelPresumed = 91;
                         }
                     }
-                    popen(DebugBuf, "r");
+                    ////popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                 } else {
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle03b:", LOG_MOST);
@@ -7123,7 +7131,7 @@ void event_CommsMacro17() {
                             MumbleChannelPresumed = 91;
                         }
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                 }
             } else {
@@ -7183,7 +7191,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM4/Realm%.2dM4Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle04a:", LOG_MOST);
                 } else {
@@ -7192,7 +7200,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM4/Realm%.2dM4Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle04b:", LOG_MOST);
                 }
@@ -7233,7 +7241,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM5/Realm%.2dM5Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle05a:", LOG_MOST);
                 } else {
@@ -7242,7 +7250,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM5/Realm%.2dM5Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle05b:", LOG_MOST);
                 }
@@ -7284,7 +7292,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM6/Realm%.2dM6Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle06a:", LOG_MOST);
                 } else {
@@ -7293,7 +7301,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM6/Realm%.2dM6Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle06b:", LOG_MOST);
                 }
@@ -7338,7 +7346,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM7/Realm%.2dM7Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle07a:", LOG_MOST);
                 } else {
@@ -7347,7 +7355,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM7/Realm%.2dM7Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle07b:", LOG_MOST);
                 }
@@ -7392,7 +7400,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM8/Realm%.2dM8Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle08a:", LOG_MOST);
                 } else {
@@ -7401,7 +7409,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM8/Realm%.2dM8Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle08b:", LOG_MOST);
                 }
@@ -7447,7 +7455,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM9/Realm%.2dM9Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle09a:", LOG_MOST);
                 } else {
@@ -7456,7 +7464,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM9/Realm%.2dM9Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle09b:", LOG_MOST);
                 }
@@ -7502,7 +7510,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM10/Realm%.2dM10Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle10a:", LOG_MOST);
                 } else {
@@ -7511,7 +7519,7 @@ void event_CommsMacro17() {
                     } else {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM10/Realm%.2dM10Blue --m", CommunityHandle, Realm, Realm, Realm);
                     }
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro17() new mumble style NetworkBattle10b:", LOG_MOST);
                 }
@@ -7614,7 +7622,7 @@ void event_CommsMacro18() {
                     if (MumbleManagement) {
                         MumbleChannelPresumed = 1;
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/MissionNetworkBattle01 --m", CommunityHandle, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -7622,7 +7630,7 @@ void event_CommsMacro18() {
                     if (MumbleManagement) {
                         MumbleChannelPresumed = 101;
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM1 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     } else {
@@ -7665,7 +7673,7 @@ void event_CommsMacro18() {
                     if (MumbleManagement) {
                         MumbleChannelPresumed = 4;
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/MissionNetworkBattle02 --m", CommunityHandle, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     } else {
@@ -7675,7 +7683,7 @@ void event_CommsMacro18() {
                     if (MumbleManagement) {
                         MumbleChannelPresumed = 101;
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM2 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     } else {
@@ -7714,7 +7722,7 @@ void event_CommsMacro18() {
                     if (MumbleManagement) {
                         MumbleChannelPresumed = 7;
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/MissionNetworkBattle03 --m", CommunityHandle, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     } else {
@@ -7724,7 +7732,7 @@ void event_CommsMacro18() {
                     if (MumbleManagement) {
                         MumbleChannelPresumed = 7;
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM3 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     } else {
@@ -7768,13 +7776,13 @@ void event_CommsMacro18() {
             if (NetworkMode & 2) {
                 if ((Realm <= 1) && MumbleManagement) {
                     sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM4 --m", CommunityHandle, Realm, Realm);
-                    popen(DebugBuf, "r");
+                    //popen(DebugBuf, "r");
                     display(DebugBuf, LOG_MOST);
                     display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                 } else {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM4 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -7811,14 +7819,14 @@ void event_CommsMacro18() {
                 if (Realm <= 1) {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM5 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
                 } else {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM5 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -7857,14 +7865,14 @@ void event_CommsMacro18() {
                 if (Realm <= 1) {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM6 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
                 } else {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM6 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -7903,14 +7911,14 @@ void event_CommsMacro18() {
                 if (Realm <= 1) {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM7 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
                 } else {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM7 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -7949,14 +7957,14 @@ void event_CommsMacro18() {
                 if (Realm <= 1) {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM8 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
                 } else {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM8 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -7996,14 +8004,14 @@ void event_CommsMacro18() {
                 if (Realm <= 1) {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM9 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
                 } else {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM9 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -8043,14 +8051,14 @@ void event_CommsMacro18() {
                 if (Realm <= 1) {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/LinuxAirCombat/Realm%d/Realm%.2dM10 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
                 } else {
                     if (MumbleManagement) {
                         sprintf(DebugBuf, "mumble mumble://%.8s@LinuxAirCombat.com/Realm%.2d/Realm%.2dM10 --m", CommunityHandle, Realm, Realm);
-                        popen(DebugBuf, "r");
+                        //popen(DebugBuf, "r");
                         display(DebugBuf, LOG_MOST);
                         display((char*)"event_CommsMacro18() new mumble style:", LOG_MOST);
                     }
@@ -8308,7 +8316,7 @@ void event_GunCameraToggle() {
             GunCameraActive = false;
             GunCameraStopSegmentFlag = true;
             if (!(NetworkMode & 16)) {
-                popen("espeak -a 175 -s 150 -p 10 \"Asking the LAC Server to end this gun camera segment.\"", "r");
+                ////popen("espeak -a 175 -s 150 -p 10 \"Asking the LAC Server to end this gun camera segment.\"", "r");
             }
             sound->setVolume(SOUND_BEEP1, 20);
             sound->play(SOUND_BEEP1, false);
@@ -8340,7 +8348,7 @@ void event_GunCameraToggle() {
             GunCameraActive = true;
             GunCameraStartSegmentFlag = true;
             if (!(NetworkMode & 16)) {
-                popen("espeak -a 175 -s 150 -p 10 \"Requesting Gun camera recording services from the LAC Server.\"", "r");
+                ////popen("espeak -a 175 -s 150 -p 10 \"Requesting Gun camera recording services from the LAC Server.\"", "r");
             }
             sound->setVolume(SOUND_BEEP2, 20);
             sound->play(SOUND_BEEP2, false);
@@ -8577,7 +8585,7 @@ void event_MapViewOnOff() {
         camera = 9;
         if (DefaultHeightMapFileIsMissing && !DefaultHeightMapFileIsMissingAudioAlertIssued) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -a 175 -s 150 -p 10 \"Note: LAC's DefaultHeightMap.LAC file was missing, so terrain was regenerated with random geography.\"", "r");
+                ////popen("espeak -a 175 -s 150 -p 10 \"Note: LAC's DefaultHeightMap.LAC file was missing, so terrain was regenerated with random geography.\"", "r");
                 DefaultHeightMapFileIsMissingAudioAlertIssued = true;
             }
         }
@@ -8845,7 +8853,7 @@ void event_targetNext() {
         case 0:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66   -s 160 \"Blue\"", "r");
+                //popen("espeak -p 10 -a 66   -s 160 \"Blue\"", "r");
             } else {
                 sound->setVolume(SOUND_BLUE, 150);
                 sound->play(SOUND_BLUE, false);
@@ -8855,7 +8863,7 @@ void event_targetNext() {
         case 1:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66   -s 160 \"Red\"", "r");
+                //popen("espeak -p 10 -a 66   -s 160 \"Red\"", "r");
             } else {
                 sound->setVolume(SOUND_RED, 150);
                 sound->play(SOUND_RED, false);
@@ -8912,7 +8920,7 @@ void event_targetNextRed() {
         case 0:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66   -s 160 \"Blue\"", "r");
+                ////popen("espeak -p 10 -a 66   -s 160 \"Blue\"", "r");
             } else {
                 sound->setVolume(SOUND_BLUE, 150);
                 sound->play(SOUND_BLUE, false);
@@ -8922,7 +8930,7 @@ void event_targetNextRed() {
         case 1:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66   -s 160 \"Red\"", "r");
+                ////popen("espeak -p 10 -a 66   -s 160 \"Red\"", "r");
             } else {
                 sound->setVolume(SOUND_RED, 150);
                 sound->play(SOUND_RED, false);
@@ -8985,7 +8993,7 @@ void event_targetPreviousBlue() {
         case 0:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66   -s 160 \"Blue\"", "r");
+                //popen("espeak -p 10 -a 66   -s 160 \"Blue\"", "r");
             } else {
                 sound->setVolume(SOUND_BLUE, 150);
                 sound->play(SOUND_BLUE, false);
@@ -8995,7 +9003,7 @@ void event_targetPreviousBlue() {
         case 1:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66   -s 160 \"Red\"", "r");
+                //popen("espeak -p 10 -a 66   -s 160 \"Red\"", "r");
             } else {
                 sound->setVolume(SOUND_RED, 150);
                 sound->play(SOUND_RED, false);
@@ -13493,7 +13501,7 @@ void Mumble1p2ChannelChange(char MumbleUrl[]) {
             // it to a nonexistant server with a nonexistant user named "nobody". If that line
             // is missing, then support for old-style versions of Mumble will fail. In that case,
             // you will need to manually re-insert that line of code right here.....
-            popen("mumble mumble://nobody:nobody@127.0.0.1/ --m", "r");
+            ////popen("mumble mumble://nobody:nobody@127.0.0.1/ --m", "r");
         }
 
         display((char*)"Mumble1p2ChannelChange(): Setting MumbleCommand1p2Timer to 2000ms.", LOG_MOST);
@@ -13541,13 +13549,13 @@ void MumbleChannelChange(char MumbleUrl[]) {
         display(DebugBuf, LOG_MOST);
         if (Realm == 1) {
             ConvertUrlToRealm1(MumbleUrl);
-            popen(ConvertedMumbleUrl, "r");
+            //popen(ConvertedMumbleUrl, "r");
             if (MumbleIsAccessible) {
                 display((char*)"MumbleChannelChange() Realm1 Mumble Channel change command issued.", LOG_MOST);
             }
         } else {
             if (MumbleIsAccessible) {
-                popen(MumbleUrl, "r");
+                //popen(MumbleUrl, "r");
                 display((char*)"MumbleChannelChange() Realm0 Mumble Channel change command issued.", LOG_MOST);
             }
         }
@@ -14290,7 +14298,7 @@ void TargetVocalizeProcess1() {
     }
     if (TargetVocalize1State == 1 && !State1Vocalized) {
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 160 \"Target \"", "r");
+            //popen("espeak -p 10 -a 66  -s 160 \"Target \"", "r");
         } else {
             sound->setVolume(SOUND_TARGET, 90);
             sound->play(SOUND_TARGET, false);
@@ -14308,7 +14316,7 @@ void TargetVocalizeProcess1() {
         case 1:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"one \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"one \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT001, 90);
                 sound->play(SOUND_DIGIT001, false);
@@ -14318,7 +14326,7 @@ void TargetVocalizeProcess1() {
         case 2:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"two \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"two \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT002, 90);
                 sound->play(SOUND_DIGIT002, false);
@@ -14328,7 +14336,7 @@ void TargetVocalizeProcess1() {
         case 3:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"three \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"three \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT003, 90);
                 sound->play(SOUND_DIGIT003, false);
@@ -14338,7 +14346,7 @@ void TargetVocalizeProcess1() {
         case 4:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"four \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"four \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT004, 90);
                 sound->play(SOUND_DIGIT004, false);
@@ -14348,7 +14356,7 @@ void TargetVocalizeProcess1() {
         case 5:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"five \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"five \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT005, 90);
                 sound->play(SOUND_DIGIT005, false);
@@ -14358,7 +14366,7 @@ void TargetVocalizeProcess1() {
         case 6:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"six \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"six \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT006, 90);
                 sound->play(SOUND_DIGIT006, false);
@@ -14368,7 +14376,7 @@ void TargetVocalizeProcess1() {
         case 7:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"seven  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"seven  \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT007, 90);
                 sound->play(SOUND_DIGIT007, false);
@@ -14378,7 +14386,7 @@ void TargetVocalizeProcess1() {
         case 8:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"eight \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"eight \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT008, 90);
                 sound->play(SOUND_DIGIT008, false);
@@ -14388,7 +14396,7 @@ void TargetVocalizeProcess1() {
         case 9:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"nine  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"nine  \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT009, 90);
                 sound->play(SOUND_DIGIT009, false);
@@ -14398,7 +14406,7 @@ void TargetVocalizeProcess1() {
         case 10:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"ten \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"ten \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT010, 90);
                 sound->play(SOUND_DIGIT010, false);
@@ -14408,7 +14416,7 @@ void TargetVocalizeProcess1() {
         case 22:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty two  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty two  \"", "r");
             } else {
                 sound->setVolume(SOUND_BLUE, 90);
                 sound->play(SOUND_BLUE, false);
@@ -14418,7 +14426,7 @@ void TargetVocalizeProcess1() {
         case 23:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty three  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty three  \"", "r");
             } else {
                 sound->setVolume(SOUND_RED, 90);
                 sound->play(SOUND_RED, false);
@@ -14428,7 +14436,7 @@ void TargetVocalizeProcess1() {
         case 24:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty four  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty four  \"", "r");
             } else {
                 sound->setVolume(SOUND_BLUE, 90);
                 sound->play(SOUND_BLUE, false);
@@ -14438,7 +14446,7 @@ void TargetVocalizeProcess1() {
         case 25:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty five  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty five  \"", "r");
             } else {
                 sound->setVolume(SOUND_RED, 90);
                 sound->play(SOUND_RED, false);
@@ -14448,7 +14456,7 @@ void TargetVocalizeProcess1() {
         case 26:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty six  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty six  \"", "r");
             } else {
                 sound->setVolume(SOUND_BLUE, 90);
                 sound->play(SOUND_BLUE, false);
@@ -14458,7 +14466,7 @@ void TargetVocalizeProcess1() {
         case 27:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty seven  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty seven  \"", "r");
             } else {
                 sound->setVolume(SOUND_RED, 90);
                 sound->play(SOUND_RED, false);
@@ -14468,7 +14476,7 @@ void TargetVocalizeProcess1() {
         case 28:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty eight  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty eight  \"", "r");
             } else {
                 sound->setVolume(SOUND_BLUE, 90);
                 sound->play(SOUND_BLUE, false);
@@ -14478,7 +14486,7 @@ void TargetVocalizeProcess1() {
         case 29:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty nine  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty nine  \"", "r");
             } else {
                 sound->setVolume(SOUND_RED, 90);
                 sound->play(SOUND_RED, false);
@@ -14500,7 +14508,7 @@ void TargetVocalizeProcess1() {
         State1Vocalized = false;
     } else if (TargetVocalize1State == 3 && !State3Vocalized) {
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 160 \"is at \"", "r");
+            //popen("espeak -p 10 -a 66  -s 160 \"is at \"", "r");
         } else {
             sound->setVolume(SOUND_IsAt, 90);
             sound->play(SOUND_IsAt, false);
@@ -14521,79 +14529,79 @@ void TargetVocalizeProcess1() {
         }
         if (InterceptAngle >= 0 && InterceptAngle < 15) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twelve \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twelve \"", "r");
             } else {
                 sound->play(SOUND_DIGIT012, false);
             }
         } else if (InterceptAngle >= 15 && InterceptAngle < 45) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"one \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"one \"", "r");
             } else {
                 sound->play(SOUND_DIGIT001, false);
             }
         } else if (InterceptAngle >= 45 && InterceptAngle < 75) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"two  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"two  \"", "r");
             } else {
                 sound->play(SOUND_DIGIT002, false);
             }
         } else if (InterceptAngle >= 75 && InterceptAngle < 105) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"three \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"three \"", "r");
             } else {
                 sound->play(SOUND_DIGIT003, false);
             }
         } else if (InterceptAngle >= 105 && InterceptAngle < 135) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"four \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"four \"", "r");
             } else {
                 sound->play(SOUND_DIGIT004, false);
             }
         } else if (InterceptAngle >= 135 && InterceptAngle < 165) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"five \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"five \"", "r");
             } else {
                 sound->play(SOUND_DIGIT005, false);
             }
         } else if (InterceptAngle >= 165 && InterceptAngle < 195) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"six \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"six \"", "r");
             } else {
                 sound->play(SOUND_DIGIT006, false);
             }
         } else if (InterceptAngle >= 195 && InterceptAngle < 225) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"seven \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"seven \"", "r");
             } else {
                 sound->play(SOUND_DIGIT007, false);
             }
         } else if (InterceptAngle >= 225 && InterceptAngle < 255) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"eight \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"eight \"", "r");
             } else {
                 sound->play(SOUND_DIGIT008, false);
             }
         } else if (InterceptAngle >= 255 && InterceptAngle < 285) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"nine  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"nine  \"", "r");
             } else {
                 sound->play(SOUND_DIGIT009, false);
             }
         } else if (InterceptAngle >= 285 && InterceptAngle < 315) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"ten \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"ten \"", "r");
             } else {
                 sound->play(SOUND_DIGIT010, false);
             }
         } else if (InterceptAngle >= 315 && InterceptAngle < 345) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"eleven \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"eleven \"", "r");
             } else {
                 sound->play(SOUND_DIGIT011, false);
             }
         } else if (InterceptAngle >= 345 && InterceptAngle <= 360) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twelve \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twelve \"", "r");
             } else {
                 sound->play(SOUND_DIGIT012, false);
             }
@@ -14609,7 +14617,7 @@ void TargetVocalizeProcess1() {
     } else if (TargetVocalize1State == 5 && !State5Vocalized) {
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Oh clock \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Oh clock \"", "r");
             } else {
                 sound->setVolume(SOUND_Oclock, 90);
                 sound->play(SOUND_Oclock, false);
@@ -14626,7 +14634,7 @@ void TargetVocalizeProcess1() {
     } else if (TargetVocalize1State == 6 && !State6Vocalized) {
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"Angel's \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"Angel's \"", "r");
             } else {
                 sound->setVolume(SOUND_Angels, 90);
                 sound->play(SOUND_Angels, false);
@@ -14643,146 +14651,146 @@ void TargetVocalizeProcess1() {
     } else if (TargetVocalize1State == 7 && !State7Vocalized) {
         if (TargetAltitude < 500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"zero \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"zero \"", "r");
             } else {
                 sound->play(SOUND_DIGIT000, false);
             }
         } else if (TargetAltitude < 1500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"one \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"one \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT001, 90);
                 sound->play(SOUND_DIGIT001, false);
             }
         } else if (TargetAltitude < 2500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"two \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"two \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT002, 90);
                 sound->play(SOUND_DIGIT002, false);
             }
         } else if (TargetAltitude < 3500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"three \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"three \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT003, 90);
                 sound->play(SOUND_DIGIT003, false);
             }
         } else if (TargetAltitude < 4500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"four \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"four \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT004, 90);
                 sound->play(SOUND_DIGIT004, false);
             }
         } else if (TargetAltitude < 5500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"five \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"five \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT005, 90);
                 sound->play(SOUND_DIGIT005, false);
             }
         } else if (TargetAltitude < 6500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"six \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"six \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT006, 90);
                 sound->play(SOUND_DIGIT006, false);
             }
         } else if (TargetAltitude < 7500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"seven \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"seven \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT007, 90);
                 sound->play(SOUND_DIGIT007, false);
             }
         } else if (TargetAltitude < 8500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"eight \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"eight \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT008, 90);
                 sound->play(SOUND_DIGIT008, false);
             }
         } else if (TargetAltitude < 9500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"nine \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"nine \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT009, 90);
                 sound->play(SOUND_DIGIT009, false);
             }
         } else if (TargetAltitude < 10500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"ten \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"ten \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT010, 90);
                 sound->play(SOUND_DIGIT010, false);
             }
         } else if (TargetAltitude < 11500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"eleven \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"eleven \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT011, 90);
                 sound->play(SOUND_DIGIT011, false);
             }
         } else if (TargetAltitude < 12500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twelve \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twelve \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT012, 90);
                 sound->play(SOUND_DIGIT012, false);
             }
         } else if (TargetAltitude < 13500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"thirteen \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"thirteen \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT013, 90);
                 sound->play(SOUND_DIGIT013, false);
             }
         } else if (TargetAltitude < 14500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"fourteen \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"fourteen \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT014, 90);
                 sound->play(SOUND_DIGIT014, false);
             }
         } else if (TargetAltitude < 15500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"fifteen \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"fifteen \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT015, 90);
                 sound->play(SOUND_DIGIT015, false);
             }
         } else if (TargetAltitude < 16500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"sixteen \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"sixteen \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT016, 90);
                 sound->play(SOUND_DIGIT016, false);
             }
         } else if (TargetAltitude < 17500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"seventeen \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"seventeen \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT017, 90);
                 sound->play(SOUND_DIGIT017, false);
             }
         } else if (TargetAltitude < 18500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"eighteen \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"eighteen \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT018, 90);
                 sound->play(SOUND_DIGIT018, false);
             }
         } else if (TargetAltitude < 19500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"nineteen \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"nineteen \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT019, 90);
                 sound->play(SOUND_DIGIT019, false);
             }
         } else if (TargetAltitude < 20500.0) {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty \"", "r");
             } else {
                 sound->setVolume(SOUND_DIGIT020, 90);
                 sound->play(SOUND_DIGIT020, false);
@@ -14968,7 +14976,7 @@ void TargetVocalizeProcess2() {
         case 21:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty one  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty one  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -14976,7 +14984,7 @@ void TargetVocalizeProcess2() {
         case 22:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty two  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty two  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -14984,7 +14992,7 @@ void TargetVocalizeProcess2() {
         case 23:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty three  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty three  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -14992,7 +15000,7 @@ void TargetVocalizeProcess2() {
         case 24:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty four  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty four  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -15000,7 +15008,7 @@ void TargetVocalizeProcess2() {
         case 25:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty five  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty five  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -15008,7 +15016,7 @@ void TargetVocalizeProcess2() {
         case 26:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty six  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty six  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -15016,7 +15024,7 @@ void TargetVocalizeProcess2() {
         case 27:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty seven  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty seven  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -15024,7 +15032,7 @@ void TargetVocalizeProcess2() {
         case 28:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty eight  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty eight  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -15032,7 +15040,7 @@ void TargetVocalizeProcess2() {
         case 29:
         {
             if (!(NetworkMode & 16)) {
-                popen("espeak -p 10 -a 66  -s 160 \"twenty nine  \"", "r");
+                //popen("espeak -p 10 -a 66  -s 160 \"twenty nine  \"", "r");
             }
             TargetVocalize2State = 0;
             break;
@@ -15267,7 +15275,7 @@ void TimerGame(int dt) {
         if (MumbleCommand1p2Timer < 2000) {
             if (!(NetworkMode & 4)) {
                 display((char*)"TimerGame() issuing old-style Mumble URL for channel change.", LOG_MOST);
-                popen(Mumble1p2StringActive, "r");
+                //popen(Mumble1p2StringActive, "r");
                 display((char*)"TimerGame() resetting Mumble1p2Timer to infinity.", LOG_MOST);
                 MumbleCommand1p2Timer = 100000000;
             }
@@ -17536,7 +17544,7 @@ void VocalizeBlueHqStatus() {
     } else {
         // Get here if player has NOT selected one of the Blue Airfields as his target
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 160 \"No status information available for the selected target.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 160 \"No status information available for the selected target.\"", "r");
         }
     }
 }
@@ -17735,7 +17743,7 @@ void VocalizeRedHqStatus() {
     } else {
         // Get here if player has NOT selected one of the Blue Airfields as his target
         if (!(NetworkMode & 16)) {
-            popen("espeak -p 10 -a 66  -s 160 \"No status information available for the selected target.\"", "r");
+            //popen("espeak -p 10 -a 66  -s 160 \"No status information available for the selected target.\"", "r");
         }
     }
 }
@@ -17746,6 +17754,6 @@ void WrongChannelMessage() {
     sprintf(SystemMessageBufferA, "WRONG MUMBLE CHANNEL. CAN'T REACH FWD OBSERVER.");
     NewSystemMessageNeedsScrolling = true;
     if (!(NetworkMode & 16)) {
-        popen("espeak -p 10 -a 66  -s 160 \"Wrong Mumble Channel. Cannot reach forward observer. \"", "r");
+        //popen("espeak -p 10 -a 66  -s 160 \"Wrong Mumble Channel. Cannot reach forward observer. \"", "r");
     }
 }
