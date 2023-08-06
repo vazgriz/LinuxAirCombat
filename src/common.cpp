@@ -86,6 +86,10 @@ void display(const char* str, int level) {
     }
 }
 
+extern void display(const std::string& msg, int level) {
+    display(msg.c_str(), level);
+}
+
 // display "out of memory" error and exit
 void error_outofmemory() {
     display((char*)"Out of memory", LOG_FATAL);

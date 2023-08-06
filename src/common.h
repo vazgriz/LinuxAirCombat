@@ -125,6 +125,7 @@ extern float view;
 extern float view_x, view_y; // angles for joystick-controlled view
 
 extern void display(const char *str, int level);
+extern void display(const std::string& msg, int level);
 extern void display_exit ();
 extern void error_outofmemory (); // display "out of memory" error and exit
 extern void key2string (int key, char *buf);
