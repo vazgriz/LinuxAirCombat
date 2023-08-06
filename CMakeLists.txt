@@ -91,6 +91,6 @@ add_custom_command(
         ${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer.dll
 )
 add_custom_target(CopyAssets
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/bin ${CMAKE_CURRENT_BINARY_DIR}/bin
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data
 )
 add_dependencies(LinuxAirCombat CopyAssets)

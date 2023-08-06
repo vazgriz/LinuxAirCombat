@@ -30,10 +30,10 @@
 
 Dirs::Dirs() {
     saves = sago::getSaveGamesFolder1() + "/Linux Air Combat/Saves";
-    textures = "bin/textures";
-    sound = "bin/sounds";
-    music = "bin/music";
-    models = "bin/models";
+    textures = "data/textures";
+    sound = "data/sounds";
+    music = "data/music";
+    models = "data/models";
 }
 
 std::string Dirs::getSaves(const std::string& name) const {
