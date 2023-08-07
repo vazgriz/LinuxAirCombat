@@ -23,8 +23,8 @@
 
 /* This file includes a 3ds loader. Thanks to the great NeHe Tutorials! */
 
-#ifndef IS_3DS_H
-#define IS_3DS_H
+#pragma once
+#include <vector>
 
 #include "model.h" // ok
 
@@ -32,16 +32,15 @@ const int debug3ds = 0; // set to 1 to get all Chunk IDs to stdout
 
 // abstract binary file representation in memory
 class BinaryFile {
-public:
     FILE* in; // file struct
     uint32_t size; // file size
     uint32_t filepointer; // pointer to char in memory
-    unsigned char* data; // file data in memory
+    std::vector<unsigned char> data; // file data in memory
     unsigned char ret[11]; // big endian swapping buffer
 
+public:
     // data type conversation
     BinaryFile(const char* filename);
-    ~BinaryFile();
     int readFloat(float* f);
     int readFloat(float* f, int n);
     int readUInt32(uint32_t* i);
@@ -133,6 +132,3 @@ private:
     Chunk* currentChunk;
     Chunk* tempChunk;
 };
-
-#endif
-

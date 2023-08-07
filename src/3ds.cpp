@@ -73,11 +73,7 @@ BinaryFile::BinaryFile(const char* filename) {
     fseek(in, 0, SEEK_END);
     size = ftell(in);
     fseek(in, 0, SEEK_SET);
-    data = new unsigned char[size];
-    if (data == NULL) {
-        error_outofmemory();
-    }
-    memset(data, 0, size);
+    data.resize(size);
     uint32_t z = 0;
     while (z < size) {
         if (size - z >= 4096) {
@@ -90,10 +86,6 @@ BinaryFile::BinaryFile(const char* filename) {
     }
     fclose(in);
     filepointer = 0;
-}
-
-BinaryFile::~BinaryFile() {
-    delete data;
 }
 
 int BinaryFile::readFloat(float* f) {
