@@ -1819,7 +1819,7 @@ int load_saveconfig() {
         delete cf;
         return 0;
     }
-    str = cf->getString(ret, (char*)"savewidth");
+    str = cf->getString(ret, (char*)"width");
     if (str == NULL) {
         width = 800;
     } else {
@@ -1830,7 +1830,7 @@ int load_saveconfig() {
     } else if (width > 3000) {
         width = 1024;
     }
-    str = cf->getString(ret, (char*)"saveheight");
+    str = cf->getString(ret, (char*)"height");
     if (str == NULL) {
         height = 600;
     } else {
@@ -1841,7 +1841,7 @@ int load_saveconfig() {
     } else if (height > 2000) {
         height = 768;
     }
-    str = cf->getString(ret, (char*)"savebpp");
+    str = cf->getString(ret, (char*)"bpp");
     if (str == NULL) {
         bpp = 32;
     } else {
@@ -1850,7 +1850,7 @@ int load_saveconfig() {
     if (bpp != 8 && bpp != 16 && bpp != 24 && bpp != 32) {
         bpp = 32;
     }
-    str = cf->getString(ret, (char*)"savefullscreen");
+    str = cf->getString(ret, (char*)"fullscreen");
     if (str == NULL) {
         fullscreen = 1;
     } else {
