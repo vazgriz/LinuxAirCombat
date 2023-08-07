@@ -1066,7 +1066,6 @@ static void LacJoystickHatFunc(int);
 
 int getJoystickAxisIndex(int n);
 
-SDL_Window* setScreen(int width, int height, int fullscreen);
 void checkargs(int argc, char** argv);
 void createMenu();
 void LacFirstInit();
@@ -1096,6 +1095,9 @@ int main(int argc, char** argv) {
     window = std::make_unique<LACEngine::Window>("LINUX Air Combat", width, height, fullscreen);
 
     glViewport(0, 0, (GLint)width, (GLint)height);
+    wantwidth = width;
+    wantheight = height;
+    wantfullscreen = fullscreen;
 
     int result = main2(argc, argv);
 
@@ -14043,34 +14045,6 @@ void setPlaneVolume() {
             sound->setVolume(SOUND_PLANE2, 0);
         }
     }
-}
-
-SDL_Window* setScreen(int w, int h, int f) {
-
-    uint32_t video_flags;
-    if (f) {
-        video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN;
-    } else {
-        video_flags = SDL_WINDOW_OPENGL;
-    }
-
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-    SDL_Window* result = SDL_CreateWindow("LINUX Air Combat", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, video_flags);
-
-    glViewport(0, 0, (GLint)width, (GLint)height);
-
-    width = w;
-    height = h;
-    fullscreen = f;
-    wantwidth = w;
-    wantheight = h;
-    wantfullscreen = f;
-    return result;
 }
 
 void switch_credits() {
