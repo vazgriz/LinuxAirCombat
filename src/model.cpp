@@ -61,8 +61,6 @@ CColor::CColor(short cr, short cg, short cb, short ca) {
     c[3] = ca;
 }
 
-CColor::~CColor() {}
-
 void CColor::setColor(CColor* col) {
     memcpy(c, col->c, 4 * sizeof(unsigned char));
 }
@@ -348,8 +346,6 @@ CRotation::CRotation() {
     calcRotation();
 }
 
-CRotation::~CRotation() {}
-
 void CRotation::setAngles(short a, short b, short c) {
     a %= 360;
 
@@ -502,8 +498,6 @@ CObject::CObject() {
     hasTexture = false;
 }
 
-CObject::~CObject() {}
-
 int CObject::addVertex(CVertex* w) {
     int i;
 
@@ -555,7 +549,7 @@ CModel::CModel() {
     light_diffuse[3] = 1;
     numRefpoints = 0;
     refpoint = NULL;
-    va = new VertexArray(VERTEXARRAY_V3N3C4T2);
+    va = std::make_unique<VertexArray>(VERTEXARRAY_V3N3C4T2);
 }
 
 void CModel::setName(const char* name) {
@@ -1268,8 +1262,6 @@ CSphere::CSphere(float radius, int segments, float dx, float dy, float dz) {
     init(radius, segments, dx, dy, dz, 0);
 }
 
-CSphere::~CSphere() {}
-
 int CSphere::random(int n) {
     if (n == 0) {
         return 0;
@@ -1459,8 +1451,6 @@ CSpherePart::CSpherePart() {}
 CSpherePart::CSpherePart(float radius, int segments, float phi) {
     init(radius, segments, phi);
 }
-
-CSpherePart::~CSpherePart() {}
 
 void CSpherePart::init(float radius, int segments) {
     init(radius, segments, 10);

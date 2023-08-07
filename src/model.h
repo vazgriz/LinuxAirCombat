@@ -24,6 +24,7 @@
 /* This file includes the memory representation of any 3D model. */
 
 #pragma once
+#include <memory>
 
 #include "common.h" // ok
 #include "vertexarray.h" // ok
@@ -43,7 +44,6 @@ public:
     CColor(CColor* col);
     CColor(short cr, short cg, short cb);
     CColor(short cr, short cg, short cb, short ca);
-    ~CColor();
     void setColor(CColor* col);
     void setColor(short cr, short cg, short cb, short ca);
     void setColor(short cr, short cg, short cb);
@@ -127,7 +127,6 @@ private:
 public:
     short a, b, c; // rotation angles for each plane of the carthesian cosy
     CRotation();
-    ~CRotation();
     void setAngles(short a, short b, short c);
     void addAngles(short a, short b, short c);
     void calcRotation();
@@ -186,7 +185,6 @@ public:
     CTriangle* triangle; // triangle list
     CQuad* quad; // quad list
     CObject();
-    ~CObject();
     int addVertex(CVertex* w); // used to construct objects
     void setColor(CColor* col);
 };
@@ -202,7 +200,7 @@ private:
     float light_diffuse2[4];
     CVector3 tlnull;
     CRotation rotnull;
-    VertexArray* va; // using a vertex array means more memory, but better performance
+    std::unique_ptr<VertexArray> va; // using a vertex array means more memory, but better performance
 
 public:
     char name[20]; // unique model name like "GL-117"
@@ -253,7 +251,6 @@ public:
     float dx, dy, dz; // ellipsoid measures in the carthesian cosy
     CSphere();
     CSphere(float radius, int segments, float dx, float dy, float dz);
-    ~CSphere();
     void init(float radius, int segments);
     void init(float radius, int segments, float dx, float dy, float dz, int randomized);
     void invertNormals(); // point outside/inside
@@ -269,7 +266,6 @@ public:
     float radius;
     CSpherePart();
     CSpherePart(float radius, int segments, float phi);
-    ~CSpherePart();
     void init(float radius, int segments);
     void init(float radius, int segments, float phi);
     void setNorthPoleColor(CColor* c, float w); // see setPoleColor, phi=0, theta=90
