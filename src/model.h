@@ -223,7 +223,7 @@ public:
     int list1, list2, list3; // display lists already generated for each type of draw() method
 
     CModel();
-    void setName(char* name);
+    void setName(const char* name);
     void addMaterial(CMaterial* material);
     void addObject(CObject* object);
     void addRefPoint(CVector3* tl);

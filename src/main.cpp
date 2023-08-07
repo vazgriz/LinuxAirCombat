@@ -21,6 +21,11 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+#include <memory>
+
+#define SDL_MAIN_HANDLED
+#include <Engine/Window.h>
+
 #include "cockpit.h"
 #include "common.h"
 #include "conf.h"
@@ -1003,10 +1008,9 @@ extern unsigned int key_ZoomFovOut;
 //extern LacUdpApiPacket OutPacket;
 
 //extern void ConvertStringToUpperCase(char* Pointer);
-extern void TestForWindNoise(); 
+extern void TestForWindNoise();
 
-SDL_GLContext context;
-SDL_Window* window;
+std::unique_ptr<LACEngine::Window> window;
 
 // Function Prototypes:
 void AileronSettings(int x, int y);
@@ -1075,12 +1079,35 @@ void sdlMainLoop();
   LAC ENTRY POINT
 ****************************************************************************/
 
+int main2(int argc, char** argv);
+
 int main(int argc, char** argv) {
+    checkargs(argc, argv); // process command line parameters
+    dirs = new Dirs();
+
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK) < 0) {
+        char buf[STDSIZE]; // temp buffer
+        sprintf(buf, "Couldn't initialize SDL: %s", SDL_GetError());
+        display(buf, LOG_FATAL);
+        exit(EXIT_INIT);
+    }
+
+    load_saveconfig();
+    window = std::make_unique<LACEngine::Window>("LINUX Air Combat", width, height, fullscreen);
+
+    glViewport(0, 0, (GLint)width, (GLint)height);
+
+    int result = main2(argc, argv);
+
+    SDL_Quit();
+
+    return result;
+}
+
+int main2(int argc, char** argv) {
     char buf[STDSIZE]; // temp buffer
     int i;
 
-    checkargs(argc, argv); // process command line parameters
-    dirs = new Dirs();
     sprintf(buf, "Startup %s, %s ... ", argv[0], VERSIONSTRING);
     display(buf, LOG_MOST);
     display(DebugBuf, LOG_MOST);
@@ -1300,29 +1327,6 @@ int main(int argc, char** argv) {
     display(DebugBuf, LOG_MOST);
     pilots = new PilotList(dirs->getSaves("pilots").c_str());
     display((char*)"Using SDL and GLUT", LOG_MOST);
-
-    if (!ConfigInit)
-        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK) < 0) {
-            sprintf(buf, "Couldn't initialize SDL: %s", SDL_GetError());
-            display(buf, LOG_FATAL);
-            exit(EXIT_INIT);
-        }
-    atexit(SDL_Quit);
-    if (!ConfigInit) {
-        window = setScreen(width, height, fullscreen);
-        if (!window) {
-            load_saveconfig();
-            window = setScreen(width, height, fullscreen);
-            if (!window) {
-                sprintf(buf, "No working display mode %dx%d found.", width, height);
-                display(buf, LOG_FATAL);
-                exit(EXIT_INIT);
-            }
-        }
-    }
-
-    context = SDL_GL_CreateContext(window);
-    SDL_GL_MakeCurrent(window, context);
 
     display((char*)"Creating sound system", LOG_MOST);
     sound = new SoundSystem();
@@ -10028,20 +10032,6 @@ void game_quit() {
     for (i = 0; i < maxblacksmoke; i++) {
         delete(blacksmoke[i]);
     }
-    delete tlinf;
-    delete tlminf;
-    delete tlnull;
-    delete explsphere;
-    delete objsphere;
-    delete sphere;
-    delete flash1;
-    delete cockpit;
-    delete font1;
-    delete font2;
-    delete space;
-    delete dirs;
-    delete gl;
-    delete sound;
     display((char*)"\n\n\n\n\n\n\n\n\n\n\n\n\n\n", LOG_MOST);
     display((char*)"LINUX AIR COMBAT HAS COMPLETED NORMALLY.\n", LOG_MOST);
     display((char*)"A complete log of all diagnostic messages from this session is available", LOG_MOST);
@@ -10066,12 +10056,26 @@ void game_quit() {
         display((char*)"THIS IS BEST FIXED BY RUNNING THE install.sh script OR BY MANUALLY COPYING THE", LOG_MOST);
         display((char*)"DefaultHeightMap.txt FILE INTO YOUR NEW, HIDDEN, ~/home/.LAC FOLDER.", LOG_MOST);
     }
+    delete tlinf;
+    delete tlminf;
+    delete tlnull;
+    delete explsphere;
+    delete objsphere;
+    delete sphere;
+    delete flash1;
+    delete cockpit;
+    delete font1;
+    delete font2;
+    delete space;
+    delete dirs;
+    delete gl;
+    delete sound;
     exit(EXIT_NORMAL);
 }
 
 void game_view() {
     frame();
-    SDL_GL_SwapWindow(window);
+    window->SwapBuffers();
 }
 
 int getJoystickAxisIndex(int n) {

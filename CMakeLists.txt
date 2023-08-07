@@ -15,18 +15,20 @@ set(SDL_mixer_bin_dll)
 
 set(LAC_include "src")
 
+add_subdirectory("Engine")
+
 add_library(Common
     "src/common.cpp"
 )
-target_include_directories(Common PUBLIC ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include})
-target_link_libraries(Common ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})
-set_property(TARGET Common PROPERTY CXX_STANDARD 17)
+target_include_directories(Common PUBLIC ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include} Engine/include)
+target_link_libraries(Common Engine ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})
+set_property(TARGET Common PROPERTY CXX_STANDARD 20)
 
 add_library(ModelLoader3DS
     "src/3ds.cpp"
 )
 target_link_libraries(ModelLoader3DS Common)
-set_property(TARGET ModelLoader3DS PROPERTY CXX_STANDARD 17)
+set_property(TARGET ModelLoader3DS PROPERTY CXX_STANDARD 20)
 
 add_executable(LinuxAirCombat
     "src/main.cpp"
@@ -76,7 +78,8 @@ add_executable(LinuxAirCombat
     "src/vertexarray.cpp"
     "src/vertexarray.h"
 )
-set_property(TARGET LinuxAirCombat PROPERTY CXX_STANDARD 17)
+set_property(TARGET LinuxAirCombat PROPERTY CXX_STANDARD 20)
+target_include_directories(LinuxAirCombat PUBLIC Engine/include)
 target_link_libraries(LinuxAirCombat ModelLoader3DS Common)
 set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR}/LAC)
 

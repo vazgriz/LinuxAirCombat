@@ -558,7 +558,7 @@ CModel::CModel() {
     va = new VertexArray(VERTEXARRAY_V3N3C4T2);
 }
 
-void CModel::setName(char* name) {
+void CModel::setName(const char* name) {
     strcpy(this->name, name);
 }
 
