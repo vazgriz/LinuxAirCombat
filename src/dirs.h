@@ -25,6 +25,7 @@
 
 #pragma once
 #include <string>
+#include <memory>
 
 class Dirs {
 public:
@@ -45,4 +46,4 @@ public:
     std::string getMaps(const std::string& name) const;
 };
 
-extern Dirs* dirs;
+extern std::unique_ptr<Dirs> dirs;

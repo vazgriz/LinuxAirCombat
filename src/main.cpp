@@ -826,7 +826,7 @@ CVector3* tlnull;
 CVector3* tlminf;
 
 // global Dirs pointer variables:
-Dirs* dirs;
+std::unique_ptr<Dirs> dirs;
 
 // global DynamicObj pointer variables:
 DynamicObj* chaff[maxchaff];
@@ -1082,7 +1082,7 @@ int main2(int argc, char** argv);
 
 int main(int argc, char** argv) {
     checkargs(argc, argv); // process command line parameters
-    dirs = new Dirs();
+    dirs = std::make_unique<Dirs>();
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK) < 0) {
         char buf[STDSIZE]; // temp buffer
@@ -10069,7 +10069,6 @@ void game_quit() {
     delete font1;
     delete font2;
     delete space;
-    delete dirs;
     delete gl;
     delete sound;
     exit(EXIT_NORMAL);
