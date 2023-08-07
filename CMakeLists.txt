@@ -78,6 +78,8 @@ add_executable(LinuxAirCombat
 )
 set_property(TARGET LinuxAirCombat PROPERTY CXX_STANDARD 17)
 target_link_libraries(LinuxAirCombat ModelLoader3DS Common)
+set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR}/LAC)
+
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -91,6 +93,6 @@ add_custom_command(
         ${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer.dll
 )
 add_custom_target(CopyAssets
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/LAC/data
 )
 add_dependencies(LinuxAirCombat CopyAssets)
