@@ -1622,7 +1622,7 @@ void AIObj::fireCannon(DynamicObj* MachineGunBullet, float phi) {
             if (id >= FIGHTER1 && id <= FIGHTER2) {
                 MachineGunBullet->gamma = gamma;
             } else {
-                MachineGunBullet->gamma = 180.0 + atan((target->tl->y - tl->y) / distance(target)) * 180.0 / pitab;
+                MachineGunBullet->gamma = 180.0 + atan((target->tl->y - tl->y) / distance(target)) * 180.0 / PI;
             }
         }
     } else {

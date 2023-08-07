@@ -39,9 +39,6 @@ extern bool SelectingAircraft;
 
 extern char DebugBuf[];
 
-double pitab;
-float sintab[360], costab[360];
-
 CColor::CColor() {
     memset(c, 255, 4 * sizeof(unsigned char));
 }
@@ -349,12 +346,6 @@ void CVertex::take(CVertex* v) {
 CRotation::CRotation() {
     a = b = c = 0;
     calcRotation();
-    pitab = 4 * atan(1);
-
-    for (int i = 0; i < 360; i++) {
-        sintab[i] = sin(pitab / 180 * i);
-        costab[i] = cos(pitab / 180 * i);
-    }
 }
 
 CRotation::~CRotation() {}
@@ -397,15 +388,15 @@ void CRotation::addAngles(short a, short b, short c) {
 }
 
 void CRotation::calcRotation() {
-    rot[0][0] = costab[c] * costab[b];
-    rot[0][1] = sintab[a] * sintab[b] * costab[c] - sintab[c] * costab[a];
-    rot[0][2] = sintab[a] * sintab[c] + costab[a] * sintab[b] * costab[c];
-    rot[1][0] = sintab[c] * costab[b];
-    rot[1][1] = costab[c] * costab[a] + sintab[a] * sintab[b] * sintab[c];
-    rot[1][2] = costab[a] * sintab[b] * sintab[c] - sintab[a] * costab[c];
-    rot[2][0] = -sintab[b];
-    rot[2][1] = sintab[a] * costab[b];
-    rot[2][2] = costab[a] * costab[b];
+    rot[0][0] = COS(c) * COS(b);
+    rot[0][1] = SIN(a) * SIN(b) * COS(c) - SIN(c) * COS(a);
+    rot[0][2] = SIN(a) * SIN(c) + COS(a) * SIN(b) * COS(c);
+    rot[1][0] = SIN(c) * COS(b);
+    rot[1][1] = COS(c) * COS(a) + SIN(a) * SIN(b) * SIN(c);
+    rot[1][2] = COS(a) * SIN(b) * SIN(c) - SIN(a) * COS(c);
+    rot[2][0] = -SIN(b);
+    rot[2][1] = SIN(a) * COS(b);
+    rot[2][2] = COS(a) * COS(b);
 }
 
 float CRotation::rotateX(CVector3* v) {
@@ -422,14 +413,14 @@ float CRotation::rotateZ(CVector3* v) {
 
 float CRotation::getsintab(int a) {
     if (a >= 0 && a < 360) {
-        return sintab[a];
+        return SIN(a);
     }
     return 0;
 }
 
 float CRotation::getcostabntab(int a) {
     if (a >= 0 && a < 360) {
-        return costab[a];
+        return COS(a);
     }
     return 0;
 }

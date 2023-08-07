@@ -29,9 +29,6 @@
 #include "common.h" // ok
 #include "vertexarray.h" // ok
 
-extern double pitab; // pi=atan(1)
-extern float sintab[360], costab[360]; // table for sine, cosine functions (obsolete, use COS(), SIN() instead)
-
 /* Currently models are normalized to the (-1,-1,-1)-(1,1,1) cube and static!
    The model represents the "class" description of a static model's geometry and colors.
    It is "instanciated" using a DynamicObj which has a reference to the model,

@@ -151,7 +151,7 @@ void GLLandscape::precalculate() {
 
     // This is just an approximation presuming the sun is a vertical line
     float m1 = mzoom / hh;
-    float ih = tan((sungamma + 5) * PI / 180) / m1; // 0 degree vertical sun radius
+    float ih = tan((sungamma + 5) * M_PI / 180) / m1; // 0 degree vertical sun radius
     for (x = 0; x <= MAXX; x++) {
         float rayheight = hw[x][MAXX];
         for (z = MAXX; z >= 0; z--) {
@@ -165,7 +165,7 @@ void GLLandscape::precalculate() {
         }
     }
     // precalculate water light, always the same angle
-    int nlwater = 1200 - (int)(1000.0 * 2.0 * fabs((90.0 - sungamma) * PI / 180.0) / PI);
+    int nlwater = 1200 - (int)(1000.0 * 2.0 * fabs((90.0 - sungamma) * M_PI / 180.0) / PI);
     // precalculate a height average
     int midheight = (highestpoint + lowestpoint) / 2;
     // set minimum ambient light
@@ -555,7 +555,7 @@ void GLLandscape::drawTree(float x, float y, float htree, float wtree, int phi) 
     float ht = getExactLSHeight(x, y);
     phi = 359 - phi;
     // Draw tree using a single rotated quad (low quality, fast)
-    float ex1 = cosi[phi] * wtree, ey1 = sine[phi] * wtree;
+    float ex1 = COS(phi) * wtree, ey1 = SIN(phi) * wtree;
     float ex2 = -ex1, ey2 = -ey1;
     float zy = 0;
     va = &vertexarrayquad[texturetree1 + 1];
@@ -1729,7 +1729,7 @@ void GLLandscape::draw(int phi, int gamma) {
     glScalef(hh2, zoomz, hh2);
     gl->extractFrustum();
     float pseudoview = getView();
-    float radius = pseudoview / cosi[45];
+    float radius = pseudoview / COS(45);
     int minx = (int)(camx - radius);
     int miny = (int)(camz - radius);
     int maxx = (int)(minx + radius * 2);

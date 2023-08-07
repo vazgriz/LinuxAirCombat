@@ -41,6 +41,8 @@
 #include "SDL/SDL_thread.h"
 #include "SDL/SDL_mixer.h"
 
+#include "mathtab.h"
+
 #define MUMBLEROOTCHANNEL 0
 #define MUMBLECURRENTMISSIONCHANNEL 1
 #define MUMBLECURRENTMISSIONBLUESUBCHANNEL 2
@@ -147,17 +149,13 @@ const int maxflare = 30;
 const int maxchaff = 30;
 const int timestep = 34; // (higher values mean slower gameplay)
 
-// sine and cosine table (obsolete)
-//#define SIN(x) sine[(int)x]
-//#define COS(x) cosi[(int)x]
-
 // From cockpit in forward view, help calculate best pilot position:
 #define AngleAheadToBestViewpoint 5.0F
 #define PilotPositionFactor 0.5F
 
 // exact sine, cosine functions
-#define SIN(x) sin(x*PI/180.0)
-#define COS(x) cos(x*PI/180.0)
+#define SIN(x) sin(x*M_PI/180.0)
+#define COS(x) cos(x*M_PI/180.0)
 
 // define common GLUT/SDL keys
 

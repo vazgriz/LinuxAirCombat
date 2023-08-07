@@ -23,9 +23,6 @@
 
 /* This file includes a collection of functions and precalculated tables. */
 
-#ifndef IS_MATHTAB_H
-
-#include <math.h>
 #include "mathtab.h"
 #include "common.h"
 
@@ -33,10 +30,6 @@ int randptr = 0;
 
 int randommaster[64][64];
 
-float PI;
-
-float sine[360];
-float cosi[360];
 float smokezoom[MAXSMOKEELEM];
 
 float dist(float dx, float dy) {
@@ -67,12 +60,6 @@ int extremerandom(int n) {
 
 void mathtab_init() {
     int i, i2;
-    PI = (float)(atan(1.0) * 4.0);
-
-    for (i = 0; i < 360; i++) {
-        sine[i] = (float)sin((float)i / 180.0 * PI);
-        cosi[i] = (float)cos((float)i / 180.0 * PI);
-    }
     for (i = 0; i < 63; i++)
         for (i2 = 0; i2 < 63; i2++) {
             randommaster[i][i2] = (i * i2 * 2000) % 32678;
@@ -105,4 +92,3 @@ int myrandom(int n, int x, int y) {
     }
     return ret;
 }
-#endif

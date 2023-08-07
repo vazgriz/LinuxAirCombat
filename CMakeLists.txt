@@ -84,13 +84,13 @@ add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         ${SDL_bin_dll}
-        ${CMAKE_CURRENT_BINARY_DIR}/SDL2.dll
+        ${CMAKE_CURRENT_BINARY_DIR}/LAC/SDL2.dll
 )
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         ${SDL_mixer_bin_dll}
-        ${CMAKE_CURRENT_BINARY_DIR}/SDL2_mixer.dll
+        ${CMAKE_CURRENT_BINARY_DIR}/LAC/SDL2_mixer.dll
 )
 add_custom_target(CopyAssets
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/LAC/data

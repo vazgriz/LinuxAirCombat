@@ -189,8 +189,8 @@ void Flash::draw() {
     float myzoom = 0.3;
 
     for (i = 0; i < 10; i++) {
-        glVertex3f(w[i].x - myzoom * cosi[phi], w[i].y, w[i].z + myzoom * sine[phi]);
-        glVertex3f(w[i].x + myzoom * cosi[phi], w[i].y, w[i].z - myzoom * sine[phi]);
+        glVertex3f(w[i].x - myzoom * COS(phi), w[i].y, w[i].z + myzoom * SIN(phi));
+        glVertex3f(w[i].x + myzoom * COS(phi), w[i].y, w[i].z - myzoom * SIN(phi));
     }
 
     glEnd();
@@ -206,26 +206,26 @@ void Flash::drawHQ() {
 
     for (i = 0; i < 9; i++) {
         glColor4ub(255, 255, 255, 0);
-        glVertex3f(w[i].x - myzoom * cosi[phi], w[i].y, w[i].z + myzoom * sine[phi]);
+        glVertex3f(w[i].x - myzoom * COS(phi), w[i].y, w[i].z + myzoom * SIN(phi));
         glColor4ub(255, 255, 255, 255);
-        glVertex3f(w[i].x - myzoom * alphawidth * cosi[phi], w[i].y, w[i].z + myzoom * alphawidth * sine[phi]);
+        glVertex3f(w[i].x - myzoom * alphawidth * COS(phi), w[i].y, w[i].z + myzoom * alphawidth * SIN(phi));
         glColor4ub(255, 255, 255, 255);
-        glVertex3f(w[i + 1].x - myzoom * alphawidth * cosi[phi], w[i + 1].y, w[i + 1].z + myzoom * alphawidth * sine[phi]);
+        glVertex3f(w[i + 1].x - myzoom * alphawidth * COS(phi), w[i + 1].y, w[i + 1].z + myzoom * alphawidth * SIN(phi));
         glColor4ub(255, 255, 255, 0);
-        glVertex3f(w[i + 1].x - myzoom * cosi[phi], w[i + 1].y, w[i + 1].z + myzoom * sine[phi]);
+        glVertex3f(w[i + 1].x - myzoom * COS(phi), w[i + 1].y, w[i + 1].z + myzoom * SIN(phi));
         glColor4ub(255, 255, 255, 255);
-        glVertex3f(w[i].x - myzoom * alphawidth * cosi[phi], w[i].y, w[i].z + myzoom * alphawidth * sine[phi]);
-        glVertex3f(w[i].x + myzoom * alphawidth * cosi[phi], w[i].y, w[i].z - myzoom * alphawidth * sine[phi]);
-        glVertex3f(w[i + 1].x + myzoom * alphawidth * cosi[phi], w[i + 1].y, w[i + 1].z - myzoom * alphawidth * sine[phi]);
-        glVertex3f(w[i + 1].x - myzoom * alphawidth * cosi[phi], w[i + 1].y, w[i + 1].z + myzoom * alphawidth * sine[phi]);
+        glVertex3f(w[i].x - myzoom * alphawidth * COS(phi), w[i].y, w[i].z + myzoom * alphawidth * SIN(phi));
+        glVertex3f(w[i].x + myzoom * alphawidth * COS(phi), w[i].y, w[i].z - myzoom * alphawidth * SIN(phi));
+        glVertex3f(w[i + 1].x + myzoom * alphawidth * COS(phi), w[i + 1].y, w[i + 1].z - myzoom * alphawidth * SIN(phi));
+        glVertex3f(w[i + 1].x - myzoom * alphawidth * COS(phi), w[i + 1].y, w[i + 1].z + myzoom * alphawidth * SIN(phi));
         glColor4ub(255, 255, 255, 255);
-        glVertex3f(w[i].x + myzoom * alphawidth * cosi[phi], w[i].y, w[i].z - myzoom * alphawidth * sine[phi]);
+        glVertex3f(w[i].x + myzoom * alphawidth * COS(phi), w[i].y, w[i].z - myzoom * alphawidth * SIN(phi));
         glColor4ub(255, 255, 255, 0);
-        glVertex3f(w[i].x + myzoom * cosi[phi], w[i].y, w[i].z - myzoom * sine[phi]);
+        glVertex3f(w[i].x + myzoom * COS(phi), w[i].y, w[i].z - myzoom * SIN(phi));
         glColor4ub(255, 255, 255, 0);
-        glVertex3f(w[i + 1].x + myzoom * cosi[phi], w[i + 1].y, w[i + 1].z - myzoom * sine[phi]);
+        glVertex3f(w[i + 1].x + myzoom * COS(phi), w[i + 1].y, w[i + 1].z - myzoom * SIN(phi));
         glColor4ub(255, 255, 255, 255);
-        glVertex3f(w[i + 1].x + myzoom * alphawidth * cosi[phi], w[i + 1].y, w[i + 1].z - myzoom * alphawidth * sine[phi]);
+        glVertex3f(w[i + 1].x + myzoom * alphawidth * COS(phi), w[i + 1].y, w[i + 1].z - myzoom * alphawidth * SIN(phi));
     }
 
     glEnd();
@@ -256,7 +256,7 @@ void CExplosion::setExplosion(float x, float y, float z, float vx, float vy, flo
 void CExplosion::move(Uint32 dt) {
     if (ttl > 0) {
         float timefac = (float)dt / (float)timestep;
-        zoom = sine[ttl * 180 / maxlen] * maxzoom;
+        zoom = SIN(ttl * 180 / maxlen) * maxzoom;
         ttl -= dt;
         tl->y += 0.01 * timefac;
 
@@ -665,7 +665,7 @@ void Font::drawTextScaled(float x, float y, float z, char* str, CColor* color, i
     glPushMatrix();
     glTranslatef(xz + xw / 2, yz, z);
     xz = 0;
-    glScalef(1.0 + 0.08 * sine[abs(timer * 8 / timestep % 360)], 1, 1);
+    glScalef(1.0 + 0.08 * SIN(abs(timer * 8 / timestep % 360)), 1, 1);
 
     for (i = 0; i < len; i++) {
         if (str[i] >= start && str[i] <= start + n) {

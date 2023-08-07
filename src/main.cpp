@@ -6118,7 +6118,7 @@ void DisplayMenu() {
     if (MenuTimernorm < 0) {
         MenuTimernorm *= -1;
     }
-    CColor color2(255, 255, (int)(255.0 * cosi[MenuTimernorm]), 255);
+    CColor color2(255, 255, (int)(255.0 * COS(MenuTimernorm)), 255);
     if (allmenus.components[3]->isVisible()) {
         ((Container*)allmenus.components[3])->components[0]->setVisible(true);
         for (i = 1; i < 25; i++) {
@@ -13930,8 +13930,8 @@ void sdlMainLoop() {
 }
 
 void setLightSource(int gamma) {
-    light_position0[0] = -cosi[gamma];
-    light_position0[1] = sine[gamma];
+    light_position0[0] = -COS(gamma);
+    light_position0[1] = SIN(gamma);
     light_position0[2] = 0;
     glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
 }
@@ -15347,8 +15347,8 @@ void TimerGame(int dt) {
         }
         float pseudoview = getView();
         float fdist = myrandom((int)pseudoview - 20) + 10;
-        float fx = fplayer->tl->x - sine[fphi] * fdist;
-        float fz = fplayer->tl->z - cosi[fphi] * fdist;
+        float fx = fplayer->tl->x - SIN(fphi) * fdist;
+        float fz = fplayer->tl->z - COS(fphi) * fdist;
         flash1->set(fx, l->getHeight(fx, fz), fz, (int)camphi);
     }
     if (initing) {

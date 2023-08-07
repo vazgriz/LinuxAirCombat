@@ -1554,8 +1554,8 @@ void Cockpit::drawRadar() {
                 sprintf(DebugBuf, "Cockpit::drawCounter() DebugRJBCC08 Object#%d. d=%f. aw=%d. yf=%f.", i, d, aw, yf);
                 display(DebugBuf, LOG_MOST);
             }
-            float px = -d * sine[aw];
-            float py = yf + d * cosi[aw];
+            float px = -d * SIN(aw);
+            float py = yf + d * COS(aw);
             if (((d < 1.18) || (px >= -0.95 && px <= 0.95 && py >= yf - 0.95 && py <= yf + 0.95)) && ThreeDObjects[i]->tl->y > (SeaLevel - 30)) {
                 if (IffOnOff) {
 
@@ -1633,8 +1633,8 @@ void Cockpit::drawRadar() {
             if (RadarZoom == 0) {
                 d = d * 0.2;
             }
-            float px = -d * sine[aw];
-            float py = yf + d * cosi[aw];
+            float px = -d * SIN(aw);
+            float py = yf + d * COS(aw);
             if ((d < 1.2) || (px >= -1.2 && px <= 1.2 && py >= yf - 1.1 && py <= yf + 1.1)) {
                 drawBlip(TRIANGLE_BLIP, px, py, zf, 000, 000, 000);
             }
@@ -1703,7 +1703,7 @@ void Cockpit::drawTargeter() {
         if (myphi < 0) {
             myphi += 360;
         }
-        float ex1 = cosi[(int)myphi] * ThreeDObjects[SelectedMissionTarget]->zoom, ey1 = -sine[(int)myphi] * ThreeDObjects[SelectedMissionTarget]->zoom;
+        float ex1 = COS((int)myphi) * ThreeDObjects[SelectedMissionTarget]->zoom, ey1 = -SIN((int)myphi) * ThreeDObjects[SelectedMissionTarget]->zoom;
         float ex2 = -ex1, ey2 = -ey1;
         float ez = ThreeDObjects[SelectedMissionTarget]->zoom;
         gl->enableAlphaBlending();

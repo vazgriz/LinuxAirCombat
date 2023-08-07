@@ -22,12 +22,9 @@
 */
 
 /* This file includes a collection of functions and precalculated tables. */
+#pragma once
 
-#ifndef IS_MATHTAB_H
-#define IS_MATHTAB_H
-
-extern float sine[], cosi[]; // sine and cosine tables (only use for approximations)
-extern float PI;
+#include <math.h>
 
 extern void mathtab_init(); // calculate tables
 extern int myrandom(int n); // random integer number [0;n-1]
@@ -37,7 +34,7 @@ extern int extremerandom(int n, int x, int y); // random integer number [0;n-1],
 extern float dist(float dx, float dy); // distance (Euklidean norm, 2D vector)
 extern int randptr;
 
+#define PI M_PI
+
 #define MAXSMOKEELEM 40
 extern float smokezoom[MAXSMOKEELEM];
-
-#endif
