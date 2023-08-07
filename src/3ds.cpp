@@ -217,21 +217,21 @@ void CLoad3DS::Compile(CModel* model) {
     // This is necessary to get a smooth shaded object
     int i;
     for (i = 0; i < model->numObjects; i++) {
-        CObject* co = model->object[i];
-        for (int i2 = 1; i2 < co->numVertices; i2++) {
+        CObject& co = *model->object[i];
+        for (int i2 = 1; i2 < co.numVertices; i2++) {
             for (int i3 = 0; i3 < i2; i3++) {
-                if (co->vertex[i2].vector.isEqual(&co->vertex[i3].vector) &&   // same coordinates
-                    co->vertex[i2].tex.isEqual(&co->vertex[i3].tex))           // same texture coordinates
+                if (co.vertex[i2].vector.isEqual(&co.vertex[i3].vector) &&   // same coordinates
+                    co.vertex[i2].tex.isEqual(&co.vertex[i3].tex))           // same texture coordinates
                 {
-                    for (int i4 = 0; i4 < co->numTriangles; i4++) {
-                        if (co->triangle[i4].v[0] == &co->vertex[i2]) {
-                            co->triangle[i4].v[0] = &co->vertex[i3];
+                    for (int i4 = 0; i4 < co.numTriangles; i4++) {
+                        if (co.triangle[i4].v[0] == &co.vertex[i2]) {
+                            co.triangle[i4].v[0] = &co.vertex[i3];
                         }
-                        if (co->triangle[i4].v[1] == &co->vertex[i2]) {
-                            co->triangle[i4].v[1] = &co->vertex[i3];
+                        if (co.triangle[i4].v[1] == &co.vertex[i2]) {
+                            co.triangle[i4].v[1] = &co.vertex[i3];
                         }
-                        if (co->triangle[i4].v[2] == &co->vertex[i2]) {
-                            co->triangle[i4].v[2] = &co->vertex[i3];
+                        if (co.triangle[i4].v[2] == &co.vertex[i2]) {
+                            co.triangle[i4].v[2] = &co.vertex[i3];
                         }
                     }
                 }
@@ -240,22 +240,22 @@ void CLoad3DS::Compile(CModel* model) {
     }
     // Scale texture coordinated by uscale, vscale
     for (i = 0; i < model->numObjects; i++) {
-        CObject* co = model->object[i];
-        float uscale = co->material->uscale;
-        float vscale = co->material->vscale;
-        float uoffset = co->material->uoffset;
-        float voffset = co->material->voffset;
+        CObject& co = *model->object[i];
+        float uscale = co.material->uscale;
+        float vscale = co.material->vscale;
+        float uoffset = co.material->uoffset;
+        float voffset = co.material->voffset;
 
-        for (int i2 = 0; i2 < co->numVertices; i2++) {
-            float ax = co->vertex[i2].tex.x - 0.5;
-            float ay = co->vertex[i2].tex.y - 0.5;
-            float phi = -co->material->wrot;
-            co->vertex[i2].tex.x = ax * COS(phi) - ay * SIN(phi) + 0.5;
-            co->vertex[i2].tex.y = ax * SIN(phi) + ay * COS(phi) + 0.5;
-            co->vertex[i2].tex.x -= uoffset;
-            co->vertex[i2].tex.y += voffset;
-            co->vertex[i2].tex.x = (co->vertex[i2].tex.x - 0.5) * uscale + 0.5;
-            co->vertex[i2].tex.y = (co->vertex[i2].tex.y - 0.5) * vscale + 0.5;
+        for (int i2 = 0; i2 < co.numVertices; i2++) {
+            float ax = co.vertex[i2].tex.x - 0.5;
+            float ay = co.vertex[i2].tex.y - 0.5;
+            float phi = -co.material->wrot;
+            co.vertex[i2].tex.x = ax * COS(phi) - ay * SIN(phi) + 0.5;
+            co.vertex[i2].tex.y = ax * SIN(phi) + ay * COS(phi) + 0.5;
+            co.vertex[i2].tex.x -= uoffset;
+            co.vertex[i2].tex.y += voffset;
+            co.vertex[i2].tex.x = (co.vertex[i2].tex.x - 0.5) * uscale + 0.5;
+            co.vertex[i2].tex.y = (co.vertex[i2].tex.y - 0.5) * vscale + 0.5;
         }
     }
 }
@@ -268,11 +268,11 @@ void CLoad3DS::ComputeColors(CModel* model) {
         return;
     }
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numVertices; i2++) {
-            if (object->hasTexture) {
-                CVertex* v = &object->vertex[i2];
-                CTexture* tex = object->material->texture;
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numVertices; i2++) {
+            if (object.hasTexture) {
+                CVertex* v = &object.vertex[i2];
+                CTexture* tex = object.material->texture;
                 tex->getColor(&c, (int)(v->tex.x * tex->width), (int)(v->tex.y * tex->height));
                 int val;
                 if (c.c[0] < 200 || c.c[1] < 200) {
@@ -288,14 +288,14 @@ void CLoad3DS::ComputeColors(CModel* model) {
                 }
                 v->color.take(&c);
             } else {
-                if (object->material) {
-                    object->vertex[i2].color.c[0] = object->material->color.c[0];
-                    object->vertex[i2].color.c[1] = object->material->color.c[1];
-                    object->vertex[i2].color.c[2] = object->material->color.c[2];
+                if (object.material) {
+                    object.vertex[i2].color.c[0] = object.material->color.c[0];
+                    object.vertex[i2].color.c[1] = object.material->color.c[1];
+                    object.vertex[i2].color.c[2] = object.material->color.c[2];
                 } else {
-                    object->vertex[i2].color.c[0] = 200;
-                    object->vertex[i2].color.c[1] = 200;
-                    object->vertex[i2].color.c[2] = 200;
+                    object.vertex[i2].color.c[0] = 200;
+                    object.vertex[i2].color.c[1] = 200;
+                    object.vertex[i2].color.c[2] = 200;
                 }
             }
         }
@@ -310,16 +310,16 @@ void CLoad3DS::ComputeNormals(CModel* model) {
     }
     CVector3 n;
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numTriangles; i2++) {
-            object->triangle[i2].getNormal(&n);
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numTriangles; i2++) {
+            object.triangle[i2].getNormal(&n);
             for (i3 = 0; i3 < 3; i3++) {
-                object->triangle[i2].v[i3]->addNormal(&n);
+                object.triangle[i2].v[i3]->addNormal(&n);
             }
         }
-        for (i2 = 0; i2 < object->numTriangles; i2++) {
+        for (i2 = 0; i2 < object.numTriangles; i2++) {
             for (i3 = 0; i3 < 3; i3++) {
-                object->triangle[i2].v[i3]->normal.norm();
+                object.triangle[i2].v[i3]->normal.norm();
             }
         }
     }
@@ -380,9 +380,9 @@ void CLoad3DS::Normalize(CModel* model) {
     float maxx = -1E10, maxy = -1E10, maxz = -1E10;
 
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numVertices; i2++) {
-            CVertex* v = &object->vertex[i2];
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numVertices; i2++) {
+            CVertex* v = &object.vertex[i2];
             if (v->vector.x > maxx) {
                 maxx = v->vector.x;
             }
@@ -412,9 +412,9 @@ void CLoad3DS::Normalize(CModel* model) {
     float sc = model->scalex > model->scaley ? model->scalex : model->scaley;
     sc = model->scalez > sc ? model->scalez : sc;
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numVertices; i2++) {
-            CVertex* v = &object->vertex[i2];
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numVertices; i2++) {
+            CVertex* v = &object.vertex[i2];
             v->vector.x -= tlx;
             v->vector.x /= sc;
             v->vector.y -= tly;
@@ -466,7 +466,7 @@ void CLoad3DS::ProcessNextChunk(CModel* model, Chunk* previousChunk) {
             model->addObject(&newObject);
             memset(&newObject, 0, sizeof(CObject));
             currentChunk->bytesRead += GetString(model->object[model->numObjects - 1]->name);
-            ProcessNextObjectChunk(model, (model->object[model->numObjects - 1]), currentChunk);
+            ProcessNextObjectChunk(model, model->object[model->numObjects - 1].get(), currentChunk);
             break;
         case MAINSCALE:
             float mainscale;
@@ -504,7 +504,7 @@ void CLoad3DS::ProcessNextMaterialChunk(CModel* model, Chunk* previousChunk) {
             currentChunk->bytesRead += file->readString(model->material[model->numMaterials - 1]->name, 255, currentChunk->length - currentChunk->bytesRead);
             break;
         case MAT_DIFFUSE:
-            ReadColorChunk(model->material[model->numMaterials - 1], currentChunk);
+            ReadColorChunk(model->material[model->numMaterials - 1].get(), currentChunk);
             break;
         case MAT_MAP:
             ProcessNextMaterialChunk(model, currentChunk);
@@ -522,19 +522,19 @@ void CLoad3DS::ProcessNextMaterialChunk(CModel* model, Chunk* previousChunk) {
             }
             break;
         case MAT_USCALE:
-            ReadUScale(model->material[model->numMaterials - 1], currentChunk);
+            ReadUScale(model->material[model->numMaterials - 1].get(), currentChunk);
             break;
         case MAT_VSCALE:
-            ReadVScale(model->material[model->numMaterials - 1], currentChunk);
+            ReadVScale(model->material[model->numMaterials - 1].get(), currentChunk);
             break;
         case MAT_UOFFSET:
-            ReadUOffset(model->material[model->numMaterials - 1], currentChunk);
+            ReadUOffset(model->material[model->numMaterials - 1].get(), currentChunk);
             break;
         case MAT_VOFFSET:
-            ReadVOffset(model->material[model->numMaterials - 1], currentChunk);
+            ReadVOffset(model->material[model->numMaterials - 1].get(), currentChunk);
             break;
         case MAT_ROTATION:
-            ReadUVRotation(model->material[model->numMaterials - 1], currentChunk);
+            ReadUVRotation(model->material[model->numMaterials - 1].get(), currentChunk);
             break;
         default:
             currentChunk->bytesRead += file->skip(currentChunk->length - currentChunk->bytesRead);
@@ -608,7 +608,7 @@ void CLoad3DS::ReadObjectMaterial(CModel* model, CObject* object, Chunk* previou
     previousChunk->bytesRead += GetString(materialName);
     for (int i = 0; i < model->numMaterials; i++) {
         if (strcmp(materialName, model->material[i]->name) == 0) {
-            object->material = model->material[i];
+            object->material = model->material[i].get();
 
             if (strlen(model->material[i]->filename) > 0)
                 if ((model->material[i]->filename[0] >= 'A' && model->material[i]->filename[0] <= 'Z') ||

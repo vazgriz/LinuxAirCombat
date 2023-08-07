@@ -743,16 +743,16 @@ HighClouds::~HighClouds() {
 
 void HighClouds::init(int theta) {
     sphere = new CSpherePart(1, 9, theta);
-    CObject* co = sphere->object[0];
-    co->hasTexture = true;
-    co->material = new CMaterial();
+    CObject& co = *sphere->object[0];
+    co.hasTexture = true;
+    co.material = new CMaterial();
 
-    for (int i2 = 0; i2 < co->numVertices; i2++) {
-        co->vertex[i2].tex.x = co->vertex[i2].vector.x * 5;
-        co->vertex[i2].tex.y = co->vertex[i2].vector.y * 5;
+    for (int i2 = 0; i2 < co.numVertices; i2++) {
+        co.vertex[i2].tex.x = co.vertex[i2].vector.x * 5;
+        co.vertex[i2].tex.y = co.vertex[i2].vector.y * 5;
     }
 
-    co->hasTexture = true;
+    co.hasTexture = true;
     sphere->displaylist = false;
     o = sphere;
     rot->b = 90;
@@ -767,11 +767,11 @@ void HighClouds::setTexture(CTexture* texture) {
 
 void HighClouds::drawGL(CVector3* tl, CVector3* textl) {
     int j;
-    CObject* cm = o->object[0];
+    CObject& cm = *o->object[0];
 
-    for (int i2 = 0; i2 < cm->numVertices; i2++) {
-        cm->vertex[i2].tex.x = cm->vertex[i2].vector.x * 4 + textl->x / zoom;
-        cm->vertex[i2].tex.y = cm->vertex[i2].vector.y * 4 - textl->z / zoom;
+    for (int i2 = 0; i2 < cm.numVertices; i2++) {
+        cm.vertex[i2].tex.x = cm.vertex[i2].vector.x * 4 + textl->x / zoom;
+        cm.vertex[i2].tex.y = cm.vertex[i2].vector.y * 4 - textl->z / zoom;
     }
 
     glEnable(GL_BLEND);
@@ -788,16 +788,16 @@ void HighClouds::drawGL(CVector3* tl, CVector3* textl) {
     glShadeModel(GL_SMOOTH);
     glEnable(GL_TEXTURE_2D);
     glColor3ub(255, 255, 255);
-    glBindTexture(GL_TEXTURE_2D, cm->material->texture->textureID);
+    glBindTexture(GL_TEXTURE_2D, cm.material->texture->textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBegin(GL_TRIANGLES);
 
-    for (j = 0; j < cm->numTriangles; j++) {
-        CVertex* v = cm->triangle[j].v[0];
+    for (j = 0; j < cm.numTriangles; j++) {
+        CVertex* v = cm.triangle[j].v[0];
 
         for (int whichVertex = 0; whichVertex < 3; whichVertex++) {
-            v = cm->triangle[j].v[whichVertex];
+            v = cm.triangle[j].v[whichVertex];
             glNormal3f(v->normal.x, v->normal.y, v->normal.z);
             glTexCoord2f(v->tex.x, v->tex.y);
             glVertex3f(v->vector.x, v->vector.y, v->vector.z);
@@ -808,11 +808,11 @@ void HighClouds::drawGL(CVector3* tl, CVector3* textl) {
 
     glBegin(GL_QUADS);
 
-    for (j = 0; j < cm->numQuads; j++) {
-        CVertex* v = cm->quad[j].v[0];
+    for (j = 0; j < cm.numQuads; j++) {
+        CVertex* v = cm.quad[j].v[0];
 
         for (int whichVertex = 0; whichVertex < 4; whichVertex++) {
-            v = cm->quad[j].v[whichVertex];
+            v = cm.quad[j].v[whichVertex];
             glNormal3f(v->normal.x, v->normal.y, v->normal.z);
             glTexCoord2f(v->tex.x, v->tex.y);
             glVertex3f(v->vector.x, v->vector.y, v->vector.z);

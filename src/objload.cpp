@@ -162,13 +162,13 @@ void CLoadOBJ::ComputeColors(CModel* model) {
     CVector3 light(1.0, 1.0, 1.0);
     light.norm();
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numVertices; i2++) {
-            n.take(&object->vertex[i2].normal);
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numVertices; i2++) {
+            n.take(&object.vertex[i2].normal);
             int lum = (int)(255.0 - 255.0 * acos(n.dotproduct(&light)));
-            object->vertex[i2].color.c[0] = lum;
-            object->vertex[i2].color.c[1] = lum;
-            object->vertex[i2].color.c[2] = lum;
+            object.vertex[i2].color.c[0] = lum;
+            object.vertex[i2].color.c[1] = lum;
+            object.vertex[i2].color.c[2] = lum;
         }
     }
 }
@@ -181,30 +181,30 @@ void CLoadOBJ::ComputeNormals(CModel* model) {
         return;
     }
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numTriangles; i2++) {
-            object->triangle[i2].getNormal(&n);
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numTriangles; i2++) {
+            object.triangle[i2].getNormal(&n);
             if (n.x == 0 && n.y == 0 && n.z == 0) {
                 n.z = 1;
             }
             for (i3 = 0; i3 < 3; i3++) {
-                object->triangle[i2].v[i3]->addNormal(&n);
+                object.triangle[i2].v[i3]->addNormal(&n);
             }
         }
-        for (i2 = 0; i2 < object->numQuads; i2++) {
-            object->quad[i2].getNormal(&n);
+        for (i2 = 0; i2 < object.numQuads; i2++) {
+            object.quad[i2].getNormal(&n);
             for (i3 = 0; i3 < 4; i3++) {
-                object->quad[i2].v[i3]->addNormal(&n);
+                object.quad[i2].v[i3]->addNormal(&n);
             }
         }
-        for (i2 = 0; i2 < object->numTriangles; i2++) {
+        for (i2 = 0; i2 < object.numTriangles; i2++) {
             for (i3 = 0; i3 < 3; i3++) {
-                object->triangle[i2].v[i3]->normal.norm();
+                object.triangle[i2].v[i3]->normal.norm();
             }
         }
-        for (i2 = 0; i2 < object->numQuads; i2++) {
+        for (i2 = 0; i2 < object.numQuads; i2++) {
             for (i3 = 0; i3 < 4; i3++) {
-                object->quad[i2].v[i3]->normal.norm();
+                object.quad[i2].v[i3]->normal.norm();
             }
         }
     }
@@ -215,9 +215,9 @@ void CLoadOBJ::Normalize(CModel* model) {
     float minx = 1E10, miny = 1E10, minz = 1E10;
     float maxx = -1E10, maxy = -1E10, maxz = -1E10;
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numVertices; i2++) {
-            CVertex* v = &object->vertex[i2];
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numVertices; i2++) {
+            CVertex* v = &object.vertex[i2];
             if (v->vector.x > maxx) {
                 maxx = v->vector.x;
             }
@@ -247,9 +247,9 @@ void CLoadOBJ::Normalize(CModel* model) {
     float sc = scx > scy ? scx : scy;
     sc = scz > sc ? scz : sc;
     for (i = 0; i < model->numObjects; i++) {
-        CObject* object = (model->object[i]);
-        for (i2 = 0; i2 < object->numVertices; i2++) {
-            CVertex* v = &object->vertex[i2];
+        CObject& object = *model->object[i];
+        for (i2 = 0; i2 < object.numVertices; i2++) {
+            CVertex* v = &object.vertex[i2];
             v->vector.x -= tlx;
             v->vector.x /= sc;
             v->vector.y -= tly;
@@ -290,23 +290,21 @@ bool CLoadOBJ::ImportOBJ(CModel* model, char* filename) {
         i++;
     }
     // create new object
-    model->object[model->numObjects] = new CObject;
-    CObject* object = model->object[model->numObjects];
-    model->numObjects++;
-    object->numVertices = vertices;
-    object->numTriangles = faces;
-    object->numQuads = 0;
+    CObject& object = model->addObject();
+    object.numVertices = vertices;
+    object.numTriangles = faces;
+    object.numQuads = 0;
     // create array of vertices and faces (triangles, quads)
-    object->vertex = new CVertex[object->numVertices];
-    object->triangle = new CTriangle[object->numTriangles];
-    object->quad = new CQuad[object->numQuads];
+    object.vertex = new CVertex[object.numVertices];
+    object.triangle = new CTriangle[object.numTriangles];
+    object.quad = new CQuad[object.numQuads];
     int vn = 0, tn = 0;
     i = 0;
     while (i < file->size - 1) {
         if (file->data[i] == 'v' && (file->data[i + 1] == ' ' || file->data[i + 1] == '\t')) {
-            object->vertex[vn].vector.x = file->readFloat(i + 2);
-            object->vertex[vn].vector.y = file->readFloat();
-            object->vertex[vn].vector.z = file->readFloat();
+            object.vertex[vn].vector.x = file->readFloat(i + 2);
+            object.vertex[vn].vector.y = file->readFloat();
+            object.vertex[vn].vector.z = file->readFloat();
             i = file->filepointer - 2;
             vn++;
         }
@@ -329,9 +327,9 @@ bool CLoadOBJ::ImportOBJ(CModel* model, char* filename) {
             {
                 // create triangles (triangulation)
                 for (i2 = 2; i2 < z; i2++) {
-                    object->triangle[tn].v[0] = &object->vertex[a[0] - 1];
-                    object->triangle[tn].v[1] = &object->vertex[a[i2 - 1] - 1];
-                    object->triangle[tn].v[2] = &object->vertex[a[i2] - 1];
+                    object.triangle[tn].v[0] = &object.vertex[a[0] - 1];
+                    object.triangle[tn].v[1] = &object.vertex[a[i2 - 1] - 1];
+                    object.triangle[tn].v[2] = &object.vertex[a[i2] - 1];
                     tn++;
                 }
             }

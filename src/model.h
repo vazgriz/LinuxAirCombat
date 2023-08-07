@@ -25,9 +25,12 @@
 
 #pragma once
 #include <memory>
+#include <array>
 
 #include "common.h" // ok
 #include "vertexarray.h" // ok
+
+const size_t maxObjects = 100;
 
 /* Currently models are normalized to the (-1,-1,-1)-(1,1,1) cube and static!
    The model represents the "class" description of a static model's geometry and colors.
@@ -208,8 +211,8 @@ public:
     Uint16 numObjects; // number of objects (which have a unique material)
     Uint16 numMaterials; // number of materials (should be the same as the number of objects)
     bool displaylist; // enable using a display list
-    CMaterial* material[100]; // materials, at most 100 (these are only pointers)
-    CObject* object[100]; // objects, at most 100 (these are only pointers)
+    std::array<std::unique_ptr<CMaterial>, maxObjects> material; // materials, at most 100 (these are only pointers)
+    std::array<std::unique_ptr<CObject>, maxObjects> object; // objects, at most 100 (these are only pointers)
     bool nolight; // do not use light?
     bool alpha; // use alpha blending?
     int numRefpoints; // reference points for missiles
@@ -223,6 +226,7 @@ public:
     void setName(const char* name);
     void addMaterial(CMaterial* material);
     void addObject(CObject* object);
+    CObject& addObject();
     void addRefPoint(CVector3* tl);
     ~CModel();
     void setColor(CColor* col);

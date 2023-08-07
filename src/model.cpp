@@ -29,6 +29,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdexcept>
+
 #include "model.h"
 #include "gl.h"
 #include "mathtab.h"
@@ -479,6 +481,9 @@ void CQuad::setVertices(CVertex* a, CVertex* b, CVertex* c, CVertex* d) {
 }
 
 CMaterial::CMaterial() {
+    utile = 1;
+    vtile = 1;
+    texture = nullptr;
     uscale = 1;
     vscale = 1;
     uoffset = 0;
@@ -557,28 +562,35 @@ void CModel::setName(const char* name) {
 }
 
 void CModel::addMaterial(CMaterial* material) {
-    this->material[numMaterials] = new CMaterial;
+    if (numMaterials == maxObjects) throw std::runtime_error("max materials allocated");
 
-    if (this->material[numMaterials] == NULL) {
-        exit(100);
-    }
+    this->material[numMaterials] = std::make_unique<CMaterial>();
+
     if (material != NULL) {
-        memcpy(this->material[numMaterials], material, sizeof(CMaterial));
+        memcpy(this->material[numMaterials].get(), material, sizeof(CMaterial));
     }
     numMaterials++;
 }
 
 void CModel::addObject(CObject* object) {
-    this->object[numObjects] = new CObject;
+    if (numObjects == maxObjects) throw std::runtime_error("max objects allocated");
 
-    if (this->object[numObjects] == NULL) {
-        exit(101);
-    }
+    this->object[numObjects] = std::make_unique<CObject>();
+
     if (object != NULL) {
-        memcpy(this->object[numObjects], object, sizeof(CObject));
+        memcpy(this->object[numObjects].get(), object, sizeof(CObject));
     }
     numObjects++;
     rotcol = 0;
+}
+
+CObject& CModel::addObject() {
+    if (numObjects == maxObjects) throw std::runtime_error("max objects allocated");
+
+    this->object[numObjects] = std::make_unique<CObject>();
+    numObjects++;
+    rotcol = 0;
+    return *this->object[numObjects - 1];
 }
 
 void CModel::addRefPoint(CVector3* tl) {
@@ -602,14 +614,6 @@ AddRef1:
 }
 
 CModel::~CModel() {
-    int i;
-
-    for (i = 0; i < numMaterials; i++) {
-        delete material[i];
-    }
-    for (i = 0; i < numObjects; i++) {
-        delete object[i];
-    }
     if (refpoint) {
         delete refpoint;
     }
@@ -650,7 +654,7 @@ void CModel::scaleTexture(float fx, float fy) {
     int i;
 
     for (i = 0; i < numObjects; i++) {
-        CObject* o = object[i];
+        CObject* o = object[i].get();
         int i2;
         for (i2 = 0; i2 < o->numVertices; i2++) {
             o->vertex[i2].tex.x *= fx;
@@ -718,7 +722,7 @@ void CModel::draw(CVector3* tl, CVector3* tl2, CRotation* rot, float zoom, float
         if (numObjects <= 0) {
             break;
         }
-        cm = object[i];
+        cm = object[i].get();
         if (cm->hasTexture) {
             if (antialiasing) {
                 gl->enableLinearTexture(cm->material->texture->textureID);
@@ -781,7 +785,7 @@ void CModel::draw(CVector3* tl, CVector3* tl2, CRotation* rot, float zoom, float
         if (numObjects <= 0) {
             break;
         }
-        cm = object[i];
+        cm = object[i].get();
         if (cm->hasTexture) {
             glEnable(GL_TEXTURE_2D);
             glColor4f(1, 1, 1, 1);
@@ -870,7 +874,7 @@ void CModel::draw2(CVector3* tl, CVector3* tl2, CRotation* rot, float zoom, int 
         if (numObjects <= 0) {
             break;
         }
-        cm = object[i];
+        cm = object[i].get();
         if (cm->hasTexture) {
             if (antialiasing) {
                 gl->enableLinearTexture(cm->material->texture->textureID);
@@ -937,7 +941,7 @@ void CModel::draw2(CVector3* tl, CVector3* tl2, CRotation* rot, float zoom, int 
             if (numObjects <= 0) {
                 break;
             }
-            cm = object[i];
+            cm = object[i].get();
             if (cm->hasTexture) {
                 glEnable(GL_TEXTURE_2D);
                 glColor4ub(255, 255, 255, 255);
@@ -1059,7 +1063,7 @@ void CModel::draw3(CVector3* tl, CVector3* tl2, CRotation* rot, float zoom, floa
         if (numObjects <= 0) {
             break;
         }
-        cm = object[i];
+        cm = object[i].get();
         glDisable(GL_TEXTURE_2D);
         glColor3ub(255, 255, 255);
         CVector3 shift;
@@ -1189,7 +1193,7 @@ void CModel::draw3(CVector3* tl, CVector3* tl2, CRotation* rot, float zoom, int 
             if (numObjects <= 0) {
                 break;
             }
-            cm = object[i];
+            cm = object[i].get();
             glDisable(GL_TEXTURE_2D);
             glColor3ub(255, 255, 255);
             CVector3 shift;

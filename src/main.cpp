@@ -13957,7 +13957,7 @@ void setMissiles(CModel* model) {
     CVector3 tlmissile(0, 0.3, 0.3);
     for (i = 0; i < model->numObjects; i++) {
         if (model->object[i]->numVertices == 4) {
-            CObject* o = model->object[i];
+            CObject* o = model->object[i].get();
             float sumx = 0, sumz = 0;
             float maxy = 2;
             int i2;
