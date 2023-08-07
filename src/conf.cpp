@@ -574,7 +574,7 @@ void ConfigFile::close() {
 
 void save_config() {
     char buf[STDSIZE];
-    ConfigFile* cf = new ConfigFile();
+    std::unique_ptr<ConfigFile> cf = std::make_unique<ConfigFile>();
     std::string path = dirs->getSaves("LacConfig.txt");
     const char* confname = path.c_str();
     sprintf(buf, "Saving %s ", confname);
@@ -1096,7 +1096,6 @@ void save_config() {
     cf->writeText((char*)"# ");
     cf->writeText((char*)"# Online help is available at AskMisterWizard.com");
     cf->close();
-    delete cf;
 }
 
 int load_config() {
@@ -1107,10 +1106,9 @@ int load_config() {
     const char* confname = name.c_str();
     sprintf(buf, "Loading %s ", confname);
     display(buf, LOG_MOST);
-    ConfigFile* cf = new ConfigFile(confname);
+    std::unique_ptr<ConfigFile> cf = std::make_unique<ConfigFile>(confname);
     if (cf->buf[0] == 0)   // no file found
     {
-        delete cf;
         return 0;
     }
     str = cf->getString(ret, (char*)"width");
@@ -1800,7 +1798,6 @@ int load_config() {
         display((char*)"load_config() Found PreferredWebBrowser within LacConfig.txt file.", LOG_MOST);
         strncpy(&PreferredBrowser[0], str, 63);
     }
-    delete cf;
     return 1;
 }
 
@@ -1812,13 +1809,13 @@ int load_saveconfig() {
     const char* confname = name.c_str();
     sprintf(buf, "Loading %s ", confname);
     display(buf, LOG_MOST);
-    ConfigFile* cf = new ConfigFile(confname);
+    std::unique_ptr<ConfigFile> cf = std::make_unique<ConfigFile>(confname);
 
     if (cf->buf[0] == 0)   // no file found
     {
-        delete cf;
         return 0;
     }
+
     str = cf->getString(ret, (char*)"width");
     if (str == NULL) {
         width = 800;
@@ -1859,7 +1856,6 @@ int load_saveconfig() {
     if (fullscreen) {
         fullscreen = 1;
     }
-    delete cf;
     return 1;
 }
 
@@ -1871,7 +1867,7 @@ void writeJoystick(ConfigFile* cf, char* str, int jn) {
 
 void save_configInterface() {
     char buf[STDSIZE];
-    ConfigFile* cf = new ConfigFile();
+    std::unique_ptr<ConfigFile> cf = std::make_unique<ConfigFile>();
     auto name = dirs->getSaves("LacControls.txt");
     const char* confname = name.c_str();
     sprintf(buf, "Saving %s ", confname);
@@ -2036,62 +2032,61 @@ void save_configInterface() {
     cf->writeText((char*)"# followed by a number to identify axes, buttons, and coolie hat\n");
     cf->writeText((char*)"# Axis: 0...MAX-1 (maybe 0=aileron 1=elevator 3=throttle 2=rudder)");
     cf->writeText((char*)"\n# Buttons: 0...MAX-1, Coolie: 100=Right, 101=Up, 102=Left, 103=Down");
-    writeJoystick(cf, (char*)" joystick_aileron", joystick_aileron);
-    writeJoystick(cf, (char*)" joystick_elevator", joystick_elevator);
-    writeJoystick(cf, (char*)" joystick_throttle", joystick_throttle);
-    writeJoystick(cf, (char*)" joystick_rudder", joystick_rudder);
-    writeJoystick(cf, (char*)" joystick_view_x", joystick_view_x);
-    writeJoystick(cf, (char*)" joystick_view_y", joystick_view_y);
-    writeJoystick(cf, (char*)" joystick_FIREPRIMARY", joystick_FIREPRIMARY);
-    writeJoystick(cf, (char*)" joystick_FIRESECONDARY", joystick_FIRESECONDARY);
-    writeJoystick(cf, (char*)" joystick_DROPFLARE", joystick_DROPFLARE);
-    writeJoystick(cf, (char*)" joystick_DROPCHAFF", joystick_DROPCHAFF);
-    writeJoystick(cf, (char*)" joystick_WEAPONSELECT", joystick_WEAPONSELECT);
-    writeJoystick(cf, (char*)" joystick_ViewZoomCycler", joystick_ViewZoomCycler);
-    writeJoystick(cf, (char*)" joystick_ZoomFovCycle", joystick_ZoomFovCycle);
-    writeJoystick(cf, (char*)" joystick_ZoomFOVin", joystick_ZoomFOVin);
-    writeJoystick(cf, (char*)" joystick_ZoomFOVout", joystick_ZoomFOVout);
-    writeJoystick(cf, (char*)" joystick_TargetCycle", joystick_TargetCycle);
-    writeJoystick(cf, (char*)" joystick_TargetNext", joystick_TargetNext);
-    writeJoystick(cf, (char*)" joystick_TargetPrev", joystick_TargetPrev);
-    writeJoystick(cf, (char*)" joystick_ThrustTripleModifier", joystick_ThrustTripleModifier);
-    writeJoystick(cf, (char*)" joystick_ToggleExtIntView", joystick_ToggleExtIntView);
-    writeJoystick(cf, (char*)" joystick_FlapsUP", joystick_FlapsUP);
-    writeJoystick(cf, (char*)" joystick_FlapsDN", joystick_FlapsDN);
-    writeJoystick(cf, (char*)" joystick_WEPorAfterburner", joystick_WEPorAfterburner);
-    writeJoystick(cf, (char*)" joystick_SpeedBrake", joystick_SpeedBrake);
-    writeJoystick(cf, (char*)" joystick_Undercarriage", joystick_Undercarriage);
-    writeJoystick(cf, (char*)" joystick_TrimRudderLeft", joystick_TrimRudderLeft);
-    writeJoystick(cf, (char*)" joystick_TrimRudderRight", joystick_TrimRudderRight);
-    writeJoystick(cf, (char*)" joystick_TrimElevatorUp", joystick_TrimElevatorUp);
-    writeJoystick(cf, (char*)" joystick_TrimElevatorDn", joystick_TrimElevatorDn);
-    writeJoystick(cf, (char*)" joystick_LookBK", joystick_LookBK);
-    writeJoystick(cf, (char*)" joystick_LookDN", joystick_LookDN);
-    writeJoystick(cf, (char*)" joystick_LookFD", joystick_LookFD);
-    writeJoystick(cf, (char*)" joystick_LookLT", joystick_LookLT);
-    writeJoystick(cf, (char*)" joystick_LookRT", joystick_LookRT);
-    writeJoystick(cf, (char*)" joystick_LookUP", joystick_LookUP);
-    writeJoystick(cf, (char*)" joystick_RadarZoomCycle", joystick_RadarZoomCycle);
-    writeJoystick(cf, (char*)" joystick_RadarZoomIn", joystick_RadarZoomIn);
-    writeJoystick(cf, (char*)" joystick_RadarZoomOut", joystick_RadarZoomOut);
-    writeJoystick(cf, (char*)" joystick_RadarOnOff", joystick_RadarOnOff);
-    writeJoystick(cf, (char*)" joystick_HudOnOff", joystick_HudOnOff);
-    writeJoystick(cf, (char*)" joystick_IffOnOff", joystick_IffOnOff);
-    writeJoystick(cf, (char*)" joystick_HudLadderBarsOnOff", joystick_HudLadderBarsOnOff);
-    writeJoystick(cf, (char*)" joystick_MapViewOnOff", joystick_MapViewOnOff);
-    writeJoystick(cf, (char*)" joystick_MapZoomCycle", joystick_MapZoomCycle);
-    writeJoystick(cf, (char*)" joystick_MapZoomIn", joystick_MapZoomIn);
-    writeJoystick(cf, (char*)" joystick_MapZoomOut", joystick_MapZoomOut);
-    writeJoystick(cf, (char*)" joystick_MapScrollEast", joystick_MapScrollEast);
-    writeJoystick(cf, (char*)" joystick_MapScrollWest", joystick_MapScrollWest);
-    writeJoystick(cf, (char*)" joystick_MapScrollNorth", joystick_MapScrollNorth);
-    writeJoystick(cf, (char*)" joystick_MapScrollSouth", joystick_MapScrollSouth);
-    writeJoystick(cf, (char*)" joystick_TargetVocalize", joystick_TargetVocalize);
+    writeJoystick(cf.get(), (char*)" joystick_aileron", joystick_aileron);
+    writeJoystick(cf.get(), (char*)" joystick_elevator", joystick_elevator);
+    writeJoystick(cf.get(), (char*)" joystick_throttle", joystick_throttle);
+    writeJoystick(cf.get(), (char*)" joystick_rudder", joystick_rudder);
+    writeJoystick(cf.get(), (char*)" joystick_view_x", joystick_view_x);
+    writeJoystick(cf.get(), (char*)" joystick_view_y", joystick_view_y);
+    writeJoystick(cf.get(), (char*)" joystick_FIREPRIMARY", joystick_FIREPRIMARY);
+    writeJoystick(cf.get(), (char*)" joystick_FIRESECONDARY", joystick_FIRESECONDARY);
+    writeJoystick(cf.get(), (char*)" joystick_DROPFLARE", joystick_DROPFLARE);
+    writeJoystick(cf.get(), (char*)" joystick_DROPCHAFF", joystick_DROPCHAFF);
+    writeJoystick(cf.get(), (char*)" joystick_WEAPONSELECT", joystick_WEAPONSELECT);
+    writeJoystick(cf.get(), (char*)" joystick_ViewZoomCycler", joystick_ViewZoomCycler);
+    writeJoystick(cf.get(), (char*)" joystick_ZoomFovCycle", joystick_ZoomFovCycle);
+    writeJoystick(cf.get(), (char*)" joystick_ZoomFOVin", joystick_ZoomFOVin);
+    writeJoystick(cf.get(), (char*)" joystick_ZoomFOVout", joystick_ZoomFOVout);
+    writeJoystick(cf.get(), (char*)" joystick_TargetCycle", joystick_TargetCycle);
+    writeJoystick(cf.get(), (char*)" joystick_TargetNext", joystick_TargetNext);
+    writeJoystick(cf.get(), (char*)" joystick_TargetPrev", joystick_TargetPrev);
+    writeJoystick(cf.get(), (char*)" joystick_ThrustTripleModifier", joystick_ThrustTripleModifier);
+    writeJoystick(cf.get(), (char*)" joystick_ToggleExtIntView", joystick_ToggleExtIntView);
+    writeJoystick(cf.get(), (char*)" joystick_FlapsUP", joystick_FlapsUP);
+    writeJoystick(cf.get(), (char*)" joystick_FlapsDN", joystick_FlapsDN);
+    writeJoystick(cf.get(), (char*)" joystick_WEPorAfterburner", joystick_WEPorAfterburner);
+    writeJoystick(cf.get(), (char*)" joystick_SpeedBrake", joystick_SpeedBrake);
+    writeJoystick(cf.get(), (char*)" joystick_Undercarriage", joystick_Undercarriage);
+    writeJoystick(cf.get(), (char*)" joystick_TrimRudderLeft", joystick_TrimRudderLeft);
+    writeJoystick(cf.get(), (char*)" joystick_TrimRudderRight", joystick_TrimRudderRight);
+    writeJoystick(cf.get(), (char*)" joystick_TrimElevatorUp", joystick_TrimElevatorUp);
+    writeJoystick(cf.get(), (char*)" joystick_TrimElevatorDn", joystick_TrimElevatorDn);
+    writeJoystick(cf.get(), (char*)" joystick_LookBK", joystick_LookBK);
+    writeJoystick(cf.get(), (char*)" joystick_LookDN", joystick_LookDN);
+    writeJoystick(cf.get(), (char*)" joystick_LookFD", joystick_LookFD);
+    writeJoystick(cf.get(), (char*)" joystick_LookLT", joystick_LookLT);
+    writeJoystick(cf.get(), (char*)" joystick_LookRT", joystick_LookRT);
+    writeJoystick(cf.get(), (char*)" joystick_LookUP", joystick_LookUP);
+    writeJoystick(cf.get(), (char*)" joystick_RadarZoomCycle", joystick_RadarZoomCycle);
+    writeJoystick(cf.get(), (char*)" joystick_RadarZoomIn", joystick_RadarZoomIn);
+    writeJoystick(cf.get(), (char*)" joystick_RadarZoomOut", joystick_RadarZoomOut);
+    writeJoystick(cf.get(), (char*)" joystick_RadarOnOff", joystick_RadarOnOff);
+    writeJoystick(cf.get(), (char*)" joystick_HudOnOff", joystick_HudOnOff);
+    writeJoystick(cf.get(), (char*)" joystick_IffOnOff", joystick_IffOnOff);
+    writeJoystick(cf.get(), (char*)" joystick_HudLadderBarsOnOff", joystick_HudLadderBarsOnOff);
+    writeJoystick(cf.get(), (char*)" joystick_MapViewOnOff", joystick_MapViewOnOff);
+    writeJoystick(cf.get(), (char*)" joystick_MapZoomCycle", joystick_MapZoomCycle);
+    writeJoystick(cf.get(), (char*)" joystick_MapZoomIn", joystick_MapZoomIn);
+    writeJoystick(cf.get(), (char*)" joystick_MapZoomOut", joystick_MapZoomOut);
+    writeJoystick(cf.get(), (char*)" joystick_MapScrollEast", joystick_MapScrollEast);
+    writeJoystick(cf.get(), (char*)" joystick_MapScrollWest", joystick_MapScrollWest);
+    writeJoystick(cf.get(), (char*)" joystick_MapScrollNorth", joystick_MapScrollNorth);
+    writeJoystick(cf.get(), (char*)" joystick_MapScrollSouth", joystick_MapScrollSouth);
+    writeJoystick(cf.get(), (char*)" joystick_TargetVocalize", joystick_TargetVocalize);
     cf->writeText((char*)"\n# This file is meant to give sensible custom interface settings");
     cf->writeText((char*)"\n# To get back to default settings, just delete this file!");
     cf->writeText((char*)"\n# Online help is available at AskMisterWizard.com");
     cf->close();
-    delete cf;
 }
 
 int getKey(char* str, int n) {
@@ -2129,7 +2124,6 @@ int getJoystick(char* str, int n) {
 }
 
 int load_configInterface() {
-
     char buf[STDSIZE];
     char ret[256];
     char* str;
@@ -2138,7 +2132,12 @@ int load_configInterface() {
     const char* confname = name.c_str();
     sprintf(buf, "Loading %s ", confname);
     display(buf, LOG_MOST);
-    ConfigFile* cf = new ConfigFile(confname);
+    std::unique_ptr<ConfigFile> cf = std::make_unique<ConfigFile>(confname);
+
+    if (cf->buf[0] == 0)   // no file found
+    {
+        return 0;
+    }
 
     str = cf->getString(ret, (char*)"key_PRIMARY"); // Get number from file, for key invoking this command.
 
@@ -2769,12 +2768,6 @@ int load_configInterface() {
     joystick_MapScrollSouth = getJoystick(str, 20);
     str = cf->getString(ret, (char*)"joystick_TargetVocalize");
     joystick_TargetVocalize = getJoystick(str, 103);
-    if (cf->buf[0] == 0)   // no file found
-    {
-        delete cf;
-        return 0;
-    }
-    delete cf;
     return 1;
 }
 
