@@ -23,8 +23,7 @@
 
 /* This file includes the main program. */
 
-#ifndef IS_MAIN_H
-#define IS_MAIN_H
+#pragma once
 
 #include <math.h>
 #include <stdio.h>
@@ -142,6 +141,3 @@ extern PilotList* pilots; // other pilots of the Eagle Squad
 extern SoundSystem* sound;
 extern Space* space; // the scene (everything) without the landscape
 extern Star* star[maxstar]; // the stars at night
-
-#endif
-

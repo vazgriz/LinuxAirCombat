@@ -23,8 +23,7 @@
 
 /* This file includes all special effects. */
 
-#ifndef IS_EFFECTS_H
-#define IS_EFFECTS_H
+#pragma once
 
 #include "model.h" // ok
 #include "object.h" // ok
@@ -158,5 +157,3 @@ public:
     void setTexture(CTexture* texture);
     void drawGL(CVector3* tl, CVector3* textl);
 };
-
-#endif

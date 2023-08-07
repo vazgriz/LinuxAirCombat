@@ -23,8 +23,7 @@
 
 /* This file includes all SDL and SDL_mixer audio processing: sound and music */
 
-#ifndef IS_AUDIO_H
-#define IS_AUDIO_H
+#pragma once
 
 #include "common.h" // ok
 
@@ -317,5 +316,3 @@ public:
     void setVolume();
     void setVolumeMusic();
 };
-
-#endif

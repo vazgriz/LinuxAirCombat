@@ -23,8 +23,7 @@
 
 /* This file includes simple objects instancing models. */
 
-#ifndef IS_OBJECT_H
-#define IS_OBJECT_H
+#pragma once
 
 #include "model.h" // ok
 
@@ -81,5 +80,3 @@ public:
     void translate(CVector3* v);
     void drawGL();
 };
-
-#endif

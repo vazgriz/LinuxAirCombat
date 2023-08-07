@@ -23,8 +23,7 @@
 
 /* This file contains all mission data and definitions (really trivial). */
 
-#ifndef IS_MISSION_H
-#define IS_MISSION_H
+#pragma once
 
 #include "model.h" // ok
 #include "aiobject.h" // ok
@@ -512,5 +511,3 @@ public:
 
 extern Mission* mission;
 extern Mission* missionnew;
-
-#endif

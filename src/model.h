@@ -23,8 +23,7 @@
 
 /* This file includes the memory representation of any 3D model. */
 
-#ifndef IS_MODEL_H
-#define IS_MODEL_H
+#pragma once
 
 #include "common.h" // ok
 #include "vertexarray.h" // ok
@@ -277,5 +276,3 @@ public:
     void setSouthPoleColor(CColor* c, float w);
     void setPoleColor(int phi, int theta, CColor* c, float w); // shade color over any pole
 };
-
-#endif

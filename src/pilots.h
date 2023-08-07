@@ -23,8 +23,7 @@
 
 /* This file handles all pilots data. */
 
-#ifndef IS_PILOTS_H
-#define IS_PILOTS_H
+#pragma once
 
 #define SAVEVERSION "LAC01p13"
 
@@ -77,5 +76,3 @@ public:
     void rm();
     void add(char* name);
 };
-
-#endif

@@ -23,8 +23,7 @@
 
 /* This file includes the cockpit rendering methods. */
 
-#ifndef IS_COCKPIT_H
-#define IS_COCKPIT_H
+#pragma once
 
 #include "common.h" // ok
 #include "model.h" // ok
@@ -54,6 +53,3 @@ public:
     void drawRelativeHeightBar();
     void drawThrustBar();
 };
-
-#endif
-

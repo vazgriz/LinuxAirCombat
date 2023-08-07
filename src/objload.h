@@ -23,8 +23,7 @@
 
 /* This file includes a wavefront obj loader. */
 
-#ifndef IS_OBJLOAD_H
-#define IS_OBJLOAD_H
+#pragma once
 
 #define int32 int
 
@@ -63,5 +62,3 @@ private:
     void Normalize(CModel* model);
     void LoadObject(CModel* model);
 };
-
-#endif

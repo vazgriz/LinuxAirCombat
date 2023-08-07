@@ -23,8 +23,7 @@
 
 /* This file includes a random landscape generator. */
 
-#ifndef IS_LAND_H
-#define IS_LAND_H
+#pragma once
 
 // surface extents
 #define MAXX 512
@@ -141,6 +140,3 @@ public:
     Landscape();
     ~Landscape();
 };
-
-#endif
-

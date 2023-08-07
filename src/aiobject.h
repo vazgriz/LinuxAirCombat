@@ -23,8 +23,7 @@
 
 /* This file includes all AI objects instancing models. */
 
-#ifndef IS_AIOBJECT_H
-#define IS_AIOBJECT_H
+#pragma once
 
 #include "common.h" // ok
 #include "model.h" // ok
@@ -377,5 +376,3 @@ public:
     void targetPrevious(AIObj** f);
     void aiAction(Uint32 dt, AIObj** f, AIObj** m, DynamicObj** c, DynamicObj** flare, DynamicObj** chaff); // core AI method
 };
-
-#endif

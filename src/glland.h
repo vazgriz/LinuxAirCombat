@@ -23,8 +23,7 @@
 
 /* This file includes a wrapper for land.cpp to display the landscape. */
 
-#ifndef IS_GLLAND_H
-#define IS_GLLAND_H
+#pragma once
 
 #include <string.h>
 
@@ -170,5 +169,3 @@ public:
 };
 
 extern GLLandscape* l;
-
-#endif

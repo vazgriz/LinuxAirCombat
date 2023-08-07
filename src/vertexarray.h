@@ -23,8 +23,7 @@
 
 /* This file includes a vertex array to emulate OpenGL calls. */
 
-#ifndef IS_VERTEXARRAY_H
-#define IS_VERTEXARRAY_H
+#pragma once
 
 #include "common.h" // ok
 
@@ -76,5 +75,3 @@ public:
     void reallocData();
     void glEnd();
 };
-
-#endif

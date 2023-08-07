@@ -23,8 +23,7 @@
 
 /* This file includes a collection of GL features. */
 
-#ifndef IS_GL_H
-#define IS_GL_H
+#pragma once
 
 #include "common.h" // ok
 #include "model.h" // ok
@@ -76,5 +75,3 @@ public:
 };
 
 extern GL* gl;
-
-#endif

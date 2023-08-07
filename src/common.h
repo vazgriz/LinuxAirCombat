@@ -21,8 +21,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef IS_COMMON_H
-#define IS_COMMON_H
+#pragma once
 
 // #define RASPBIAN // Raspberry Pi requires a few tweaks. Define RASPBIAN to activate them or comment this line out.
 // #define STEAMDECK // Valve "Steam Deck" requies a few tweaks. Define STEAMDECK to activate them or comment this line out.
@@ -224,5 +223,3 @@ const int timestep = 34; // (higher values mean slower gameplay)
 #define EXIT_COMMAND 3
 #define EXIT_ALLOC 4
 #define EXIT_CONTEXT 5
-
-#endif

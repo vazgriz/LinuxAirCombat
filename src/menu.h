@@ -23,8 +23,7 @@
 
 /* This file includes a very general GUI. */
 
-#ifndef IS_MENU_H
-#define IS_MENU_H
+#pragma once
 
 #include "model.h" // ok
 
@@ -159,5 +158,3 @@ public:
     void triggerMouse(int id, int button);
     void eventKey(unsigned char key);
 };
-
-#endif

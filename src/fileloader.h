@@ -23,8 +23,7 @@
 
 // This is a low level library to split text files into tokens.
 
-#ifndef IS_FILELOADER_H
-#define IS_FILELOADER_H
+#pragma once
 
 /**************************************************************************
   This is a low level library to split text files into tokens.
@@ -153,5 +152,3 @@ extern int file_find(char* string);
 **************************************************************************/
 extern int file_nextToken(char* token, int tokenlen);
 extern int file_nextChar();
-
-#endif

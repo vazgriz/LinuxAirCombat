@@ -23,8 +23,7 @@
 
 /* This file contains all configuration parsing code. */
 
-#ifndef IS_CONF_H
-#define IS_CONF_H
+#pragma once
 
 // interface definitions
 extern unsigned int key_firecannon, key_firemissile, key_dropchaff, key_dropflare;
@@ -71,5 +70,3 @@ extern int load_config();
 extern int load_saveconfig();
 extern void save_configInterface();
 extern int load_configInterface();
-
-#endif

@@ -21,10 +21,6 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef LOADER_TGA_H
-#define LOADER_TGA_H
+#pragma once
 
 extern unsigned char* tga_load(const char* im_file, int* im_w, int* im_h);
-
-#endif
-
