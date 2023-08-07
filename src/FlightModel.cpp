@@ -100,7 +100,7 @@ extern void setPlaneVolume();
 // AileronSettings()
 //
 void AileronSettings(int x, int y) {
-    float TorqueOffset;
+    float TorqueOffset = 0;
     float SpeedEffect;
     float FinalTorqueOffset;
     float aileron = x / 32768.0;
@@ -732,12 +732,14 @@ void TestAltitudeAirDensity() {
         LowAltitudeDragFactor = 1.1;
         DragDissipationAsAltitudeIncreases = 0.130;
         fplayer->AirDensityDrag = LowAltitudeDragFactor - ((fplayer->tl->y / MAXALTITUDE) * DragDissipationAsAltitudeIncreases);
+        break;
     }
     case FIGHTER_YAK9:
     {
         LowAltitudeDragFactor = 1.1;
         DragDissipationAsAltitudeIncreases = 0.137;
         fplayer->AirDensityDrag = LowAltitudeDragFactor - ((fplayer->tl->y / MAXALTITUDE) * DragDissipationAsAltitudeIncreases);
+        break;
     }
     default:
     {
@@ -1130,6 +1132,7 @@ void ThrottleSettings(int throttleinput) {
             case FIGHTER_ME163:
             {
                 fplayer->FuelLevel += 5.0 * ((float)ThrottleReference / 100000000.0);
+                break;
             }
             default:
             {
