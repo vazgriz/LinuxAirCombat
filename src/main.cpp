@@ -353,11 +353,10 @@ char SystemMessageBufferA[64] = "_______________________________________________
 char TargetVocalize1State = 0;
 char TargetVocalize2State = 0;
 
-std::string FileSystemHomeDir = sago::getDataHome();
-std::string FileSystemDefaultHeightMapFileName = "/.LAC/DefaultHeightMap.LAC";
-std::string FileSystemGunCamHistoryFileName = "/.LAC/GunCamHistory.LAC";
-std::string FileSystemLastTerrainFileName = "/.LAC/LastTerrain.LAC";
-std::string FileSystemOnlineLineScoreLogFileName = "/.LAC/OnlineScoreLog.LAC";
+std::string FileSystemDefaultHeightMapFileName = "DefaultHeightMap.LAC";
+std::string FileSystemGunCamHistoryFileName = "GunCamHistory.LAC";
+std::string FileSystemLastTerrainFileName = "LastTerrain.LAC";
+std::string FileSystemOnlineLineScoreLogFileName = "OnlineScoreLog.LAC";
 std::string FileSystemDefaultHeightMapFilePath;
 std::string FileSystemGunCamHistoryFilePath;
 std::string FileSystemLastTerrainFilePath;
@@ -1115,17 +1114,17 @@ int main2(int argc, char** argv) {
     display(DebugBuf, LOG_MOST);
     display((char*)DebugBuf, LOG_MOST);
 
-    FileSystemLastTerrainFilePath = FileSystemHomeDir = FileSystemLastTerrainFileName;
+    FileSystemLastTerrainFilePath = dirs->getSaves(FileSystemLastTerrainFileName);
     display((char*)"GLLandscape::GLLandscape() path to LastTerrain.LAC file =", LOG_MOST);
     display(FileSystemLastTerrainFilePath.c_str(), LOG_MOST);
 
-    FileSystemDefaultHeightMapFilePath = FileSystemHomeDir + FileSystemDefaultHeightMapFileName;
+    FileSystemDefaultHeightMapFilePath = dirs->getSaves(FileSystemDefaultHeightMapFileName);
 
-    FileSystemOnlineScoreLogFilePath = FileSystemHomeDir + FileSystemOnlineLineScoreLogFileName;
+    FileSystemOnlineScoreLogFilePath = dirs->getSaves(FileSystemOnlineLineScoreLogFileName);
     display((char*)"GLLandscape::GLLandscape() path to OnlineScoreLog.LAC file =", LOG_MOST);
     display(FileSystemOnlineScoreLogFilePath.c_str(), LOG_MOST);
 
-    FileSystemGunCamHistoryFilePath = FileSystemHomeDir + FileSystemGunCamHistoryFileName;
+    FileSystemGunCamHistoryFilePath = dirs->getSaves(FileSystemGunCamHistoryFileName);
     display((char*)"GLLandscape::GLLandscape() path to GunCamHistory.LAC file =", LOG_MOST);
     display(FileSystemGunCamHistoryFilePath.c_str(), LOG_MOST);
 
@@ -13787,9 +13786,9 @@ void sdlMainLoop() {
             case SDL_KEYDOWN:
             {
                 //if (!event.key.keysym.unicode) {
-                    LacSpecialFunc(event.key.keysym.sym, 0, 0);
+                    //LacSpecialFunc(event.key.keysym.sym, 0, 0);
                 //} else {
-                //    LacKeyboardFunc(event.key.keysym.sym, 0, 0);
+                    LacKeyboardFunc(event.key.keysym.sym, 0, 0);
                 //}
                 break;
             }

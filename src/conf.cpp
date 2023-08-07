@@ -377,38 +377,8 @@ ConfigFile::ConfigFile(const char* fname) {
         save_config();
         save_configInterface();
 
-        SourceHeightMap = fopen("/usr/local/bin/LAC/LacSim/music/DefaultHeightMap.LAC", "rb");
-        if (SourceHeightMap != NULL) {
-            display((char*)"Succesfully located backup copy of DefaultHeightMap.LAC.", LOG_MOST);
-            DefaultHeightMapFileIsMissing = false;
-            DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath.c_str(), "wb");
-            if (DestHeightMap != NULL) {
-                display((char*)"Succesfully created blank new DefaultHeightMap.LAC.", LOG_MOST);
-                display((char*)"Try running LAC again now....", LOG_MOST);
-
-                do {
-                    SourceCount = fread(FileReadBuffer, 1, sizeof FileReadBuffer, SourceHeightMap);
-                    if (SourceCount) {
-
-                        DestCount = fwrite(FileReadBuffer, 1, SourceCount, DestHeightMap);
-                    } else {
-                        DestCount = 0;
-                    }
-                }
-                while ((SourceCount > 0) && (SourceCount == DestCount));
-                if (DestCount) {
-                    display((char*)"Copied the DefaultHeightMap.LAC file.", LOG_MOST);
-                }
-            } else {
-                display((char*)"ConfigFile::ConfigFile(): TROUBLE. Unable to write to ~home/.LAC/DefaultHeightMap.LAC file.", LOG_MOST);
-            }
-        } else {
-            DefaultHeightMapFileIsMissing = true;
-        }
-
         if (DefaultHeightMapFileIsMissing) {
-
-            SourceHeightMap = fopen("DefaultHeightMap.LAC", "rb");
+            SourceHeightMap = fopen(dirs->getData("DefaultHeightMap.LAC").c_str(), "rb");
             if (SourceHeightMap != NULL) {
                 display((char*)"Succesfully located DefaultHeightMap.LAC from current directory.", LOG_MOST);
                 display((char*)"   NOTE THAT LAC DOES NOT LIKE TO RUN FROM THE SAME FOLDER CONTAINING ITS SOURCE CODE.", LOG_MOST);
@@ -440,37 +410,6 @@ ConfigFile::ConfigFile(const char* fname) {
             }
         }
 
-        if (DefaultHeightMapFileIsMissing) {
-
-            SourceHeightMap = fopen("../../DefaultHeightMap.LAC", "rb");
-            if (SourceHeightMap != NULL) {
-                display((char*)"Succesfully located DefaultHeightMap.LAC from two directories higher up in the filesystem.", LOG_MOST);
-                DefaultHeightMapFileIsMissing = false;
-                DestHeightMap = fopen(FileSystemDefaultHeightMapFilePath.c_str(), "wb");
-                if (DestHeightMap != NULL) {
-                    display((char*)"Succesfully created blank new DefaultHeightMap.LAC.", LOG_MOST);
-                    display((char*)"Try running LAC again now....", LOG_MOST);
-
-                    do {
-                        SourceCount = fread(FileReadBuffer, 1, sizeof FileReadBuffer, SourceHeightMap);
-                        if (SourceCount) {
-
-                            DestCount = fwrite(FileReadBuffer, 1, SourceCount, DestHeightMap);
-                        } else {
-                            DestCount = 0;
-                        }
-                    }
-                    while ((SourceCount > 0) && (SourceCount == DestCount));
-                    if (DestCount) {
-                        display((char*)"Copied the DefaultHeightMap.LAC file.", LOG_MOST);
-                    }
-                } else {
-                    display((char*)"ConfigFile::ConfigFile(): TROUBLE. Unable to write to ~home/.LAC/DefaultHeightMap.LAC file.", LOG_MOST);
-                }
-            } else {
-                DefaultHeightMapFileIsMissing = true;
-            }
-        }
         if (DefaultHeightMapFileIsMissing) {
             display((char*)"Could not locate backup copy of DefaultHeightMap.LAC. LAC will run without that", LOG_MOST);
             display((char*)"file, but terrain features will be randomly relocated and will not match expected layouts.", LOG_MOST);
@@ -636,7 +575,8 @@ void ConfigFile::close() {
 void save_config() {
     char buf[STDSIZE];
     ConfigFile* cf = new ConfigFile();
-    const char* confname = dirs->getSaves((char*)"LacConfig.txt").c_str();
+    std::string path = dirs->getSaves("LacConfig.txt");
+    const char* confname = path.c_str();
     sprintf(buf, "Saving %s ", confname);
     display(buf, LOG_MOST);
     int ret1 = cf->openOutput(confname);
@@ -1868,7 +1808,7 @@ int load_saveconfig() {
     char buf[STDSIZE];
     char ret[256];
     char* str;
-    auto name = dirs->getSaves("saveconf");
+    auto name = dirs->getSaves("LacConfig.txt");
     const char* confname = name.c_str();
     sprintf(buf, "Loading %s ", confname);
     display(buf, LOG_MOST);

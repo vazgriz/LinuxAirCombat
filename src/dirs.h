@@ -29,7 +29,7 @@
 
 class Dirs {
 public:
-    std::string dir;
+    std::string data;
     std::string saves;
     std::string textures;
     std::string music;
@@ -38,6 +38,7 @@ public:
     std::string maps;
 
     Dirs();
+    std::string getData(const std::string& name) const;
     std::string getSaves(const std::string& name) const; // get dir name containing the saves, ...
     std::string getTextures(const std::string& name) const;
     std::string getSounds(const std::string& name) const;
