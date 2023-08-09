@@ -10079,13 +10079,7 @@ void game_view() {
 }
 
 int getJoystickAxisIndex(int n) {
-    int idx = (n / 1000) * 10 + (n % 1000);
-    if (idx < 0) {
-        idx = 0;
-    }
-    if (idx >= maxjaxis) {
-        idx = 0;
-    }
+    int idx = n + (joystick_index * 10);
     return idx;
 }
 

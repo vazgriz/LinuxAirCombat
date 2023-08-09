@@ -52,6 +52,7 @@ int dithering = 0;
 int dynamiclighting = 0;
 int fullscreen = 0;
 int mouse_autorudder = 30;
+int joystick_index;
 
 #ifdef STEAMDECK
 int NetworkMode = 179; // For Steam Deck, default is 179.
@@ -1228,6 +1229,12 @@ int load_config() {
         controls = 0;
     } else if (controls > 2) {
         controls = 0;
+    }
+    str = cf->getString(ret, "joystick_index");
+    if (str == NULL) {
+        joystick_index = 0;
+    } else {
+        joystick_index = atoi(str);
     }
     str = cf->getString(ret, (char*)"difficulty");
     if (str == NULL) {

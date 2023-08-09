@@ -30,6 +30,7 @@ extern unsigned int key_firecannon, key_firemissile, key_dropchaff, key_dropflar
 extern unsigned int key_selectmissile, key_thrustup, key_thrustdown;
 extern unsigned int key_targetnearest, key_targetnext, key_targetprevious, key_targetlocking;
 
+extern int joystick_index;
 extern int joystick_firecannon, joystick_firemissile, joystick_dropchaff, joystick_dropflare;
 extern int joystick_selectmissile, joystick_thrustup, joystick_thrustdown;
 extern int joystick_ZoomFOVin, joystick_ZoomFOVout, joystick_targetnext, joystick_targetprevious, joystick_targetlocking, joystick_ToggleExtIntView;
