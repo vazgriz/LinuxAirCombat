@@ -82,6 +82,7 @@ set_property(TARGET LinuxAirCombat PROPERTY CXX_STANDARD 20)
 target_include_directories(LinuxAirCombat PUBLIC Engine/include)
 target_link_libraries(LinuxAirCombat ModelLoader3DS Common)
 set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR}/LAC)
+set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/LAC)
 
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
