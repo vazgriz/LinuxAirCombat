@@ -14,14 +14,18 @@ set(SDL_mixer_bin)
 set(SDL_mixer_bin_dll)
 
 set(LAC_include "src")
+set(LAC_Engine_include "${CMAKE_CURRENT_LIST_DIR}/Engine/include/")
+set(LAC_Engine_include_all ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include} ${LAC_Engine_include})
+set(LAC_Engine_bin_all ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})
 
 add_subdirectory("Engine")
+add_subdirectory("Testing")
 
 add_library(Common
     "src/common.cpp"
 )
-target_include_directories(Common PUBLIC ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include} Engine/include)
-target_link_libraries(Common Engine ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})
+target_include_directories(Common PUBLIC ${LAC_Engine_include_all})
+target_link_libraries(Common Engine ${LAC_Engine_bin_all})
 set_property(TARGET Common PROPERTY CXX_STANDARD 20)
 
 add_library(ModelLoader3DS
