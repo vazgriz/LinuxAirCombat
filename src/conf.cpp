@@ -691,6 +691,7 @@ void save_config() {
     cf->writeText((char*)"# don't have a joystick you can try using a mouse pointer instead, by entering 1 below:");
     cf->writeText((char*)"");
     cf->write((char*)" controls", controls);
+    cf->write((char*)" joystick_index", joystick_index);
     cf->writeText((char*)"");
     cf->writeText((char*)"# Difficulty level (Realism): 2, 3, or 4. Higher numbers = greater realism.");
     cf->writeText((char*)"");
