@@ -3,7 +3,9 @@
 #include <stdexcept>
 #include <format>
 
-LACEngine::Window::Window(const std::string& title, int32_t width, int32_t height, bool fullscreen) {
+using namespace LACEngine;
+
+Window::Window(const std::string& title, int32_t width, int32_t height, bool fullscreen) {
     uint32_t video_flags;
     if (fullscreen) {
         video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN;
@@ -30,31 +32,35 @@ LACEngine::Window::Window(const std::string& title, int32_t width, int32_t heigh
     }
 }
 
-SDL_Window* LACEngine::Window::GetWindow() const {
+SDL_Window* Window::GetWindow() const {
     return m_window;
 }
 
-void LACEngine::Window::MakeCurrent() {
+void Window::MakeCurrent() {
     if (SDL_GL_MakeCurrent(m_window, m_context) != 0) {
         throw std::runtime_error(std::format("Error making OpenGL context current: {}", SDL_GetError()));
     }
 }
 
-void LACEngine::Window::SwapBuffers() {
+void Window::SwapBuffers() {
     SDL_GL_SwapWindow(m_window);
 }
 
-void LACEngine::Window::SetResizeable(bool value) {
+void Window::SetSwapInterval(int32_t value) {
+    SDL_GL_SetSwapInterval(value);
+}
+
+void Window::SetResizeable(bool value) {
     SDL_SetWindowResizable(m_window, (SDL_bool)value);
 }
 
-int32_t LACEngine::Window::GetWidth() const {
+int32_t Window::GetWidth() const {
     int width;
     SDL_GetWindowSize(m_window, &width, nullptr);
     return width;
 }
 
-int32_t LACEngine::Window::GetHeight() const {
+int32_t Window::GetHeight() const {
     int height;
     SDL_GetWindowSize(m_window, &height, nullptr);
     return height;

@@ -16,9 +16,10 @@ int main() {
     }
 
     std::unique_ptr<LACEngine::Window> window = std::make_unique<LACEngine::Window>("Model Viewer", 1280, 720, false);
-    window->MakeCurrent();
 
+    window->MakeCurrent();
     window->SetResizeable(true);
+    window->SetSwapInterval(1);
 
     if (gladLoadGLLoader(&SDL_GL_GetProcAddress) == 0) {
         std::cout << "Error: Failed to load OpenGL functions\n";
@@ -44,20 +45,28 @@ int main() {
     backend.LoadMesh(mesh);
 
     SDL_Event event;
+    bool shouldExit = false;
 
     while (true) {
-        SDL_WaitEvent(&event);
-        if (event.type == SDL_QUIT) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                shouldExit = true;
+            }
+
+            if (event.type == SDL_WINDOWEVENT) {
+                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                    int32_t width = window->GetWidth();
+                    int32_t height = window->GetHeight();
+                    backend.SetWindowSize(window->GetWidth(), window->GetHeight());
+                }
+            }
+        }
+
+        if (shouldExit) {
             break;
         }
 
-        if (event.type == SDL_WINDOWEVENT) {
-            if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-                int32_t width = window->GetWidth();
-                int32_t height = window->GetHeight();
-                backend.SetWindowSize(window->GetWidth(), window->GetHeight());
-            }
-        }
+        window->SwapBuffers();
     }
 
     SDL_Quit();

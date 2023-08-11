@@ -12,6 +12,8 @@ public:
     void MakeCurrent();
     void SwapBuffers();
 
+    void SetSwapInterval(int32_t value);
+
     void SetResizeable(bool value);
 
     int32_t GetWidth() const;
