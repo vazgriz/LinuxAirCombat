@@ -12,7 +12,7 @@ conan_basic_setup()
 set(LAC_include "src")
 set(LAC_Engine_include "${CMAKE_CURRENT_LIST_DIR}/Engine/include/")
 set(LAC_Engine_include_all ${LAC_include} ${LAC_Engine_include} ${CONAN_INCLUDE_DIRS})
-set(LAC_Engine_bin_all ${CONAN_LIBS})
+set(LAC_Engine_bin_all Engine ${CONAN_LIBS})
 
 add_subdirectory("Engine")
 add_subdirectory("Testing")
@@ -21,7 +21,7 @@ add_library(Common
     "src/common.cpp"
 )
 target_include_directories(Common PUBLIC ${LAC_Engine_include_all})
-target_link_libraries(Common Engine ${LAC_Engine_bin_all})
+target_link_libraries(Common ${LAC_Engine_bin_all})
 set_property(TARGET Common PROPERTY CXX_STANDARD 20)
 
 add_library(ModelLoader3DS
@@ -79,7 +79,7 @@ add_executable(LinuxAirCombat
     "src/vertexarray.h"
 )
 set_property(TARGET LinuxAirCombat PROPERTY CXX_STANDARD 20)
-target_include_directories(LinuxAirCombat PUBLIC Engine/include)
+target_include_directories(LinuxAirCombat PUBLIC ${LAC_Engine_include})
 target_link_libraries(LinuxAirCombat ModelLoader3DS Common)
 set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR}/LAC)
 set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/LAC)
