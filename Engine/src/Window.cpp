@@ -14,7 +14,7 @@ Window::Window(const std::string& title, int32_t width, int32_t height, bool ful
     }
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -65,6 +65,6 @@ int32_t Window::GetWidth() const {
 
 int32_t Window::GetHeight() const {
     int height;
-    SDL_GetWindowSize(m_window, &height, nullptr);
+    SDL_GetWindowSize(m_window, nullptr, &height);
     return height;
 }

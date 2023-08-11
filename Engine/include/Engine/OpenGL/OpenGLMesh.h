@@ -4,7 +4,15 @@
 
 namespace LACEngine {
 
-struct OpenGLMesh {
+class OpenGLMesh {
+public:
+    OpenGLMesh();
+    ~OpenGLMesh();
+
+    OpenGLMesh(OpenGLMesh&& other) noexcept;
+
+    void Bind();
+
     std::vector<uint32_t> vertexIDs;
     uint32_t vertexArrayObject;
 };

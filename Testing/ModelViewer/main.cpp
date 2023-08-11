@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <fstream>
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -8,6 +9,22 @@
 #include <Engine/Window.h>
 #include <Engine/OpenGLBackend.h>
 #include <Engine/Mesh.h>
+#include <Engine/OpenGL/OpenGLShader.h>
+#include <Engine/OpenGL/OpenGLProgram.h>
+
+LACEngine::OpenGLShader LoadShader(const std::string& path, uint32_t shaderType) {
+    LACEngine::OpenGLShader shader(shaderType);
+
+    std::ifstream file(path, std::ios::binary | std::ios::ate);
+    std::vector<char> buffer;
+    buffer.resize(file.tellg());
+    file.seekg(0);
+    file.read(buffer.data(), buffer.size());
+
+    shader.LoadSource(buffer.size(), buffer.data());
+
+    return shader;
+}
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -44,6 +61,17 @@ int main() {
 
     backend.LoadMesh(mesh);
 
+    LACEngine::OpenGLProgram program;
+
+    {
+        LACEngine::OpenGLShader vertexShader = LoadShader("data/shaders/test.vertex", GL_VERTEX_SHADER);
+        LACEngine::OpenGLShader fragmentShader = LoadShader("data/shaders/test.fragment", GL_FRAGMENT_SHADER);
+
+        program.AttachShader(vertexShader);
+        program.AttachShader(fragmentShader);
+        program.Link();
+    }
+
     SDL_Event event;
     bool shouldExit = false;
 
@@ -65,6 +93,10 @@ int main() {
         if (shouldExit) {
             break;
         }
+
+        program.Use();
+        static_cast<LACEngine::OpenGLMesh*>(mesh.GetRenderData())->Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         window->SwapBuffers();
     }
