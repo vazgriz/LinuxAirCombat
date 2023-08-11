@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <glad/glad.h>
+
 #define SDL_MAIN_HANDLED
 #include <Engine/Window.h>
 
@@ -10,6 +12,12 @@ int main() {
     }
 
     std::unique_ptr<LACEngine::Window> window = std::make_unique<LACEngine::Window>("Model Viewer", 1280, 720, false);
+    window->MakeCurrent();
+
+    if (gladLoadGLLoader(&SDL_GL_GetProcAddress) == 0) {
+        std::cout << "Error: Failed to load OpenGL functions\n";
+        return EXIT_FAILURE;
+    }
 
     SDL_Event event;
 
