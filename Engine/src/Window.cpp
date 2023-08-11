@@ -43,3 +43,19 @@ void LACEngine::Window::MakeCurrent() {
 void LACEngine::Window::SwapBuffers() {
     SDL_GL_SwapWindow(m_window);
 }
+
+void LACEngine::Window::SetResizeable(bool value) {
+    SDL_SetWindowResizable(m_window, (SDL_bool)value);
+}
+
+int32_t LACEngine::Window::GetWidth() const {
+    int width;
+    SDL_GetWindowSize(m_window, &width, nullptr);
+    return width;
+}
+
+int32_t LACEngine::Window::GetHeight() const {
+    int height;
+    SDL_GetWindowSize(m_window, &height, nullptr);
+    return height;
+}

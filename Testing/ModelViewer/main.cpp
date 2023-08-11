@@ -4,6 +4,7 @@
 
 #define SDL_MAIN_HANDLED
 #include <Engine/Window.h>
+#include <Engine/OpenGLBackend.h>
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -14,10 +15,15 @@ int main() {
     std::unique_ptr<LACEngine::Window> window = std::make_unique<LACEngine::Window>("Model Viewer", 1280, 720, false);
     window->MakeCurrent();
 
+    window->SetResizeable(true);
+
     if (gladLoadGLLoader(&SDL_GL_GetProcAddress) == 0) {
         std::cout << "Error: Failed to load OpenGL functions\n";
         return EXIT_FAILURE;
     }
+
+    LACEngine::OpenGLBackend backend;
+    backend.SetWindowSize(window->GetWidth(), window->GetHeight());
 
     SDL_Event event;
 
@@ -25,6 +31,14 @@ int main() {
         SDL_WaitEvent(&event);
         if (event.type == SDL_QUIT) {
             break;
+        }
+
+        if (event.type == SDL_WINDOWEVENT) {
+            if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                int32_t width = window->GetWidth();
+                int32_t height = window->GetHeight();
+                backend.SetWindowSize(window->GetWidth(), window->GetHeight());
+            }
         }
     }
 

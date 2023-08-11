@@ -12,6 +12,11 @@ public:
     void MakeCurrent();
     void SwapBuffers();
 
+    void SetResizeable(bool value);
+
+    int32_t GetWidth() const;
+    int32_t GetHeight() const;
+
 private:
     SDL_Window* m_window;
     SDL_GLContext m_context;

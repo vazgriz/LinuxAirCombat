@@ -16,6 +16,8 @@ add_library(Engine
     "src/Mesh.cpp"
     "src/Model.cpp"
     "src/Material.cpp"
+    "src/RenderBackend.cpp"
+    "src/OpenGLBackend.cpp"
 )
 target_include_directories(Engine PUBLIC ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include} "include")
 target_link_libraries(Engine ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})
