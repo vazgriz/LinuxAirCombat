@@ -36,9 +36,9 @@
 #include <limits.h>
 #include <GL/glut.h>
 #define SDL_MAIN_HANDLED
-#include "SDL/SDL.h"
-#include "SDL/SDL_thread.h"
-#include "SDL/SDL_mixer.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_thread.h"
+#include "SDL2/SDL_mixer.h"
 
 #include "mathtab.h"
 

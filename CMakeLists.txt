@@ -2,21 +2,17 @@ cmake_minimum_required(VERSION 3.19)
 
 project(LinuxAirCombat)
 
-set(GLUT_include)
-set(GLUT_bin)
-set(GL_include)
-set(GL_bin)
-set(SDL_include)
-set(SDL_bin)
-set(SDL_bin_dll)
-set(SDL_mixer_include)
-set(SDL_mixer_bin)
-set(SDL_mixer_bin_dll)
+conan_cmake_run(CONANFILE conanfile.txt
+                BASIC_SETUP CMAKE_TARGETS
+                BUILD missing)
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 set(LAC_include "src")
 set(LAC_Engine_include "${CMAKE_CURRENT_LIST_DIR}/Engine/include/")
-set(LAC_Engine_include_all ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include} ${LAC_Engine_include})
-set(LAC_Engine_bin_all ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})
+set(LAC_Engine_include_all ${LAC_include} ${LAC_Engine_include} ${CONAN_INCLUDE_DIRS})
+set(LAC_Engine_bin_all ${CONAN_LIBS})
 
 add_subdirectory("Engine")
 add_subdirectory("Testing")
@@ -88,18 +84,6 @@ target_link_libraries(LinuxAirCombat ModelLoader3DS Common)
 set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR}/LAC)
 set_target_properties(LinuxAirCombat PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/LAC)
 
-add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${SDL_bin_dll}
-        ${CMAKE_CURRENT_BINARY_DIR}/LAC/SDL2.dll
-)
-add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${SDL_mixer_bin_dll}
-        ${CMAKE_CURRENT_BINARY_DIR}/LAC/SDL2_mixer.dll
-)
 add_custom_target(CopyAssets
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/LAC/data
 )
