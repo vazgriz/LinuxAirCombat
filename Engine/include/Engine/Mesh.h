@@ -21,8 +21,15 @@ class VertexData {
 public:
     VertexData(MeshData meshDataType, VertexFormat vertexFormat);
 
+    MeshData GetMeshDataType() const;
+    VertexFormat GetVertexFormat() const;
+
     bool IsLocalDataLoaded();
     void LoadLocalData(size_t size, void* data);
+
+    const void* GetLocalData() const;
+    size_t GetLocalDataSize() const;
+
 private:
     MeshData m_meshDataType;
     VertexFormat m_vertexFormat;
@@ -31,10 +38,19 @@ private:
 
 class Mesh {
 public:
+    Mesh();
+
     void AddVertexData(const std::shared_ptr<VertexData>& vertexData);
 
+    void* GetRenderData() const;
+    void SetRenderData(void* data);
+
+    size_t GetVertexDataCount() const;
+    const VertexData& GetVertexData(size_t i) const;
+
 private:
-    std::vector< std::shared_ptr<VertexData>> m_vertexData;
+    void* m_renderData;
+    std::vector<std::shared_ptr<VertexData>> m_vertexData;
 };
 
 }

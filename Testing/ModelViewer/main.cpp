@@ -1,6 +1,8 @@
 #include <iostream>
+#include <memory>
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 #define SDL_MAIN_HANDLED
 #include <Engine/Window.h>
@@ -28,8 +30,18 @@ int main() {
 
     std::shared_ptr<LACEngine::VertexData> vertexData = std::make_shared<LACEngine::VertexData>(LACEngine::MeshData::Position, LACEngine::VertexFormat::Float32_Vec3);
 
+    glm::vec3 vertexDataRaw[] = {
+        glm::vec3(0, 0, 0),
+        glm::vec3(0, 1, 0),
+        glm::vec3(1, 0, 0)
+    };
+
+    vertexData->LoadLocalData(sizeof(vertexDataRaw), &vertexDataRaw);
+
     LACEngine::Mesh mesh;
     mesh.AddVertexData(vertexData);
+
+    backend.LoadMesh(mesh);
 
     SDL_Event event;
 

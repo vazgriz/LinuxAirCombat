@@ -3,6 +3,7 @@ freeglut/3.4.0
 sdl/2.26.5
 sdl_mixer/2.0.4
 glad/0.1.36
+glm/cci.20230113
 
 [generators]
 cmake
