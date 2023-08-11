@@ -11,6 +11,7 @@ public:
     ~OpenGLBackend();
 
     void SetWindowSize(int32_t width, int32_t height);
+    void loadMesh(const Mesh& mesh);
 };
 
 }

@@ -5,6 +5,7 @@
 #define SDL_MAIN_HANDLED
 #include <Engine/Window.h>
 #include <Engine/OpenGLBackend.h>
+#include <Engine/Mesh.h>
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -24,6 +25,11 @@ int main() {
 
     LACEngine::OpenGLBackend backend;
     backend.SetWindowSize(window->GetWidth(), window->GetHeight());
+
+    std::shared_ptr<LACEngine::VertexData> vertexData = std::make_shared<LACEngine::VertexData>(LACEngine::MeshData::Position, LACEngine::VertexFormat::Float32_Vec3);
+
+    LACEngine::Mesh mesh;
+    mesh.AddVertexData(vertexData);
 
     SDL_Event event;
 

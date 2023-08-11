@@ -15,3 +15,7 @@ OpenGLBackend::~OpenGLBackend() {
 void OpenGLBackend::SetWindowSize(int32_t width, int32_t height) {
     glViewport(0, 0, width, height);
 }
+
+void OpenGLBackend::loadMesh(const Mesh& mesh) {
+
+}

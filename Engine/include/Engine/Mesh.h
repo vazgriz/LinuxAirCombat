@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 
 namespace LACEngine {
 enum class MeshData {
@@ -19,15 +20,21 @@ enum class VertexFormat {
 class VertexData {
 public:
     VertexData(MeshData meshDataType, VertexFormat vertexFormat);
+
+    bool IsLocalDataLoaded();
+    void LoadLocalData(size_t size, void* data);
 private:
     MeshData m_meshDataType;
     VertexFormat m_vertexFormat;
-    void* m_LocalData;
+    std::vector<char> m_localData;  //stored CPU data
 };
 
 class Mesh {
+public:
+    void AddVertexData(const std::shared_ptr<VertexData>& vertexData);
+
 private:
-    std::vector<VertexData> m_vertexData;
+    std::vector< std::shared_ptr<VertexData>> m_vertexData;
 };
 
 }
