@@ -3,6 +3,8 @@
 #include <memory>
 
 namespace LACEngine {
+class RenderBackend;
+
 enum class MeshData {
     Position,
     Normal,
@@ -39,6 +41,9 @@ private:
 class Mesh {
 public:
     Mesh();
+    ~Mesh();
+
+    void SetRenderBackend(RenderBackend* renderBackend);
 
     void AddVertexData(const std::shared_ptr<VertexData>& vertexData);
 
@@ -49,6 +54,7 @@ public:
     const VertexData& GetVertexData(size_t i) const;
 
 private:
+    RenderBackend* m_renderBackend;
     void* m_renderData;
     std::vector<std::shared_ptr<VertexData>> m_vertexData;
 };

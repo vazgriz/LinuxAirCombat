@@ -2,6 +2,8 @@
 
 #include <stdexcept>
 
+#include "Engine/RenderBackend.h"
+
 using namespace LACEngine;
 
 VertexData::VertexData(MeshData meshDataType, VertexFormat vertexFormat) {
@@ -34,8 +36,18 @@ size_t VertexData::GetLocalDataSize() const {
     return m_localData.size();
 }
 
-Mesh::Mesh() : m_renderData(nullptr) {
+Mesh::Mesh() : m_renderBackend(nullptr), m_renderData(nullptr) {
 
+}
+
+Mesh::~Mesh() {
+    if (m_renderBackend != nullptr && m_renderData != nullptr) {
+        m_renderBackend->UnloadMesh(*this);
+    }
+}
+
+void Mesh::SetRenderBackend(RenderBackend* renderBackend) {
+    m_renderBackend = renderBackend;
 }
 
 void* Mesh::GetRenderData() const {

@@ -48,4 +48,13 @@ void OpenGLBackend::LoadMesh(Mesh& mesh) {
     mesh.SetRenderData(meshData.get());
 
     m_meshes.emplace_back(std::move(meshData));
+
+    mesh.SetRenderBackend(this);
+}
+
+void OpenGLBackend::UnloadMesh(Mesh& mesh) {
+    OpenGLMesh& meshData = *static_cast<OpenGLMesh*>(mesh.GetRenderData());
+
+    glDeleteBuffers(static_cast<int32_t>(meshData.vertexIDs.size()), meshData.vertexIDs.data());
+    glDeleteVertexArrays(1, &meshData.vertexArrayObject);
 }

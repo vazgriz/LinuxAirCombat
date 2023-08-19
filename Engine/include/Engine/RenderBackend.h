@@ -12,7 +12,8 @@ public:
 
     virtual void SetWindowSize(int32_t width, int32_t height) = 0;
 
-    virtual void LoadMesh(const Mesh& mesh) = 0;
+    virtual void LoadMesh(Mesh& mesh) = 0;
+    virtual void UnloadMesh(Mesh& mesh) = 0;
 };
 
 }
