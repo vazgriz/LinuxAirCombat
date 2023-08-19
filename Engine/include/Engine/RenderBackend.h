@@ -2,6 +2,7 @@
 #include <stdint.h>
 
 #include "Engine/Mesh.h"
+#include "Engine/Texture.h"
 
 namespace LACEngine {
 
@@ -14,6 +15,9 @@ public:
 
     virtual void LoadMesh(Mesh& mesh) = 0;
     virtual void UnloadMesh(Mesh& mesh) = 0;
+
+    virtual void LoadTexture(Texture& texture) = 0;
+    virtual void UnloadTexture(Texture& texture) = 0;
 };
 
 }
