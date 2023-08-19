@@ -4,12 +4,12 @@
 
 namespace LACEngine {
 
-class OpenGLMesh {
+class GLMesh {
 public:
-    OpenGLMesh();
-    ~OpenGLMesh();
+    GLMesh();
+    ~GLMesh();
 
-    OpenGLMesh(OpenGLMesh&& other) noexcept;
+    GLMesh(GLMesh&& other) noexcept;
 
     void Bind();
 

@@ -7,13 +7,13 @@
 
 #define SDL_MAIN_HANDLED
 #include <Engine/Window.h>
-#include <Engine/OpenGLBackend.h>
+#include <Engine/GLBackend.h>
 #include <Engine/Mesh.h>
-#include <Engine/OpenGL/OpenGLShader.h>
-#include <Engine/OpenGL/OpenGLProgram.h>
+#include <Engine/OpenGL/GLShader.h>
+#include <Engine/OpenGL/GLProgram.h>
 
-LACEngine::OpenGLShader LoadShader(const std::string& path, uint32_t shaderType) {
-    LACEngine::OpenGLShader shader(shaderType);
+LACEngine::GLShader LoadShader(const std::string& path, uint32_t shaderType) {
+    LACEngine::GLShader shader(shaderType);
 
     std::ifstream file(path, std::ios::binary | std::ios::ate);
     std::vector<char> buffer;
@@ -43,7 +43,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    LACEngine::OpenGLBackend backend;
+    LACEngine::GLBackend backend;
     backend.SetWindowSize(window->GetWidth(), window->GetHeight());
 
     std::shared_ptr<LACEngine::VertexData> vertexData = std::make_shared<LACEngine::VertexData>(LACEngine::MeshData::Position, LACEngine::VertexFormat::Float32_Vec3);
@@ -61,11 +61,11 @@ int main() {
 
     backend.LoadMesh(mesh);
 
-    LACEngine::OpenGLProgram program;
+    LACEngine::GLProgram program;
 
     {
-        LACEngine::OpenGLShader vertexShader = LoadShader("data/shaders/test.vertex", GL_VERTEX_SHADER);
-        LACEngine::OpenGLShader fragmentShader = LoadShader("data/shaders/test.fragment", GL_FRAGMENT_SHADER);
+        LACEngine::GLShader vertexShader = LoadShader("data/shaders/test.vertex", GL_VERTEX_SHADER);
+        LACEngine::GLShader fragmentShader = LoadShader("data/shaders/test.fragment", GL_FRAGMENT_SHADER);
 
         program.AttachShader(vertexShader);
         program.AttachShader(fragmentShader);
@@ -95,7 +95,7 @@ int main() {
         }
 
         program.Use();
-        static_cast<LACEngine::OpenGLMesh*>(mesh.GetRenderData())->Bind();
+        static_cast<LACEngine::GLMesh*>(mesh.GetRenderData())->Bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         window->SwapBuffers();

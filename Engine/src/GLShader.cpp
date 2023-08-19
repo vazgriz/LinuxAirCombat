@@ -1,29 +1,29 @@
-#include "Engine/OpenGL/OpenGLShader.h"
+#include "Engine/OpenGL/GLShader.h"
 
 #include <iostream>
 #include <glad/glad.h>
 
 using namespace LACEngine;
 
-OpenGLShader::OpenGLShader(uint32_t shaderType) : m_shaderID(0) {
+GLShader::GLShader(uint32_t shaderType) : m_shaderID(0) {
     m_shaderID = glCreateShader(shaderType);
 }
 
-OpenGLShader::~OpenGLShader() {
+GLShader::~GLShader() {
     glDeleteShader(m_shaderID);
     m_shaderID = 0;
 }
 
-OpenGLShader::OpenGLShader(OpenGLShader&& other) noexcept{
+GLShader::GLShader(GLShader&& other) noexcept{
     m_shaderID = other.m_shaderID;
     other.m_shaderID = 0;
 }
 
-uint32_t OpenGLShader::GetID() const {
+uint32_t GLShader::GetID() const {
     return m_shaderID;
 }
 
-void OpenGLShader::LoadSource(int32_t size, const char* data) {
+void GLShader::LoadSource(int32_t size, const char* data) {
     glShaderSource(m_shaderID, 1, &data, &size);
     glCompileShader(m_shaderID);
 
@@ -35,6 +35,6 @@ void OpenGLShader::LoadSource(int32_t size, const char* data) {
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
 }
-void OpenGLShader::LoadSource(const std::string& data) {
+void GLShader::LoadSource(const std::string& data) {
     LoadSource(data.size(), data.data());
 }

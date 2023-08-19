@@ -17,10 +17,10 @@ add_library(Engine
     "src/Model.cpp"
     "src/Material.cpp"
     "src/RenderBackend.cpp"
-    "src/OpenGLBackend.cpp"
-    "src/OpenGLShader.cpp"
-    "src/OpenGLProgram.cpp"
-    "src/OpenGLMesh.cpp"
+    "src/GLBackend.cpp"
+    "src/GLShader.cpp"
+    "src/GLProgram.cpp"
+    "src/GLMesh.cpp"
     #"src/ModelLoader3ds.cpp"
  )
 target_include_directories(Engine PUBLIC ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include} "include")

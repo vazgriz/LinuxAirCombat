@@ -1,20 +1,20 @@
-#include "Engine/OpenGLBackend.h"
+#include "Engine/GLBackend.h"
 
 #include <glad/glad.h>
 
-#include "Engine/OpenGL/OpenGLMesh.h"
+#include "Engine/OpenGL/GLMesh.h"
 
 using namespace LACEngine;
 
-OpenGLBackend::OpenGLBackend() {
+GLBackend::GLBackend() {
 
 }
 
-OpenGLBackend::~OpenGLBackend() {
+GLBackend::~GLBackend() {
 
 }
 
-void OpenGLBackend::SetWindowSize(int32_t width, int32_t height) {
+void GLBackend::SetWindowSize(int32_t width, int32_t height) {
     glViewport(0, 0, width, height);
 }
 
@@ -26,8 +26,8 @@ void SetVertexAttribPointer(VertexFormat format) {
     }
 }
 
-void OpenGLBackend::LoadMesh(Mesh& mesh) {
-    std::unique_ptr<OpenGLMesh> meshData = std::make_unique<OpenGLMesh>();
+void GLBackend::LoadMesh(Mesh& mesh) {
+    std::unique_ptr<GLMesh> meshData = std::make_unique<GLMesh>();
     meshData->vertexIDs.resize(mesh.GetVertexDataCount());
 
     uint32_t& vao = meshData->vertexArrayObject;
@@ -52,8 +52,8 @@ void OpenGLBackend::LoadMesh(Mesh& mesh) {
     mesh.SetRenderBackend(this);
 }
 
-void OpenGLBackend::UnloadMesh(Mesh& mesh) {
-    OpenGLMesh& meshData = *static_cast<OpenGLMesh*>(mesh.GetRenderData());
+void GLBackend::UnloadMesh(Mesh& mesh) {
+    GLMesh& meshData = *static_cast<GLMesh*>(mesh.GetRenderData());
 
     glDeleteBuffers(static_cast<int32_t>(meshData.vertexIDs.size()), meshData.vertexIDs.data());
     glDeleteVertexArrays(1, &meshData.vertexArrayObject);

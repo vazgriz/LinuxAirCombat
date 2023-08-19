@@ -3,12 +3,12 @@
 #include <string>
 
 namespace LACEngine {
-class OpenGLShader {
+class GLShader {
 public:
-    OpenGLShader(uint32_t shaderType);
-    ~OpenGLShader();
+    GLShader(uint32_t shaderType);
+    ~GLShader();
 
-    OpenGLShader(OpenGLShader&& other) noexcept;
+    GLShader(GLShader&& other) noexcept;
 
     uint32_t GetID() const;
 

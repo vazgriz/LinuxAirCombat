@@ -1,31 +1,31 @@
-#include "Engine/OpenGL/OpenGLProgram.h"
+#include "Engine/OpenGL/GLProgram.h"
 
 #include <glad/glad.h>
 
 using namespace LACEngine;
 
-OpenGLProgram::OpenGLProgram() :m_programID(0) {
+GLProgram::GLProgram() :m_programID(0) {
     m_programID = glCreateProgram();
 }
 
-OpenGLProgram::~OpenGLProgram() {
+GLProgram::~GLProgram() {
     glDeleteProgram(m_programID);
     m_programID = 0;
 }
 
-OpenGLProgram::OpenGLProgram(OpenGLProgram&& other) noexcept {
+GLProgram::GLProgram(GLProgram&& other) noexcept {
     m_programID = other.m_programID;
     other.m_programID = 0;
 }
 
-void OpenGLProgram::AttachShader(const OpenGLShader& shader) {
+void GLProgram::AttachShader(const GLShader& shader) {
     glAttachShader(m_programID, shader.GetID());
 }
 
-void OpenGLProgram::Link() {
+void GLProgram::Link() {
     glLinkProgram(m_programID);
 }
 
-void OpenGLProgram::Use() {
+void GLProgram::Use() {
     glUseProgram(m_programID);
 }
