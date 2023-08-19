@@ -7,10 +7,15 @@ namespace LACEngine {
 class RenderBackend;
 
 enum struct TextureFormat {
+    None,
     R,
     RG,
     RGB,
-    RGBA
+    RGBA,
+    B,
+    BG,
+    BGR,
+    BGRA
 };
 
 enum struct TextureAlphaType {

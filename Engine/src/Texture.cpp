@@ -66,15 +66,19 @@ size_t Texture::GetLocalDataSize() const {
     size_t bytesPerPixel = 0;
 
     switch (m_format) {
+    case TextureFormat::B:
     case TextureFormat::R:
         bytesPerPixel = 1;
         break;
+    case TextureFormat::BG:
     case TextureFormat::RG:
         bytesPerPixel = 2;
         break;
+    case TextureFormat::BGR:
     case TextureFormat::RGB:
         bytesPerPixel = 3;
         break;
+    case TextureFormat::BGRA:
     case TextureFormat::RGBA:
         bytesPerPixel = 4;
         break;

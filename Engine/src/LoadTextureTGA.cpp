@@ -8,13 +8,13 @@
 
 using namespace LACEngine;
 
-Texture LoadFromTGA(const std::string& filename, TextureAlphaType alphaType) {
+Texture LACEngine::LoadFromTGA(const std::string& filename, TextureAlphaType alphaType) {
 	SDL_Surface* data = IMG_Load(filename.c_str());
 
-	TextureFormat format = TextureFormat::R;
+	TextureFormat format = TextureFormat::None;
 
 	switch (data->format->format) {
-	case SDL_PIXELFORMAT_RGB888:
+	case SDL_PIXELFORMAT_RGB24:
 		format = TextureFormat::RGB;
 		break;
 	case SDL_PIXELFORMAT_RGBA32:
@@ -23,6 +23,14 @@ Texture LoadFromTGA(const std::string& filename, TextureAlphaType alphaType) {
 	case SDL_PIXELFORMAT_INDEX8:
 		format = TextureFormat::R;
 		break;
+	case SDL_PIXELFORMAT_BGR24:
+		format = TextureFormat::BGR;
+		break;
+	}
+
+	if (format == TextureFormat::None) {
+		std::string name = SDL_GetPixelFormatName(data->format->format);
+		throw std::runtime_error("Invalid data format");
 	}
 
 	Texture texture(format, data->w, data->h, alphaType);
@@ -35,4 +43,6 @@ Texture LoadFromTGA(const std::string& filename, TextureAlphaType alphaType) {
 	memcpy(ptr, data->pixels, texture.GetLocalDataSize());
 
 	SDL_FreeSurface(data);
+
+	return texture;
 }
