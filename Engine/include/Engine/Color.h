@@ -40,12 +40,13 @@ public:
         memcpy(&elements, &other.elements, sizeof(elements));
         return *this;
     }
-
-    bool operator == (const Color& left, const Color& right) {
-        return left.r == right.r
-            && left.g == right.g
-            && left.b == right.b
-            && left.a == right.a;
-    }
 };
+
+inline bool operator == (const Color& left, const Color& right) {
+    return left.r == right.r
+        && left.g == right.g
+        && left.b == right.b
+        && left.a == right.a;
+}
+
 }

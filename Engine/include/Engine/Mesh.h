@@ -66,7 +66,7 @@ public:
     size_t GetIndexDataCount() const;
     const uint16_t* GetIndexData() const;
 
-    bool SetHasIndexData(bool value);
+    void SetHasIndexData(bool value);
     void SetIndexData(size_t count, uint16_t* data);
     void ResizeIndexData(size_t count);
     uint16_t* GetIndexData();

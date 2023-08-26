@@ -8,7 +8,7 @@ Material& Model::AddMaterial() {
 }
 
 Mesh& Model::AddMesh() {
-    m_meshes.emplace_back(std::make_shared<Material>());
+    m_meshes.emplace_back(std::make_shared<Mesh>());
     return *m_meshes.back();
 }
 

@@ -118,7 +118,7 @@ const uint16_t* Mesh::GetIndexData() const {
     return m_indexData.data();
 }
 
-bool Mesh::SetHasIndexData(bool value) {
+void Mesh::SetHasIndexData(bool value) {
     m_hasIndexData = value;
 }
 
