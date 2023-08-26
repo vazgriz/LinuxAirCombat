@@ -54,9 +54,11 @@ int main() {
     LACEngine::CLoad3DS loader;
     loader.Import3DS(model, "data/a6m2.3ds");
 
-    LACEngine::Mesh& mesh = *model.GetMesh(0);
+    for (size_t i = 0; i < model.GetMeshCount(); i++) {
+        LACEngine::Mesh& mesh = *model.GetMesh(i);
 
-    backend.LoadMesh(mesh);
+        backend.LoadMesh(mesh);
+    }
 
     LACEngine::GLProgram program;
 
@@ -92,8 +94,17 @@ int main() {
         }
 
         program.Use();
-        static_cast<LACEngine::GLMesh*>(mesh.GetRenderData())->Bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        for (size_t i = 0; i < model.GetMeshCount(); i++) {
+            LACEngine::Mesh& mesh = *model.GetMesh(i);
+            static_cast<LACEngine::GLMesh*>(mesh.GetRenderData())->Bind();
+
+            if (mesh.HasIndexData()) {
+                glDrawElements(GL_TRIANGLES, mesh.GetIndexDataCount(), GL_UNSIGNED_SHORT, 0);
+            } else {
+                glDrawArrays(GL_TRIANGLES, 0, mesh.GetVertexData(0).GetVertexCount());
+            }
+        }
 
         window->SwapBuffers();
     }

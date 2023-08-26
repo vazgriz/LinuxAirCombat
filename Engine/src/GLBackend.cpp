@@ -46,6 +46,13 @@ void GLBackend::LoadMesh(Mesh& mesh) {
         glEnableVertexAttribArray(i);
     }
 
+    if (mesh.HasIndexData()) {
+        uint32_t& ebo = meshData->indexBufferID;
+        glGenBuffers(1, &ebo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexDataCount() * sizeof(uint16_t), mesh.GetIndexData(), GL_STATIC_DRAW);
+    }
+
     mesh.SetRenderData(meshData.get());
     mesh.SetRenderBackend(this);
 

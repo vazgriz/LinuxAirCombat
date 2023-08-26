@@ -13,8 +13,10 @@ public:
 
     void Bind();
 
-    std::vector<uint32_t> vertexIDs;
     uint32_t vertexArrayObject;
+    uint32_t indexBufferID;
+    bool hasIndexBuffer;
+    std::vector<uint32_t> vertexIDs;
 };
 
 }
