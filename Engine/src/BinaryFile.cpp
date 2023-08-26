@@ -134,10 +134,16 @@ int BinaryFile::readUInt32(uint32_t* i) {
     return 4;
 }
 
-int BinaryFile::readBinary(char* dest, int size) {
-    memcpy(dest, &data[filepointer], size);
-    filepointer += size;
-    return size;
+int BinaryFile::readBinary(char* dest, int n) {
+    if (n <= 0) {
+        return 0;
+    }
+    if (filepointer + n > size) {
+        n = size - filepointer;
+    }
+    memcpy(dest, &data[filepointer], n);
+    filepointer += n;
+    return n;
 }
 
 int BinaryFile::skip(int n) {

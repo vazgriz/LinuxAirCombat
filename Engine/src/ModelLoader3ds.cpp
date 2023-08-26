@@ -389,7 +389,8 @@ void CLoad3DS::ReadChunk(Chunk* pChunk) {
 
 void CLoad3DS::ReadColorChunk(Material& material, Chunk* pChunk) {
     ReadChunk(tempChunk);
-    tempChunk->bytesRead += file->readBinary(reinterpret_cast<char*>(material.color.elements.data()), 4);
+    int max = tempChunk->length - tempChunk->bytesRead;
+    tempChunk->bytesRead += file->readBinary(reinterpret_cast<char*>(material.color.elements.data()), std::min(4, max));
     pChunk->bytesRead += tempChunk->bytesRead;
 }
 
@@ -455,17 +456,29 @@ void CLoad3DS::ReadUVCoordinates(Mesh& object, Chunk* previousChunk) {
 }
 
 void CLoad3DS::ReadVertexIndices(Mesh& object, Chunk* previousChunk) {
-    uint16_t indexCount;
-    previousChunk->bytesRead += file->readUInt16(&indexCount);
+    uint16_t triangleCount;
+    previousChunk->bytesRead += file->readUInt16(&triangleCount);
 
-    object.ResizeIndexData(indexCount);
-    previousChunk->bytesRead += file->readBinary(reinterpret_cast<char*>(object.GetIndexData()), indexCount * sizeof(uint16_t));
+    //triangle count is the number of triangles in the mesh
+    //allocate 3 uint16 for each triangle
+    //need to read 4 uint16 values, only save the first 3
+
+    object.ResizeIndexData(triangleCount * 3);
+
+    for (uint16_t i = 0; i < triangleCount; i++) {
+        uint16_t buffer[4];
+        previousChunk->bytesRead += file->readBinary(reinterpret_cast<char*>(buffer), 4 * sizeof(uint16_t));
+        int index = i * 3;
+        object.GetIndexData()[index] = buffer[0];
+        object.GetIndexData()[index + 1] = buffer[1];
+        object.GetIndexData()[index + 2] = buffer[2];
+    }
+
     object.SetHasIndexData(true);
 }
 
 void CLoad3DS::ReadVertices(Mesh& object, Chunk* previousChunk) {
     uint16_t vertexCount;
-    int i;
     previousChunk->bytesRead += file->readUInt16(&vertexCount);
 
     int size = vertexCount * sizeof(glm::vec3);
