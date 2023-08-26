@@ -36,7 +36,7 @@ size_t VertexData::GetLocalDataSize() const {
     return m_localData.size();
 }
 
-Mesh::Mesh() : m_renderBackend(nullptr), m_renderData(nullptr) {
+Mesh::Mesh() : m_renderBackend(nullptr), m_renderData(nullptr), m_hasTexture(false) {
 
 }
 
@@ -76,4 +76,24 @@ const VertexData& Mesh::GetVertexData(size_t i) const {
     }
 
     return *m_vertexData[i];
+}
+
+void Mesh::SetHasTexture(bool value) {
+    m_hasTexture = value;
+}
+
+bool Mesh::HasTexture() const {
+    return m_hasTexture;
+}
+
+void Mesh::SetMaterial(const std::shared_ptr<Material>& material) {
+    m_material = material;
+}
+
+std::shared_ptr<Material> Mesh::GetMaterial() {
+    return m_material;
+}
+
+std::shared_ptr<const Material> Mesh::GetMaterial() const {
+    return m_material;
 }

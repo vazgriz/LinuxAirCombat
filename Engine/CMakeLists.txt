@@ -21,9 +21,12 @@ add_library(Engine
     "src/GLShader.cpp"
     "src/GLProgram.cpp"
     "src/GLMesh.cpp"
-    #"src/ModelLoader3ds.cpp"
+    "src/ModelLoader3ds.cpp"
     "src/Texture.cpp"
     "src/LoadTextureTGA.cpp"
+    "src/BinaryFile.cpp"
+    "src/Directories.cpp"
+    "src/PlatformFolders.cpp"
 )
 target_include_directories(Engine PUBLIC ${LAC_include} ${GLUT_include} ${GL_include} ${SDL_include} ${SDL_mixer_include} "include")
 target_link_libraries(Engine ${GLUT_bin} ${GL_bin} ${SDL_bin} ${SDL_mixer_bin})

@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace LACEngine {
 class RenderBackend;
@@ -64,6 +65,6 @@ private:
     void* m_renderData;
 };
 
-Texture LoadFromTGA(const std::string& filename, TextureAlphaType alphaType);
+std::shared_ptr<Texture> TryLoadFromTGA(const std::string& filename, TextureAlphaType alphaType);
 
 }

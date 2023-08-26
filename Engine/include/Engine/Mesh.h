@@ -2,6 +2,8 @@
 #include <vector>
 #include <memory>
 
+#include "Engine/Material.h"
+
 namespace LACEngine {
 class RenderBackend;
 
@@ -53,10 +55,20 @@ public:
     size_t GetVertexDataCount() const;
     const VertexData& GetVertexData(size_t i) const;
 
+    void SetHasTexture(bool value);
+    bool HasTexture() const;
+
+    void SetMaterial(const std::shared_ptr<Material>& material);
+    std::shared_ptr<Material> GetMaterial();
+    std::shared_ptr<const Material> GetMaterial() const;
+
 private:
     RenderBackend* m_renderBackend;
     void* m_renderData;
     std::vector<std::shared_ptr<VertexData>> m_vertexData;
+
+    bool m_hasTexture;
+    std::shared_ptr<Material> m_material;
 };
 
 }

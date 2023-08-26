@@ -8,8 +8,12 @@
 
 using namespace LACEngine;
 
-Texture LACEngine::LoadFromTGA(const std::string& filename, TextureAlphaType alphaType) {
+std::shared_ptr<Texture> LACEngine::TryLoadFromTGA(const std::string& filename, TextureAlphaType alphaType) {
 	SDL_Surface* data = IMG_Load(filename.c_str());
+
+	if (data == nullptr) {
+		return nullptr;
+	}
 
 	TextureFormat format = TextureFormat::None;
 
@@ -33,14 +37,14 @@ Texture LACEngine::LoadFromTGA(const std::string& filename, TextureAlphaType alp
 		throw std::runtime_error("Invalid data format");
 	}
 
-	Texture texture(format, data->w, data->h, alphaType);
-	char* ptr = texture.CreateLocalData();
+	std::shared_ptr<Texture> texture = std::make_shared<Texture>(format, data->w, data->h, alphaType);
+	char* ptr = texture->CreateLocalData();
 
-	if (texture.GetLocalDataSize() != data->pitch * data->h) {
+	if (texture->GetLocalDataSize() != data->pitch * data->h) {
 		throw std::runtime_error("Data size mismatch");
 	}
 
-	memcpy(ptr, data->pixels, texture.GetLocalDataSize());
+	memcpy(ptr, data->pixels, texture->GetLocalDataSize());
 
 	SDL_FreeSurface(data);
 
