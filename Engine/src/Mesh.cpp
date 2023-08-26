@@ -11,6 +11,23 @@ VertexData::VertexData(MeshData meshDataType, VertexFormat vertexFormat) {
     m_vertexFormat = vertexFormat;
 }
 
+size_t VertexData::GetVertexSize(VertexFormat vertexFormat) {
+    switch (vertexFormat) {
+    case VertexFormat::Float32_Vec4:
+        return 4 * sizeof(float);
+    case VertexFormat::Float32_Vec3:
+        return 3 * sizeof(float);
+    case VertexFormat::Float32_Vec2:
+        return 2 * sizeof(float);
+    case VertexFormat::Uint8_Vec4:
+        return 4 * sizeof(uint8_t);
+    }
+}
+
+size_t VertexData::GetVertexCount() const {
+    return m_count;
+}
+
 MeshData VertexData::GetMeshDataType() const {
     return m_meshDataType;
 }
@@ -24,8 +41,19 @@ bool VertexData::IsLocalDataLoaded() {
 }
 
 void VertexData::LoadLocalData(size_t size, void* data) {
-    m_localData.resize(size);
-    memcpy(m_localData.data(), data, size);
+    ResizeLocalData(size);
+    size_t vertexSize = GetVertexSize(m_vertexFormat);
+    memcpy(m_localData.data(), data, m_count * size);
+}
+
+void VertexData::ResizeLocalData(size_t size) {
+    size_t vertexSize = GetVertexSize(m_vertexFormat);
+    m_count = size / vertexSize;
+    m_localData.resize(m_count * vertexSize);
+}
+
+void* VertexData::GetLocalData() {
+    return m_localData.data();
 }
 
 const void* VertexData::GetLocalData() const {
@@ -78,6 +106,35 @@ const VertexData& Mesh::GetVertexData(size_t i) const {
     return *m_vertexData[i];
 }
 
+bool Mesh::HasIndexData() const {
+    return m_hasIndexData;
+}
+
+size_t Mesh::GetIndexDataCount() const {
+    return m_indexData.size();
+}
+
+const uint16_t* Mesh::GetIndexData() const {
+    return m_indexData.data();
+}
+
+bool Mesh::SetHasIndexData(bool value) {
+    m_hasIndexData = value;
+}
+
+void Mesh::SetIndexData(size_t count, uint16_t* data) {
+    m_indexData.resize(count);
+    memcpy(m_indexData.data(), data, count * sizeof(uint16_t));
+}
+
+void Mesh::ResizeIndexData(size_t count) {
+    m_indexData.resize(count);
+}
+
+uint16_t* Mesh::GetIndexData() {
+    return m_indexData.data();
+}
+
 void Mesh::SetHasTexture(bool value) {
     m_hasTexture = value;
 }
@@ -96,4 +153,16 @@ std::shared_ptr<Material> Mesh::GetMaterial() {
 
 std::shared_ptr<const Material> Mesh::GetMaterial() const {
     return m_material;
+}
+
+void Mesh::SetName(std::string&& name) {
+    m_name = std::move(name);
+}
+
+void Mesh::SetName(const std::string& name) {
+    m_name = name;
+}
+
+const std::string& Mesh::GetName() const {
+    return m_name;
 }

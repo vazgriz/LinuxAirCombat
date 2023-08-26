@@ -119,6 +119,12 @@ int BinaryFile::readUInt32(uint32_t* i) {
     return 4;
 }
 
+int BinaryFile::readBinary(char* dest, int size) {
+    memcpy(dest, &data[filepointer], size);
+    filepointer += size;
+    return size;
+}
+
 int BinaryFile::skip(int n) {
     if (filepointer + n > size) {
         n = size - filepointer;

@@ -91,28 +91,28 @@ namespace LACEngine {
         int GetString(std::string& string);
         void ReadChunk(Chunk*);
         void ProcessNextChunk(Model& model, Chunk*);
-        void ProcessNextObjectChunk(Model* model, CObject* object, Chunk*);
-        void ProcessNextMaterialChunk(Model* model, Chunk*);
+        void ProcessNextObjectChunk(Model& model, Mesh& object, Chunk*);
+        void ProcessNextMaterialChunk(Model& model, Material& material, Chunk*);
         void ReadColorChunk(Material& material, Chunk* pChunk);
-        void ReadVertices(CObject* object, Chunk*);
-        void ReadVertexIndices(CObject* object, Chunk*);
-        void ReadUVCoordinates(CObject* object, Chunk*);
-        void ReadMeshMatrix(CObject* object, Chunk*);
+        void ReadVertices(Mesh& object, Chunk*);
+        void ReadVertexIndices(Mesh& object, Chunk*);
+        void ReadUVCoordinates(Mesh& object, Chunk*);
+        void ReadMeshMatrix(Mesh& object, Chunk*);
         void ReadUScale(Material& material, Chunk*);
         void ReadVScale(Material& material, Chunk*);
         void ReadUOffset(Material& material, Chunk*);
         void ReadVOffset(Material& material, Chunk*);
         void ReadUVRotation(Material& material, Chunk*);
         void ReadObjectMaterial(Model& model, Mesh& object, Chunk* previousChunk);
-        void Compile(Model& model);
         void ComputeNormals(Model& model);
         void ComputeColors(Model& model);
         void LoadTextures(Model& model);
-        void Normalize(Model& model);
         void CleanUp();
         FILE* filepointer;
         Chunk* currentChunk;
         Chunk* tempChunk;
+
+        glm::vec3 ComputeNormal(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3);
     };
 
 }

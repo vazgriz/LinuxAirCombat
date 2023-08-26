@@ -84,54 +84,6 @@ CLoad3DS::CLoad3DS() {
     }
 }
 
-void CLoad3DS::Compile(Model& model) {
-    // Merge numerically equal vertices
-    // This is necessary to get a smooth shaded object
-    int i;
-    for (i = 0; i < model.GetMeshCount(); i++) {
-        Mesh& co = *model.GetMesh(i);
-        for (int i2 = 1; i2 < co.numVertices; i2++) {
-            for (int i3 = 0; i3 < i2; i3++) {
-                if (co.vertex[i2].vector.isEqual(&co.vertex[i3].vector) &&   // same coordinates
-                    co.vertex[i2].tex.isEqual(&co.vertex[i3].tex))           // same texture coordinates
-                {
-                    for (int i4 = 0; i4 < co.numTriangles; i4++) {
-                        if (co.triangle[i4].v[0] == &co.vertex[i2]) {
-                            co.triangle[i4].v[0] = &co.vertex[i3];
-                        }
-                        if (co.triangle[i4].v[1] == &co.vertex[i2]) {
-                            co.triangle[i4].v[1] = &co.vertex[i3];
-                        }
-                        if (co.triangle[i4].v[2] == &co.vertex[i2]) {
-                            co.triangle[i4].v[2] = &co.vertex[i3];
-                        }
-                    }
-                }
-            }
-        }
-    }
-    // Scale texture coordinated by uscale, vscale
-    for (i = 0; i < model.GetMeshCount(); i++) {
-        Mesh& co = *model.GetMesh(i);
-        float uscale = co.material->uscale;
-        float vscale = co.material->vscale;
-        float uoffset = co.material->uoffset;
-        float voffset = co.material->voffset;
-
-        for (int i2 = 0; i2 < co.numVertices; i2++) {
-            float ax = co.vertex[i2].tex.x - 0.5;
-            float ay = co.vertex[i2].tex.y - 0.5;
-            float phi = -co.material->wrot;
-            co.vertex[i2].tex.x = ax * COS(phi) - ay * SIN(phi) + 0.5;
-            co.vertex[i2].tex.y = ax * SIN(phi) + ay * COS(phi) + 0.5;
-            co.vertex[i2].tex.x -= uoffset;
-            co.vertex[i2].tex.y += voffset;
-            co.vertex[i2].tex.x = (co.vertex[i2].tex.x - 0.5) * uscale + 0.5;
-            co.vertex[i2].tex.y = (co.vertex[i2].tex.y - 0.5) * vscale + 0.5;
-        }
-    }
-}
-
 void CLoad3DS::ComputeColors(Model& model) {
     int i, i2;
     Color c;
@@ -142,33 +94,21 @@ void CLoad3DS::ComputeColors(Model& model) {
 
     for (i = 0; i < model.GetMeshCount(); i++) {
         Mesh& object = *model.GetMesh(i);
-        for (i2 = 0; i2 < object.numVertices; i2++) {
-            if (object.hasTexture) {
-                CVertex* v = &object.vertex[i2];
-                CTexture* tex = object.material->texture;
-                tex->getColor(&c, (int)(v->tex.x * tex->width), (int)(v->tex.y * tex->height));
-                int val;
-                if (c.c[0] < 200 || c.c[1] < 200) {
-                    val = c.c[0];
-                    val = val * 2 / 3;
-                    c.c[0] = val;
-                    val = c.c[1];
-                    val = val * 2 / 3;
-                    c.c[1] = val;
-                    val = c.c[2];
-                    val = val * 2 / 3;
-                    c.c[2] = val;
-                }
-                v->color.take(&c);
-            } else {
-                if (object.material) {
-                    object.vertex[i2].color.c[0] = object.material->color.c[0];
-                    object.vertex[i2].color.c[1] = object.material->color.c[1];
-                    object.vertex[i2].color.c[2] = object.material->color.c[2];
+        if (!object.HasTexture()) {
+            size_t count = object.GetVertexData(0).GetVertexCount();
+            std::shared_ptr<VertexData> vertexData = std::make_shared<VertexData>(MeshData::VertexColor, VertexFormat::Uint8_Vec4);
+            vertexData->ResizeLocalData(count * VertexData::GetVertexSize(VertexFormat::Uint8_Vec4));
+
+            Color* colors = reinterpret_cast<Color*>(vertexData->GetLocalData());
+            std::shared_ptr<Material> material = object.GetMaterial();
+
+            for (size_t i = 0; i < count; i++) {
+                if (material != nullptr) {
+                    colors[i] = material->color;
                 } else {
-                    object.vertex[i2].color.c[0] = 200;
-                    object.vertex[i2].color.c[1] = 200;
-                    object.vertex[i2].color.c[2] = 200;
+                    colors[i].r = 200;
+                    colors[i].g = 200;
+                    colors[i].b = 200;
                 }
             }
         }
@@ -176,26 +116,75 @@ void CLoad3DS::ComputeColors(Model& model) {
 }
 
 void CLoad3DS::ComputeNormals(Model& model) {
-    int i, i2, i3;
-
     if (model.GetMeshCount() <= 0) {
         return;
     }
-    glm::vec3 n;
-    for (i = 0; i < model.GetMeshCount(); i++) {
+
+    for (int i = 0; i < model.GetMeshCount(); i++) {
         Mesh& object = *model.GetMesh(i);
-        for (i2 = 0; i2 < object.numTriangles; i2++) {
-            object.triangle[i2].getNormal(&n);
-            for (i3 = 0; i3 < 3; i3++) {
-                object.triangle[i2].v[i3]->addNormal(&n);
+
+        size_t positionIndex = 0;
+
+        for (size_t i = 0; i < object.GetVertexDataCount(); i++) {
+            const VertexData& data = object.GetVertexData(i);
+            if (data.GetMeshDataType() == MeshData::Position) {
+                positionIndex = i;
+                break;
             }
         }
-        for (i2 = 0; i2 < object.numTriangles; i2++) {
-            for (i3 = 0; i3 < 3; i3++) {
-                object.triangle[i2].v[i3]->normal.norm();
+
+        const VertexData& positionData = object.GetVertexData(positionIndex);
+        size_t vertexCount = positionData.GetVertexCount();
+
+        std::shared_ptr<VertexData> vertexData = std::make_shared<VertexData>(MeshData::Normal, VertexFormat::Float32_Vec3);
+        vertexData->ResizeLocalData(vertexCount * sizeof(glm::vec3));
+
+        const glm::vec3* positions = reinterpret_cast<const glm::vec3*>(positionData.GetLocalData());
+        glm::vec3* normals = reinterpret_cast<glm::vec3*>(vertexData->GetLocalData());
+
+        if (object.HasIndexData()) {
+            const uint16_t* indexData = object.GetIndexData();
+            size_t indexDataCount = object.GetIndexDataCount();
+
+            for (size_t j = 0; j < indexDataCount; j++) {
+                if (j + 2 >= indexDataCount) break;
+                uint16_t i1 = indexData[i];
+                uint16_t i2 = indexData[i + 1];
+                uint16_t i3 = indexData[i + 3];
+
+                glm::vec3 p1 = positions[i1];
+                glm::vec3 p2 = positions[i2];
+                glm::vec3 p3 = positions[i3];
+
+                glm::vec3 normal = ComputeNormal(p1, p2, p3);
+
+                normals[i1] = normal;
+                normals[i2] = normal;
+                normals[i3] = normal;
+            }
+        } else {
+            for (size_t j = 0; j < vertexCount; j += 3) {
+                if (j + 2 >= vertexCount) break;
+                glm::vec3 p1 = positions[j];
+                glm::vec3 p2 = positions[j + 1];
+                glm::vec3 p3 = positions[j + 2];
+
+                glm::vec3 normal = ComputeNormal(p1, p2, p3);
+
+                normals[j] = normal;
+                normals[j + 1] = normal;
+                normals[j + 2] = normal;
             }
         }
     }
+}
+
+glm::vec3 CLoad3DS::ComputeNormal(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3) {
+    glm::vec3 a = glm::normalize(p2 - p1);
+    glm::vec3 b = glm::normalize(p3 - p1);
+    glm::vec3 c = glm::cross(a, b);
+
+    return c;
 }
 
 int CLoad3DS::GetString(char* buffer) {
@@ -222,15 +211,11 @@ bool CLoad3DS::Import3DS(Model& model, const char* filename) {
 
     ProcessNextChunk(model, currentChunk);
 
-    Compile(model);
-
     ComputeNormals(model);
 
     LoadTextures(model);
 
     ComputeColors(model);
-    // Set vertices to [(-1,-1,-1);(1,1,1)]
-    Normalize(model);
     // Clean up
     CleanUp();
     return true;
@@ -252,61 +237,8 @@ void CLoad3DS::LoadTextures(Model& model) {
     }
 }
 
-void CLoad3DS::Normalize(Model& model) {
-    int i, i2;
-    float minx = 1E10, miny = 1E10, minz = 1E10;
-    float maxx = -1E10, maxy = -1E10, maxz = -1E10;
-
-    for (i = 0; i < model->numObjects; i++) {
-        CObject& object = *model->object[i];
-        for (i2 = 0; i2 < object.numVertices; i2++) {
-            CVertex* v = &object.vertex[i2];
-            if (v->vector.x > maxx) {
-                maxx = v->vector.x;
-            }
-            if (v->vector.y > maxy) {
-                maxy = v->vector.y;
-            }
-            if (v->vector.z > maxz) {
-                maxz = v->vector.z;
-            }
-            if (v->vector.x < minx) {
-                minx = v->vector.x;
-            }
-            if (v->vector.y < miny) {
-                miny = v->vector.y;
-            }
-            if (v->vector.z < minz) {
-                minz = v->vector.z;
-            }
-        }
-    }
-    float tlx = (maxx + minx) / 2.0;
-    float tly = (maxy + miny) / 2.0;
-    float tlz = (maxz + minz) / 2.0;
-    model->scalex = (maxx - minx) * 0.5;
-    model->scaley = (maxy - miny) * 0.5;
-    model->scalez = (maxz - minz) * 0.5;
-    float sc = model->scalex > model->scaley ? model->scalex : model->scaley;
-    sc = model->scalez > sc ? model->scalez : sc;
-    for (i = 0; i < model->numObjects; i++) {
-        CObject& object = *model->object[i];
-        for (i2 = 0; i2 < object.numVertices; i2++) {
-            CVertex* v = &object.vertex[i2];
-            v->vector.x -= tlx;
-            v->vector.x /= sc;
-            v->vector.y -= tly;
-            v->vector.y /= sc;
-            v->vector.z -= tlz;
-            v->vector.z /= sc;
-        }
-    }
-}
-
 void CLoad3DS::ProcessNextChunk(Model& model, Chunk* previousChunk) {
     char version[10];
-    char buf[STDSIZE];
-    CObject newObject;
     currentChunk = new Chunk;
     if (currentChunk == NULL) {
         throw std::runtime_error("Out of memory");
@@ -327,19 +259,24 @@ void CLoad3DS::ProcessNextChunk(Model& model, Chunk* previousChunk) {
 
             break;
         case MATERIAL:
-            model->AddMaterial();
-            ProcessNextMaterialChunk(model, currentChunk);
+        {
+            Material& material = model.AddMaterial();
+            ProcessNextMaterialChunk(model, material, currentChunk);
             break;
+        }
         case OBJECT:
-            model->addObject(&newObject);
-            memset(&newObject, 0, sizeof(CObject));
-            currentChunk->bytesRead += GetString(model->object[model->numObjects - 1]->name);
-            ProcessNextObjectChunk(model, model->object[model->numObjects - 1].get(), currentChunk);
+        {
+            Mesh& newMesh = model.AddMesh();
+            std::string name;
+            currentChunk->bytesRead += GetString(name);
+            newMesh.SetName(name);
+            ProcessNextObjectChunk(model, newMesh, currentChunk);
             break;
+        }
         case MAINSCALE:
             float mainscale;
             currentChunk->bytesRead += file->readFloat(&mainscale);
-            model->scale = mainscale;
+            model.SetMainScale(mainscale);
             currentChunk->bytesRead += file->skip(currentChunk->length - currentChunk->bytesRead);
             break;
         case EDITKEYFRAME:
@@ -355,14 +292,12 @@ void CLoad3DS::ProcessNextChunk(Model& model, Chunk* previousChunk) {
     currentChunk = previousChunk;
 }
 
-void CLoad3DS::ProcessNextMaterialChunk(Model* model, Chunk* previousChunk) {
+void CLoad3DS::ProcessNextMaterialChunk(Model& model, Material& material, Chunk* previousChunk) {
     currentChunk = new Chunk;
 
     if (currentChunk == NULL) {
         throw std::runtime_error("Out of memory");
     }
-
-    Material& material = *model->GetMaterial(model->GetMaterialCount() - 1);
 
     while (previousChunk->bytesRead < previousChunk->length) {
         ReadChunk(currentChunk);
@@ -374,7 +309,7 @@ void CLoad3DS::ProcessNextMaterialChunk(Model* model, Chunk* previousChunk) {
             ReadColorChunk(material, currentChunk);
             break;
         case MAT_MAP:
-            ProcessNextMaterialChunk(model, currentChunk);
+            ProcessNextMaterialChunk(model, material, currentChunk);
             break;
         case MAT_MAPFILE:
             currentChunk->bytesRead += file->readString(material.filename);
@@ -456,7 +391,7 @@ void CLoad3DS::ReadColorChunk(Material& material, Chunk* pChunk) {
     pChunk->bytesRead += tempChunk->bytesRead;
 }
 
-void CLoad3DS::ReadMeshMatrix(CObject* object, Chunk* previousChunk) {
+void CLoad3DS::ReadMeshMatrix(Mesh& object, Chunk* previousChunk) {
     float matrix[12];
     previousChunk->bytesRead += file->readFloat((float*)matrix, (previousChunk->length - previousChunk->bytesRead) / 4);
     // Where to put theses coords???
@@ -504,60 +439,46 @@ void CLoad3DS::ReadVScale(Material& material, Chunk* previousChunk) {
     previousChunk->bytesRead += file->skip(currentChunk->length - currentChunk->bytesRead);
 }
 
-void CLoad3DS::ReadUVCoordinates(CObject* object, Chunk* previousChunk) {
-    previousChunk->bytesRead += file->readUInt16((uint16_t*)&object->numTexVertex);
-    CVector2* p = new CVector2[object->numTexVertex];
-    if (p == NULL) {
-        throw std::runtime_error("Out of memory");
-    }
-    previousChunk->bytesRead += file->readFloat((float*)p, (previousChunk->length - previousChunk->bytesRead) / 4);
-    for (int i = 0; i < object->numTexVertex; i++) {
-        object->vertex[i].tex.take(&p[i]);
-    }
-    delete p;
+void CLoad3DS::ReadUVCoordinates(Mesh& object, Chunk* previousChunk) {
+    uint16_t vertexCount;
+    previousChunk->bytesRead += file->readUInt16(&vertexCount);
+
+    int size = vertexCount * sizeof(glm::vec2);
+    std::shared_ptr<VertexData> vertexData = std::make_shared<VertexData>(MeshData::UV, VertexFormat::Float32_Vec2);
+    vertexData->ResizeLocalData(size);
+
+    previousChunk->bytesRead += file->readBinary(static_cast<char*>(vertexData->GetLocalData()), size);
+
+    object.AddVertexData(vertexData);
 }
 
-void CLoad3DS::ReadVertexIndices(CObject* object, Chunk* previousChunk) {
-    uint16_t index = 0;
-    previousChunk->bytesRead += file->readUInt16((uint16_t*)&object->numTriangles);
-    object->triangle = new CTriangle[object->numTriangles];
-    if (object->triangle == NULL) {
-        throw std::runtime_error("Out of memory");
-    }
-    memset(object->triangle, 0, sizeof(CTriangle) * object->numTriangles);
-    for (int i = 0; i < object->numTriangles; i++) {
-        for (int j = 0; j < 4; j++) {
-            previousChunk->bytesRead += file->readUInt16(&index);
+void CLoad3DS::ReadVertexIndices(Mesh& object, Chunk* previousChunk) {
+    uint16_t indexCount;
+    previousChunk->bytesRead += file->readUInt16(&indexCount);
 
-            if (j < 3) {
-                object->triangle[i].v[j] = &object->vertex[index];
-            }
-        }
-    }
+    object.ResizeIndexData(indexCount);
+    previousChunk->bytesRead += file->readBinary(reinterpret_cast<char*>(object.GetIndexData()), indexCount * sizeof(uint16_t));
+    object.SetHasIndexData(true);
 }
 
-void CLoad3DS::ReadVertices(CObject* object, Chunk* previousChunk) {
+void CLoad3DS::ReadVertices(Mesh& object, Chunk* previousChunk) {
+    uint16_t vertexCount;
     int i;
-    previousChunk->bytesRead += file->readUInt16((uint16_t*)&object->numVertices);
-    object->vertex = new CVertex[object->numVertices];
-    if (object->vertex == NULL) {
-        throw std::runtime_error("Out of memory");
+    previousChunk->bytesRead += file->readUInt16(&vertexCount);
+
+    int size = vertexCount * sizeof(glm::vec3);
+    std::shared_ptr<VertexData> vertexData = std::make_shared<VertexData>(MeshData::Position, VertexFormat::Float32_Vec3);
+    vertexData->ResizeLocalData(size);
+
+    previousChunk->bytesRead += file->readBinary(static_cast<char*>(vertexData->GetLocalData()), size);
+
+    for (uint16_t i = 0; i < vertexCount; i++) {
+        glm::vec3& vertex = *reinterpret_cast<glm::vec3*>(vertexData->GetLocalData());
+        float tempY = vertex.y;
+        vertex.y = vertex.z;
+        vertex.z = -tempY;
     }
-    memset(object->vertex, 0, sizeof(CVertex) * object->numVertices);
-    CVector3* p = new CVector3[object->numVertices];
-    if (p == NULL) {
-        throw std::runtime_error("Out of memory");
-    }
-    previousChunk->bytesRead += file->readFloat((float*)p, (previousChunk->length - previousChunk->bytesRead) / 4);
-    for (i = 0; i < object->numVertices; i++) {
-        object->vertex[i].vector.take(&p[i]);
-    }
-    // Flip the y values with the z values (as 3DMAX changed them) and negate z
-    for (i = 0; i < object->numVertices; i++) {
-        float fTempY = object->vertex[i].vector.y;
-        object->vertex[i].vector.y = object->vertex[i].vector.z;
-        object->vertex[i].vector.z = -fTempY;
-    }
-    delete p;
+
+    object.AddVertexData(vertexData);
 }
 
