@@ -24,6 +24,7 @@ public:
     int readString(char* ptr, int n);
     int readString(char* ptr);
     int readString(std::string& str);
+    int readString(std::string& str, int n);
     int readBinary(char* dest, int n);
     int skip(int n);
 };

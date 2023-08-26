@@ -9,6 +9,8 @@
 #include <Engine/Window.h>
 #include <Engine/GLBackend.h>
 #include <Engine/Mesh.h>
+#include <Engine/Model.h>
+#include <Engine/ModelLoader3ds.h>
 #include <Engine/OpenGL/GLShader.h>
 #include <Engine/OpenGL/GLProgram.h>
 
@@ -48,16 +50,11 @@ int main() {
 
     std::shared_ptr<LACEngine::VertexData> vertexData = std::make_shared<LACEngine::VertexData>(LACEngine::MeshData::Position, LACEngine::VertexFormat::Float32_Vec3);
 
-    glm::vec3 vertexDataRaw[] = {
-        glm::vec3(0, 0, 0),
-        glm::vec3(0, 1, 0),
-        glm::vec3(1, 0, 0)
-    };
+    LACEngine::Model model;
+    LACEngine::CLoad3DS loader;
+    loader.Import3DS(model, "data/a6m2.3ds");
 
-    vertexData->LoadLocalData(sizeof(vertexDataRaw), &vertexDataRaw);
-
-    LACEngine::Mesh mesh;
-    mesh.AddVertexData(vertexData);
+    LACEngine::Mesh& mesh = *model.GetMesh(0);
 
     backend.LoadMesh(mesh);
 

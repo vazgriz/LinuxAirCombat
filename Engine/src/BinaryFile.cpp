@@ -107,6 +107,21 @@ int BinaryFile::readString(std::string& str) {
     return count;
 }
 
+int BinaryFile::readString(std::string& str, int n) {
+    if (n <= 0) {
+        return 0;
+    }
+    if (filepointer + n > size) {
+        n = size - filepointer;
+    }
+
+    str.resize(n);
+    memcpy(str.data(), &data[filepointer], n);
+    filepointer += n;
+
+    return n;
+}
+
 int BinaryFile::readUInt16(uint16_t* i) {
     * i = *((uint16_t*)&data[filepointer]);
     filepointer += 2;

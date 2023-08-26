@@ -35,6 +35,7 @@ std::string Directories::textures = "data/textures";
 std::string Directories::sound = "data/sounds";
 std::string Directories::music = "data/music";
 std::string Directories::models = "data/models";
+std::string Directories::maps = "data/maps";
 
 std::string Directories::getData(const std::string& name) {
     return data + "/" + name;

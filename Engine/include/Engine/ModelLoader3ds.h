@@ -26,6 +26,7 @@
 
 #include <vector>
 #include "Model.h"
+#include <glm/glm.hpp>
 
 #include "Engine/BinaryFile.h"
 
@@ -92,7 +93,7 @@ namespace LACEngine {
         void ReadChunk(Chunk*);
         void ProcessNextChunk(Model& model, Chunk*);
         void ProcessNextObjectChunk(Model& model, Mesh& object, Chunk*);
-        void ProcessNextMaterialChunk(Model& model, Material& material, Chunk*);
+        void ProcessNextMaterialChunk(Model& model, Chunk*);
         void ReadColorChunk(Material& material, Chunk* pChunk);
         void ReadVertices(Mesh& object, Chunk*);
         void ReadVertexIndices(Mesh& object, Chunk*);

@@ -54,7 +54,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Engine/MeshLoader3ds.h"
+#include "Engine/ModelLoader3ds.h"
 #include "Engine/Directories.h"
 
 using namespace LACEngine;
@@ -146,7 +146,7 @@ void CLoad3DS::ComputeNormals(Model& model) {
             const uint16_t* indexData = object.GetIndexData();
             size_t indexDataCount = object.GetIndexDataCount();
 
-            for (size_t j = 0; j < indexDataCount; j++) {
+            for (size_t j = 0; j < indexDataCount; j += 3) {
                 if (j + 2 >= indexDataCount) break;
                 uint16_t i1 = indexData[i];
                 uint16_t i2 = indexData[i + 1];
@@ -260,8 +260,8 @@ void CLoad3DS::ProcessNextChunk(Model& model, Chunk* previousChunk) {
             break;
         case MATERIAL:
         {
-            Material& material = model.AddMaterial();
-            ProcessNextMaterialChunk(model, material, currentChunk);
+            model.AddMaterial();
+            ProcessNextMaterialChunk(model, currentChunk);
             break;
         }
         case OBJECT:
@@ -292,27 +292,29 @@ void CLoad3DS::ProcessNextChunk(Model& model, Chunk* previousChunk) {
     currentChunk = previousChunk;
 }
 
-void CLoad3DS::ProcessNextMaterialChunk(Model& model, Material& material, Chunk* previousChunk) {
+void CLoad3DS::ProcessNextMaterialChunk(Model& model, Chunk* previousChunk) {
     currentChunk = new Chunk;
 
     if (currentChunk == NULL) {
         throw std::runtime_error("Out of memory");
     }
 
+    Material& material = *model.GetMaterial(model.GetMaterialCount() - 1);
+
     while (previousChunk->bytesRead < previousChunk->length) {
         ReadChunk(currentChunk);
         switch (currentChunk->ID) {
         case MAT_NAME:
-            currentChunk->bytesRead += file->readString(material.name);
+            currentChunk->bytesRead += file->readString(material.name, currentChunk->length - currentChunk->bytesRead);
             break;
         case MAT_DIFFUSE:
             ReadColorChunk(material, currentChunk);
             break;
         case MAT_MAP:
-            ProcessNextMaterialChunk(model, material, currentChunk);
+            ProcessNextMaterialChunk(model, currentChunk);
             break;
         case MAT_MAPFILE:
-            currentChunk->bytesRead += file->readString(material.filename);
+            currentChunk->bytesRead += file->readString(material.filename, currentChunk->length - currentChunk->bytesRead);
             {
                 for (size_t i = 0; i < material.filename.size(); i++) {
                     material.filename[i] = tolower(material.filename[i]);
